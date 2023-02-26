@@ -5,6 +5,6 @@ void main2();
 
 main() {
 	main1();
-	//main2();
+	main2();
 
 }
