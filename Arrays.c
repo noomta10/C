@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+/* Count number of occurances of each digit, blanks and others */
+
 demo1() {
 	int c;
 	int numberOfWhites = 0;
@@ -18,7 +20,7 @@ demo1() {
 			numberOfOthers++;
 	}
 
-	printf("Digits:\n ");
+	printf("Digits:\n");
 	for (int i = 0; i < 10; i++)
 		printf("%d: %d\n", i, numberOfDigits[i]);
 	printf("Whites: %d\nOthers: %d", numberOfWhites, numberOfOthers);
