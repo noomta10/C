@@ -18,9 +18,9 @@ demo1() {
 			numberOfOthers++;
 	}
 
-	printf("Digits: ");
+	printf("Digits:\n ");
 	for (int i = 0; i < 10; i++)
-		printf("%d: %d, ", i, numberOfDigits[i]);
-	printf("Whites: %d, Others: %d", numberOfWhites, numberOfOthers);
+		printf("%d: %d\n", i, numberOfDigits[i]);
+	printf("Whites: %d\nOthers: %d", numberOfWhites, numberOfOthers);
 
 }
