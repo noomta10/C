@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+/* Replace tabs and backslashes with visable characters */
+
 main1() {
 	int c;
 

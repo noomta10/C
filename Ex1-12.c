@@ -2,6 +2,8 @@
 #define IN 1
 #define OUT 0
 
+/* Prints input one word per line */
+
 main2() {
 	int c;
 	int state = OUT;
