@@ -129,7 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Ex1-10.c" />
     <ClCompile Include="Ex1-12.c" />
-    <ClCompile Include="Functions.c" />
+    <ClCompile Include="Ex1-13.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="Arrays.c" />
   </ItemGroup>
