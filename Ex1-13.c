@@ -38,6 +38,6 @@ main3() {
 	}
 	
 	if (overflowCount > 0)
-		printf("Overflow count/; %d", overflowCount);
+		printf("Overflow count: %d", overflowCount);
 	
 }
