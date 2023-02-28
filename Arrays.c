@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+/* Prints the number of digits, blanks and other characters */
+
 demo1() {
 	int c;
 	int numberOfWhites = 0;
