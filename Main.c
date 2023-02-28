@@ -7,7 +7,8 @@ void main4();
 void main5();
 void demo1();
 void demo2();
+void demo3();
 
 main() {
-	main5();
+	demo3();
 }
