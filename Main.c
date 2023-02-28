@@ -8,5 +8,5 @@ void demo1();
 void demo2();
 
 main() {
-	main4();
+	demo2();
 }

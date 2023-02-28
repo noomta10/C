@@ -19,9 +19,9 @@ main4() {
 
 	for (int i = 0; i < MAX_DIFFERENT_CHARS; i++) {
 		if (isprint(i))
-			printf("%9d - %c - %9d\n", i, i, cCounter[i]);
+			printf("%5d - %c - %5d\n", i, i, cCounter[i]);
 		else
-			printf("%9d -   - %9d\n", i, cCounter[i]);
+			printf("%5d -   - %5d\n", i, cCounter[i]);
 	}
 
 
