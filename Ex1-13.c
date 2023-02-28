@@ -1,6 +1,5 @@
 #include <stdio.h>
-#define MAX_WORD_LENGTH 11
-#define MAX_HISTOGRAM_LENGTH 15
+#define MAX_WORD_LENGTH 10
 #define IN 1
 #define OUT 0
 
