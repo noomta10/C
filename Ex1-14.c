@@ -1,11 +1,12 @@
 #include <stdio.h>
-#define MAX_WORD_LENGTH 10
+#define MAX_WORD_LENGTH 11
+#define MAX_HISTOGRAM_LENGTH 15
 #define IN 1
 #define OUT 0
 
 /* Creates a histogram of the lengths of words */
 
-main3() {
+main4() {
 	int c;
 	int cCount = 0;
 	int overflowCount = 0;
@@ -15,7 +16,7 @@ main3() {
 	for (int i = 0; i < MAX_WORD_LENGTH; i++)
 		wordLengthCounter[i] = 0;
 
-	while ((c = getchar()) != EOF){
+	while ((c = getchar()) != EOF) {
 		if (c == ' ' || c == '\n' || c == '\t') {
 			state = OUT;
 			if (cCount > MAX_WORD_LENGTH)
@@ -35,8 +36,8 @@ main3() {
 	for (int i = 0; i < MAX_WORD_LENGTH; i++) {
 		printf("%d: %d\n", i + 1, wordLengthCounter[i]);
 	}
-	
+
 	if (overflowCount > 0)
-		printf("Overflow count: %d", overflowCount);
-	
+		printf("Overflow count/; %d", overflowCount);
+
 }
