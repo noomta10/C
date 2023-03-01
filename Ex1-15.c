@@ -2,6 +2,8 @@
 #define MAX 300
 float celsius(float fahr);
 
+/* Create a tempersture convertor with function to convert to celsius */
+
 main5() {
 	float fahr;
 

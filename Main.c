@@ -5,10 +5,11 @@ void main2();
 void main3();
 void main4();
 void main5();
+void main6();
 void demo1();
 void demo2();
 void demo3();
 
 main() {
-	demo3();
+	main6();
 }

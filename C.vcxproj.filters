@@ -36,5 +36,14 @@
     <ClCompile Include="Functions.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CharArray.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ex1-15.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ex1-17.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
