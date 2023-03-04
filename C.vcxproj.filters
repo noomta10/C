@@ -45,5 +45,8 @@
     <ClCompile Include="Ex1-17.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Ex1-18.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

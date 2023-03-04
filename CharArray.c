@@ -24,6 +24,7 @@ demo3() {
 	printf("Line: %s", longestline);
 }
 
+/* Gets a line, returns line length */
 int getlinelength(char line[], int limit)
 {
 	int c, i;
@@ -40,6 +41,7 @@ int getlinelength(char line[], int limit)
 
 }
 
+/* Copy line array to longestline array*/
 void copy(char line[], char longestline[]) {
 	int i;
 	i = 0;
