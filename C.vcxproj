@@ -135,6 +135,7 @@
     <ClCompile Include="Ex1-15.c" />
     <ClCompile Include="Ex1-17.c" />
     <ClCompile Include="Ex1-18.c" />
+    <ClCompile Include="Ex1-19.c" />
     <ClCompile Include="Functions.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="Arrays.c" />

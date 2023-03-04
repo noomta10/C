@@ -10,10 +10,11 @@ main7() {
 	char line[MAXLINE];
 
 	while (getlinelength(line, MAXLINE) > 0) {
-		removeblanks(line);
 		if (removeblanks(line) > 0)
 			printf("%s", line);
 	}
+
+	return 0;
 }
 
 int removeblanks(char line[]) {
