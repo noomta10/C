@@ -27,6 +27,9 @@ int reverse(char line[], char reversedline[]) {
 	
 	i--;
 
+	if (line[i] == '\n')
+		i--;
+
 	while (i >= 0)
 	{
 		reversedline[j++] = line[i--];
