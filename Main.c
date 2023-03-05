@@ -11,7 +11,8 @@ void main8();
 void demo1();
 void demo2();
 void demo3();
+void demo4();
 
 main() {
-	main8();
+	demo4();
 }
