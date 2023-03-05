@@ -1,7 +1,7 @@
 #include <stdio.h>
 #define MAXLINE 1000
 
-/* Print the longest input line and its length */
+/* Print the longest input line */
 
 int maxlength;
 char line[MAXLINE];
