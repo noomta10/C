@@ -25,7 +25,7 @@ demo4() {
 		}
 
 		if (maxlength > 0) 
-			printf("%s", longestline);
+			printf("Longest line: %s", longestline);
 		
 		return 0;
 	}
