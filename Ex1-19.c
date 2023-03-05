@@ -4,37 +4,40 @@
 /* Remove trailing blanks and tabs and delete blank lines */
 
 int getlinelength(char line[], int limit);
-int reverse(char line[], char reversedline[]);
+void reverse(char line[]);
+
 
 main8() {
 	char line[MAXLINE];
-	char reversedline[MAXLINE];
 
 	while (getlinelength(line, MAXLINE) > 0) {
-		reverse(line, reversedline);
-		printf("%s", reversedline);
+		reverse(line);
+		printf("%s", line);
 	}
 
 	return 0;
 }
 
-int reverse(char line[], char reversedline[]) {
+void reverse(char line[]) {
 	int i = 0;
 	int j = 0;
+	char template;
 	
 	while (line[i] != '\0')
 		i++;
 	
 	i--;
 
-	if (line[i] == '\n')
+	if (j < i)
 		i--;
 
 	while (i >= 0)
 	{
-		reversedline[j++] = line[i--];
-	}
+		template = line[j];
+		line[j] = line[i];
+		line[i] = template;
+		i--;
+		j++;
 
-	reversedline[j] = '\0';
-	return j;
+	}
 }
