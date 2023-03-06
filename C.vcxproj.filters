@@ -51,5 +51,11 @@
     <ClCompile Include="Ex1-19.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CharArrayExternal.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ex1-20.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

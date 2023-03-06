@@ -16,3 +16,13 @@ main9() {
 			putchar(c);
 	}
 }
+
+
+
+	fdfs
+11	ddd
+111	ddd
+1	decltypez1		3
+literal				fff
+12345678901234567890
+0	0	0	0	0abc0

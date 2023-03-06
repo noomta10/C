@@ -19,26 +19,28 @@ main8() {
 }
 
 
-void reverse(char line[]) {
+
+
+void reverse(char line[])
+{
 	int i = 0;
 	int j = 0;
-	char template;
-	
+	char temp;
+
 	while (line[i] != '\0')
 		i++;
-	
+
 	i--;
 
 	if (j < i)
 		i--;
 
-	while (i >= 0)
+	while (i >= j)
 	{
-		template = line[j];
+		temp = line[j];
 		line[j] = line[i];
-		line[i] = template;
+		line[i] = temp;
 		i--;
 		j++;
-
 	}
 }
