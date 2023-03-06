@@ -23,12 +23,12 @@ demo4() {
 			maxlength = length;
 			copyex();
 		}
-
-		if (maxlength > 0) 
-			printf("Longest line: %s", longestline);
-		
-		return 0;
 	}
+
+	if (maxlength > 0) 
+		printf("Longest line: %s", longestline);
+	return 0;
+	
 }
 
 int getlinelengthex(void)

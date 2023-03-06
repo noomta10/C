@@ -1,7 +1,7 @@
 #include <stdio.h>
 #define MAXLINE 1000
 
-/* Remove trailing blanks and tabs and delete blank lines */
+/* Reverse a string */
 
 int getlinelength(char line[], int limit);
 void reverse(char line[]);
@@ -17,6 +17,7 @@ main8() {
 
 	return 0;
 }
+
 
 void reverse(char line[]) {
 	int i = 0;

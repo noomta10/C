@@ -41,6 +41,7 @@ int getlinelength(char line[], int limit)
 
 }
 
+
 /* Copy line array to longestline array*/
 void copy(char line[], char longestline[]) {
 	int i = 0;
