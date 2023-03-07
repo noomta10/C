@@ -1,28 +1,32 @@
 #include <stdio.h>
-#define TAB 4
+#define TAB 8	
 
 /* Replace tabs and to spaces */
 
 main9() {
 	int c;
+	int position = 1;
+	int blanksNumber = 0;
 
 	while ((c = getchar()) != EOF)
 	{
 		if (c == '\t'){
-			for(int i = 0; i < TAB; i++)
+			blanksNumber = TAB - (position - 1) % TAB;
+			while (blanksNumber > 0)
+			{
 				putchar(' ');
+				position++;
+				blanksNumber--;
+			}
 		}
-		else
+		else if(c == '\n'){
 			putchar(c);
+			position = 1;
+		}
+		else {
+			putchar(c);
+			position++;
+		}
+
 	}
 }
-
-
-
-	fdfs
-11	ddd
-111	ddd
-1	decltypez1		3
-literal				fff
-12345678901234567890
-0	0	0	0	0abc0
