@@ -138,6 +138,8 @@
     <ClCompile Include="Ex1-18.c" />
     <ClCompile Include="Ex1-19.c" />
     <ClCompile Include="Ex1-20.c" />
+    <ClCompile Include="Ex1-5.c" />
+    <ClCompile Include="Ex2-1.c" />
     <ClCompile Include="Functions.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="Arrays.c" />
