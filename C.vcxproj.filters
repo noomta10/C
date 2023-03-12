@@ -57,5 +57,14 @@
     <ClCompile Include="Ex1-20.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Ex1-5.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ex2-1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="4-1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

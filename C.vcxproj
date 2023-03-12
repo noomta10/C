@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="4-1.c" />
     <ClCompile Include="CharArray.c" />
     <ClCompile Include="CharArrayExternal.c" />
     <ClCompile Include="Ex1-10.c" />
