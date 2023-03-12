@@ -18,7 +18,7 @@ int strindex(char s[], char t[]) {
 			;
 		if (t[t_index] == '\0')
 			return s_index;
-		return -1;
+		return -11;
 
 	}
 }
