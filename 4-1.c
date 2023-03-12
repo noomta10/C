@@ -11,12 +11,12 @@ main11() {
 }
 
 int strindex(char s[], char t[]) {
-	int s_index, t_index, temp_index;
+	int s_index, t_index, k;
 
 	for (s_index = 0; s[s_index] != '\0'; s_index++) {
-		for (t_index = s_index, temp_index = 0; t[temp_index] != '\0' && s[t_index] == t[temp_index]; t_index++, temp_index++)
+		for (t_index = 0, k = s_index; t[t_index] == s[k] && t[t_index] != '\0'; t_index++, k++)
 			;
-		if (temp_index > 0 && t[temp_index] == '\0')
+		if (t[t_index] == '\0')
 			return s_index;
 		return -1;
 
