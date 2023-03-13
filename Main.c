@@ -12,6 +12,7 @@ void main8();
 void main9();
 void main10();
 void main11();
+void main12();
 
 void demo1();
 void demo2();

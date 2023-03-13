@@ -63,7 +63,10 @@
     <ClCompile Include="Ex2-1.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="4-1.c">
+    <ClCompile Include="Ex4-1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="try.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

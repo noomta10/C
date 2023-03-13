@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="4-1.c" />
+    <ClCompile Include="Ex4-1.c" />
     <ClCompile Include="CharArray.c" />
     <ClCompile Include="CharArrayExternal.c" />
     <ClCompile Include="Ex1-10.c" />
@@ -144,6 +144,7 @@
     <ClCompile Include="Functions.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="Arrays.c" />
+    <ClCompile Include="try.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
