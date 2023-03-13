@@ -66,8 +66,5 @@
     <ClCompile Include="Ex4-1.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="try.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
