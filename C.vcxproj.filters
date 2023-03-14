@@ -51,7 +51,7 @@
     <ClCompile Include="Ex1-19.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CharArrayExternal.c">
+    <ClCompile Include="CharArray_external.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Ex1-20.c">
@@ -67,6 +67,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Calculator.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Calculator_push_pop.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

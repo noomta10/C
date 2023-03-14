@@ -128,9 +128,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Calculator.c" />
+    <ClCompile Include="Calculator_push_pop.c" />
     <ClCompile Include="Ex4-1.c" />
     <ClCompile Include="CharArray.c" />
-    <ClCompile Include="CharArrayExternal.c" />
+    <ClCompile Include="CharArray_external.c" />
     <ClCompile Include="Ex1-10.c" />
     <ClCompile Include="Ex1-12.c" />
     <ClCompile Include="Ex1-13.c" />

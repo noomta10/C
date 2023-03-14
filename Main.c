@@ -17,7 +17,7 @@ void demo1();
 void demo2();
 void demo3();
 void demo4();
-void demo5();
+int demo5();
 
 main() {
 	demo5();
