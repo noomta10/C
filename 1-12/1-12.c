@@ -4,7 +4,7 @@
 
 /* Prints input one word per line */
 
-main2() {
+main() {
 	int c;
 	int state = OUT;
 

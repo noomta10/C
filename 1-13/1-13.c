@@ -5,7 +5,7 @@
 
 /* Creates a histogram of the lengths of words */
 
-main3() {
+main() {
 	int c;
 	int cCount = 0;
 	int overflowCount = 0;

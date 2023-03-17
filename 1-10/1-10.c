@@ -2,7 +2,7 @@
 
 /* Replace tabs and backslashes with visable characters */
 
-main1() {
+main() {
 	int c;
 
 	while ((c = getchar()) != EOF) {
