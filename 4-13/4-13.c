@@ -7,7 +7,7 @@ int main() {
 	char my_string[] = "Hello world";
 	printf("Before reverse: %s\n", my_string);
 	reverse(my_string);
-	printf("After reverse: %s", my_string);
+	printf("After reverse: %s\n", my_string);
 }
 
 

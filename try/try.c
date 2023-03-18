@@ -1,14 +1,12 @@
 #include <stdio.h>
+#include <math.h>
 
-void printd(int);
+#define ALON(x) if (x>0) {printf("Alon is %d\n",x);}
+
 
 int main() {
-	printd(123);
+	int i = 5;
+	ALON(i++);
+	ALON(i++);
 }
 
-void printd(int number)
-{
-	if (number / 10)
-		printd(number / 10);
-	putchar(number % 10 + '0');
-}
