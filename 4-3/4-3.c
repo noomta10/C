@@ -4,6 +4,8 @@
 #define MAXOP 100 // max size of oparand or operator
 #define NUMBER 0 // signal that a number was found
 
+/* Calculator */
+
 int getop(char[]);
 void push(double);
 double pop(void);

@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+/* Find right most occurance of a string in another string */
+
 int strindex(char s[], char t[]);
 
 main() {

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <limits.h>
 
+/* Print ranges of signed and unsigned data types */
+
 main()
 {
 	printf("The range of signed char is from %d to %d\n", SCHAR_MIN, SCHAR_MAX);

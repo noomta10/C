@@ -1,11 +1,11 @@
 #include <stdio.h>
 #define MAXLINE 1000
 
+/* Remove trailing blanks and tabs and delete blank lines */
+
 int getlinelength(char line[], int limit);
 int removeblanks(char line[]);
 
-
-/* Remove trailing blanks and tabs and delete blank lines */
 main() {
 	char line[MAXLINE];
 
@@ -16,6 +16,7 @@ main() {
 
 	return 0;
 }
+
 
 int removeblanks(char line[]) {
 	int i = 0;
@@ -38,3 +39,19 @@ int removeblanks(char line[]) {
 	return i;
 }
 
+
+int getlinelength(char line[], int limit)
+{
+	int c, i;
+
+	for (i = 0; i < limit - 2 && (c = getchar()) != EOF && c != '\n'; i++)
+		line[i] = c;
+	if (c == '\n') {
+		line[i] = c;
+		i++;
+	}
+
+	line[i] = '\0';
+	return i;
+
+}

@@ -2,7 +2,7 @@
 #define MAXLINE 1000
 #define MIN_LINE_LENGTH 5
 
-/* Print all input lines that are longer than 80 characters */
+/* Print all input lines that are longer than 5 characters */
 
 int getlinelength(char line[], int limit);
 

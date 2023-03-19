@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+/* Reverse a string recursively */
+
 void reverse(char string[]);
 void reverse1(char string[], int start, int end);
 
