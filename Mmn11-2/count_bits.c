@@ -5,6 +5,7 @@ Main function asks for an input from the user, prints it, sends it to count_bits
 and finally, prints the return value. */
 
 #define _CRT_SECURE_NO_WARNINGS
+#define OK 0
 #include <stdio.h>
 
 int count_bits(unsigned long number);
@@ -15,7 +16,7 @@ int main() {
 	scanf("%lu", &number);
 	printf("Number is: %lu\n", number);
 	printf("number of bits that are ON on the even places: %d\n", count_bits(number));
-	return 0;
+	return OK;
 }
 
 /* Count_bits is a function that sums up and returns the number of bits that are on, on the even places,
