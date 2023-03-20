@@ -20,8 +20,9 @@ int main() {
 
 /* Count_bits is a function that sums up and returns the number of bits that are on, on the even places,
 in an unsigned long variable.
-The function gets an unsigned long number and use bitwise operators AND and RIGHT SHIFT (until the nunmber becomes zero),
-and returns the number of bits on the even places are on. */
+The function gets an unsigned long number and use bitwise operators AND and RIGHT SHIFT (until the number becomes zero).
+It returns the number of bits on the even places are on.
+We assume that the number the function recives is not larger than max value of unsigned long (4294967295)*/
 int count_bits(unsigned long number) {
 	int bit_count;
 	bit_count = 0;
