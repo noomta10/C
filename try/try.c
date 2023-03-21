@@ -3,6 +3,7 @@
 
 
 int main() {
-	printf("%d", strncmp("aaa", "bbb", 0));
+	int n = 10000;
+	printf("%d", 0177&n);
 }
 
