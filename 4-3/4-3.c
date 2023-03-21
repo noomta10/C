@@ -1,10 +1,11 @@
+/* Reverse polish alculator */
+
 #include <stdio.h>
+#include <math.h>
 #include <stdlib.h> // for atof- converts string to double
 
 #define MAXOP 100 // max size of oparand or operator
 #define NUMBER 0 // signal that a number was found
-
-/* Calculator */
 
 int getop(char[]);
 void push(double);
@@ -39,6 +40,7 @@ int main() {
 			break;
 		case '\n':
 			printf("\t%.8g\n", pop());
+			break;
 		default:
 			printf("Error: unknown command");
 			break;
@@ -55,6 +57,7 @@ int main() {
 int sp = 0; // next free stack position
 double val[MAXVAL]; // value stack
 
+/* push: push f onto value stack */
 void push(double f) {
 	if (sp < MAXVAL)
 		val[sp++] = f;
@@ -62,6 +65,7 @@ void push(double f) {
 		printf("Error: Stack full");
 }
 
+/* pop: pop and return top value from stack */
 double pop(void) {
 	if (sp > 0)
 		return val[--sp];
@@ -74,7 +78,6 @@ double pop(void) {
 
 
 #include <ctype.h> // for isdigit()
-#define NUMBER 0 // signal that a number was found
 
 int getch(void);
 void ungetch(int);
