@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-/* Turn off (set to zero) bit in specified index  */
+/* Turns off (sets to zero) bit in specified index  */
 
 int reset_bit_index(unsigned int number, int index);
 

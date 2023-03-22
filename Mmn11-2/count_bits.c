@@ -23,7 +23,7 @@ int main() {
 in an unsigned long variable.
 The function gets an unsigned long number and use bitwise operators AND and RIGHT SHIFT (until the number becomes zero).
 It returns the number of bits on the even places are on.
-We assume that the number the function recives is not larger than max value of unsigned long (4294967295)*/
+We assume that the number the function recives is not larger than max value of unsigned long (4294967295) */
 int reset_bit_index(unsigned long number) {
 	int bit_count;
 	bit_count = 0;
