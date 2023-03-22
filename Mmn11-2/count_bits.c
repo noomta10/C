@@ -6,6 +6,7 @@ and finally, prints the return value. */
 
 #define _CRT_SECURE_NO_WARNINGS
 #define OK 0
+#define STEP 2
 #include <stdio.h>
 
 int reset_bit_index(unsigned long number);
@@ -32,7 +33,7 @@ int reset_bit_index(unsigned long number) {
 		if (number & 1)
 			bit_count++;
 
-		number = number >> 2;
+		number = number >> STEP;
 	}
 
 	return bit_count;
