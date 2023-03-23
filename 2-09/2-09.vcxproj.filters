@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="count_bits.c">
+    <ClCompile Include="2-09.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
