@@ -48,6 +48,7 @@ int main() {
 			char second_string[MAX_LINE];
 			printf("Enter 2 strings with a space between them: ");
 			scanf("%s%s", first_string, second_string);
+			printf("First string is: %s, Second string is: %s\n", first_string, second_string);
 			printf("Return value: %d\n\n", my_strcmp(first_string, second_string));
 		}
 		else if (option == OPTION2) {
@@ -58,6 +59,7 @@ int main() {
 			scanf("%s%s", first_string, second_string);
 			printf("Enter number of characters to compare: ");
 			scanf("%d", &characters_to_compare);
+			printf("First string is: %s, Second string is: %s, Number of characters to compare is: %d\n", first_string, second_string, characters_to_compare);
 			printf("Return value: %d\n\n", my_strncmp(first_string, second_string, characters_to_compare));
 		}
 		else if (option == OPTION3) {
@@ -67,6 +69,7 @@ int main() {
 			scanf("%s", string);
 			printf("Enter a character: ");
 			scanf(" %c", &character);
+			printf("String is: %s, Character is: %c\n", string, character);
 			printf("Return value: %d\n\n", my_strchr(string, character));
 		}
 		else if (option == OPTION4)
