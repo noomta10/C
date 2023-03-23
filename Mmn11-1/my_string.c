@@ -53,9 +53,9 @@ int main() {
 			printf("Enter number of characters to compare: ");
 			scanf("%d", &characters_to_compare);
 
-			if (characters_to_compare < 0)
+			if (characters_to_compare < 0 || characters_to_compare > MAX_LINE)
 			{
-				printf("Error: number of characters to compare must be >=0.\n\n");
+				printf("Error: number of characters to compare must be >=0 and =<80.\n\n");
 				continue;
 			}
 
@@ -112,7 +112,7 @@ int my_strncmp(char cs[], char ct[], int n) {
 
 	for (i = 0; i < n && cs[i] == ct[i]; i++)
 		;
-
+		
 	if (i == n)
 		return EQUAL;
 	return_value = (cs[i] < ct[i]) ? SMALL : BIG;
