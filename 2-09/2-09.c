@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-/* Count 1 bits  */
+/* Count 1 bits (short way)  */
 
 int count_bits(unsigned int number);
 
