@@ -5,16 +5,14 @@ Main function asks for an input from the user, prints it, sends it to count_bits
 and finally, prints the return value. */
 
 #define _CRT_SECURE_NO_WARNINGS
-#define OK 0
-#define STEP 2
-#include <stdio.h>
 
-int reset_bit_index(unsigned long number);
+#include <stdio.h>
+#include "count_bits.h"
 
 int main() {
 	unsigned long number;
 	printf("Enter a number: ");
-	scanf("%lu", &number);
+	scanf("%ul", &number);
 	printf("Number is: %lu\n", number);
 	printf("number of bits that are ON on the even places: %d\n", reset_bit_index(number));
 	return OK;

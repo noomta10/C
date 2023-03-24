@@ -20,6 +20,7 @@ In the end, the function prints the return value of the selected function. */
 
 int main() {
 	int option;
+
 	do {
 		printf("\nChoose a function to use:\n\n"
 			"1. my_strcmp(cs, ct)- Compare string cs to ct. return <0 if cs<ct, 0 if cs=ct, or 0< if cs>ct.\n\n"
@@ -34,12 +35,12 @@ int main() {
 			char second_string[MAX_LINE];
 
 			printf("Enter first string: ");
-			scanf("%s", first_string);
-			printf("Enter second string: ");
-			scanf("%s", second_string);
+			scanf("%[^\n]", first_string);
+			// printf("Enter second string: ");
+			// scanf("%[^\n]", second_string);
 
-			printf("First string is: %s, Second string is: %s\n", first_string, second_string);
-			printf("Return value: %d\n\n", my_strcmp(first_string, second_string));
+			printf("First string is: %s\n", first_string);//, second_string);
+			//printf("Return value: %d\n\n", my_strcmp(first_string, second_string));
 		}
 		else if (option == OPTION2) {
 			char first_string[MAX_LINE];
@@ -85,7 +86,7 @@ int main() {
 } 
 
 
-/* My_strcmp function gets 2 strings and compare them lexically.
+/* My_strcmp function gets 2 strings and compare them lexically. String will not have newlines and spaces.
 Returns <0 if cs<ct, 0 if cs=ct, or 0< if cs>ct. */
 
 int my_strcmp(char cs[], char ct[]) {
@@ -103,8 +104,8 @@ int my_strcmp(char cs[], char ct[]) {
 }
 
 
-/* My_strncmp gets 2 strings and an integer, and compare lexically at most n characters of string cs to ct.
-Returns <0 if cs<ct, 0 if cs=ct, or 0< if cs>ct. */
+/* My_strncmp gets 2 strings and an integer, and compare lexically at most n characters of string cs to ct. 
+String will not have newlines and spaces. Returns <0 if cs<ct, 0 if cs=ct, or 0< if cs>ct. */
 
 int my_strncmp(char cs[], char ct[], int n) {
 	int i;
@@ -115,16 +116,18 @@ int my_strncmp(char cs[], char ct[], int n) {
 		
 	if (i == n)
 		return EQUAL;
+
 	return_value = (cs[i] < ct[i]) ? SMALL : BIG;
 	return return_value;
 }
 
 
 /* My_strchr gets a string and a character, and search for the first occurance of the character.
-Returns int of first occurance of c in cs, or -1 if not present. */
+String will not have newlines and spaces. Returns int of first occurance of c in cs, or -1 if not present. */
 
 int my_strchr(char cs[], char c) {
-	for (int i = 0; cs[i] != '\0'; i++) {
+	int i;
+	for (i = 0; cs[i] != '\0'; i++) {
 		if (cs[i] == c)
 			return i;
 	}

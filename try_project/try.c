@@ -3,15 +3,13 @@
  
 int main()
 {
-	char a[2] ;
-	char b[2];
+	char first_string[80];
+	char second_string[80];
 
-	int i = 0;
-	a[i++] = '1';
-	a[i++] = '2';
-	i = 0;
-	b[i++] = '3';
-	b[i++] = 0;
-	printf("%s", a);
-	int c = 2;
+	printf("Enter first string: ");
+	scanf("%[^\n]%*c", first_string);
+	 printf("Enter second string: ");
+	 scanf("%[^\n]%*c", second_string);
+
+	printf("First string is: %s, Second string is: %s.\n", first_string, second_string);
 }
