@@ -14,7 +14,7 @@ int main() {
 	printf("Enter a number: ");
 	scanf("%lu", &number);
 	printf("Number is: %lu\n", number);
-	printf("number of bits that are ON on the even places: %d\n", count_bits(number));
+	printf("Number of bits that are ON on the even places: %d\n", count_bits(number));
 	return OK;
 }
 

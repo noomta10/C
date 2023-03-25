@@ -11,6 +11,8 @@ Returns int of first occurance of c in cs, or -1 if not present. */
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
 #include "my_string.h"
 
 /* Main function prints a menu and lets the user choose between 3 functions. The process repeats until the user types '4' to exit.
@@ -28,11 +30,11 @@ int main() {
 			"3. my_strchr(cs, c)- Return int of first occurance of c in cs, or -1 if not present.\n\n"
 			"4. quit\n\n"
 			"Enter your choise: ");
-		scanf("%[^\n]%*c", &option);
+		scanf("%[^\n]%*c", option);
 
 		while (strlen(option) != 1) {
 			printf("Error: you need to enter a character.\nEnter your choice: ");
-			scanf("%[^\n]%*c", &option);
+			scanf("%[^\n]%*c", option);
 		}
 
 		if (option[0] == OPTION1) {
@@ -58,10 +60,10 @@ int main() {
 			printf("Enter second string: ");
 			scanf("%[^\n]%*c", second_string);
 			printf("Enter number of characters to compare: ");
-			scanf("%[^\n]%*c", &characters_to_compare_line);
+			scanf("%[^\n]%*c", characters_to_compare_line);
 			characters_to_compare = atoi(characters_to_compare_line);
 
-			if (characters_to_compare < 0 || characters_to_compare > MAX_LINE )
+			if (characters_to_compare < 0 || characters_to_compare > MAX_LINE)
 			{
 				printf("Error: number of characters to compare must be a number >=0 and =<80.\n\n");
 				continue;
@@ -79,7 +81,7 @@ int main() {
 			printf("Enter a string: ");
 			scanf("%[^\n]%*c", string);
 			printf("Enter a character: ");
-			scanf("%[^\n]%*c", &character_line);
+			scanf("%[^\n]%*c", character_line);
 			character = character_line[0];
 
 
@@ -93,10 +95,10 @@ int main() {
 	} while (option[0] != OPTION4);
 
 	return OK;
-} 
+}
 
 
-/* My_strcmp function gets 2 strings and compare them lexically. 
+/* My_strcmp function gets 2 strings and compare them lexically.
 Returns <0 if cs<ct, 0 if cs=ct, or 0< if cs>ct. */
 
 int my_strcmp(char cs[], char ct[]) {
@@ -114,7 +116,7 @@ int my_strcmp(char cs[], char ct[]) {
 }
 
 
-/* My_strncmp gets 2 strings and an integer, and compare lexically at most n characters of string cs to ct. 
+/* My_strncmp gets 2 strings and an integer, and compare lexically at most n characters of string cs to ct.
 Returns <0 if cs<ct, 0 if cs=ct, or 0< if cs>ct. */
 
 int my_strncmp(char cs[], char ct[], int n) {
@@ -123,7 +125,7 @@ int my_strncmp(char cs[], char ct[], int n) {
 
 	for (i = 0; i < n && cs[i] == ct[i] && cs[i] != '\0'; i++)
 		;
-		
+
 	if (i == n || cs[i] == '\0')
 		return EQUAL;
 
