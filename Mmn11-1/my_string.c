@@ -19,7 +19,7 @@ Required values are prompted, and sent to the function.
 In the end, the function prints the return value of the selected function. */
 
 int main() {
-	int option;
+	char option[MAX_LINE];
 
 	do {
 		printf("\nChoose a function to use:\n\n"
@@ -28,13 +28,14 @@ int main() {
 			"3. my_strchr(cs, c)- Return int of first occurance of c in cs, or -1 if not present.\n\n"
 			"4. quit\n\n"
 			"Enter your choise: ");
+		scanf("%[^\n]%*c", &option);
 
-		while (scanf("%d%*c", &option) != 1){
-			printf("Error: you need to write a number\n");
-			scanf("%d%*c", &option);
+		while (strlen(option) != 1) {
+			printf("Error: you need to enter a character.\nEnter your choice: ");
+			scanf("%[^\n]%*c", &option);
 		}
 
-		if (option == OPTION1) {
+		if (option[0] == OPTION1) {
 			char first_string[MAX_LINE];
 			char second_string[MAX_LINE];
 
@@ -46,9 +47,10 @@ int main() {
 			printf("First string is: %s\nSecond string is: %s\n", first_string, second_string);
 			printf("Return value: %d\n\n", my_strcmp(first_string, second_string));
 		}
-		else if (option == OPTION2) {
+		else if (option[0] == OPTION2) {
 			char first_string[MAX_LINE];
 			char second_string[MAX_LINE];
+			char characters_to_compare_line[MAX_LINE];
 			int characters_to_compare;
 
 			printf("Enter first string: ");
@@ -56,11 +58,12 @@ int main() {
 			printf("Enter second string: ");
 			scanf("%[^\n]%*c", second_string);
 			printf("Enter number of characters to compare: ");
-			scanf("%d", &characters_to_compare);
+			scanf("%[^\n]%*c", &characters_to_compare_line);
+			characters_to_compare = atoi(characters_to_compare_line);
 
-			if (characters_to_compare < 0 || characters_to_compare > MAX_LINE)
+			if (characters_to_compare < 0 || characters_to_compare > MAX_LINE )
 			{
-				printf("Error: number of characters to compare must be >=0 and =<80.\n\n");
+				printf("Error: number of characters to compare must be a number >=0 and =<80.\n\n");
 				continue;
 			}
 
@@ -68,23 +71,26 @@ int main() {
 				first_string, second_string, characters_to_compare);
 			printf("Return value: %d\n\n", my_strncmp(first_string, second_string, characters_to_compare));
 		}
-		else if (option == OPTION3) {
+		else if (option[0] == OPTION3) {
 			char string[MAX_LINE];
+			char character_line[MAX_LINE];
 			char character;
 
 			printf("Enter a string: ");
 			scanf("%[^\n]%*c", string);
 			printf("Enter a character: ");
-			scanf(" %c", &character);
+			scanf("%[^\n]%*c", &character_line);
+			character = character_line[0];
+
 
 			printf("String is: %s\nCharacter is: %c\n", string, character);
 			printf("Return value: %d\n\n", my_strchr(string, character));
 		}
-		else if (option == OPTION4)
+		else if (option[0] == OPTION4)
 			break;
 		else
 			printf("Invalid option.\n\n");
-	} while (option != OPTION4);
+	} while (option[0] != OPTION4);
 
 	return OK;
 } 

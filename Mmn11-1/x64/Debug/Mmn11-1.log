@@ -1,2 +1,3 @@
 ﻿  my_string.c
+C:\Users\noomt\OneDrive\Desktop\C_Project\Mmn11-1\my_string.c(62,28): warning C4013: 'atoi' undefined; assuming extern returning int
   Mmn11-1.vcxproj -> C:\Users\noomt\OneDrive\Desktop\C_Project\1-10\x64\Debug\Mmn11-1.exe

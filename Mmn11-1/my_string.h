@@ -1,9 +1,9 @@
 #define MAX_LINE 80 /* Max line length (of the array that holds each input string) */
 
-#define OPTION1 1 /* Options for the menu to choose the functions */
-#define OPTION2 2
-#define OPTION3 3
-#define OPTION4 4 
+#define OPTION1 '1' /* Options for the menu to choose the functions */
+#define OPTION2 '2'
+#define OPTION3 '3'
+#define OPTION4 '4' 
 
 #define ZERO 0 /* To reset new variables */
 
