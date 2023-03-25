@@ -28,7 +28,11 @@ int main() {
 			"3. my_strchr(cs, c)- Return int of first occurance of c in cs, or -1 if not present.\n\n"
 			"4. quit\n\n"
 			"Enter your choise: ");
-		scanf("%d", &option);
+
+		while (scanf("%d%*c", &option) != 1){
+			printf("Error: you need to write a number\n");
+			scanf("%d%*c", &option);
+		}
 
 		if (option == OPTION1) {
 			char first_string[MAX_LINE];
@@ -40,7 +44,7 @@ int main() {
 			scanf("%[^\n]%*c", second_string);
 
 			printf("First string is: %s\nSecond string is: %s\n", first_string, second_string);
-			//printf("Return value: %d\n\n", my_strcmp(first_string, second_string));
+			printf("Return value: %d\n\n", my_strcmp(first_string, second_string));
 		}
 		else if (option == OPTION2) {
 			char first_string[MAX_LINE];
@@ -60,7 +64,7 @@ int main() {
 				continue;
 			}
 
-			printf("First string is: %s, Second string is: %s, Number of characters to compare is: %d\n",
+			printf("First string is: %s\nSecond string is: %s\nNumber of characters to compare is: %d\n",
 				first_string, second_string, characters_to_compare);
 			printf("Return value: %d\n\n", my_strncmp(first_string, second_string, characters_to_compare));
 		}
@@ -73,7 +77,7 @@ int main() {
 			printf("Enter a character: ");
 			scanf(" %c", &character);
 
-			printf("String is: %s, Character is: %c\n", string, character);
+			printf("String is: %s\nCharacter is: %c\n", string, character);
 			printf("Return value: %d\n\n", my_strchr(string, character));
 		}
 		else if (option == OPTION4)
@@ -111,10 +115,10 @@ int my_strncmp(char cs[], char ct[], int n) {
 	int i;
 	int return_value;
 
-	for (i = 0; i < n && cs[i] == ct[i]; i++)
+	for (i = 0; i < n && cs[i] == ct[i] && cs[i] != '\0'; i++)
 		;
 		
-	if (i == n)
+	if (i == n || cs[i] == '\0')
 		return EQUAL;
 
 	return_value = (cs[i] < ct[i]) ? SMALL : BIG;
