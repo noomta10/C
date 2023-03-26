@@ -1,7 +1,13 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
- 
-int main()
-{
-	printf("%d", strncmp("aew", "AEWSR", 0));
+
+main(void) {
+	int y;
+	int x = 2;
+
+	int* pointer_to_x = &x;
+
+	y = *pointer_to_x + 1;
+
+	printf("%d\n", y);
+	printf("%d\n", *pointer_to_x);
 }

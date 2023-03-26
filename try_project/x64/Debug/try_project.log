@@ -1,3 +1,2 @@
 ﻿  try.c
-C:\Users\noomt\OneDrive\Desktop\C_Project\try_project\try.c(6,15): warning C4013: 'strncmp' undefined; assuming extern returning int
   try_project.vcxproj -> C:\Users\noomt\OneDrive\Desktop\C_Project\1-10\x64\Debug\try_project.exe
