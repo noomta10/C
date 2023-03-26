@@ -24,13 +24,6 @@ float get_float(float* fp)
 	int c, sign;
 	long exp = 10;
 
-	/* There are 4 stages:
-	 a. skip white spaces
-	 b. decide whether there is a sign
-	 c. calculate part before the decimal point
-	 d. calculate part after the decimal point
-	*/
-
 	/* skip white spaces */
 	while (isspace(c = my_getch()))
 		;
@@ -46,10 +39,11 @@ float get_float(float* fp)
 	if (c == '-' || c == '+')
 		c = my_getch();
 
-
+	/* calculate part before the decimal point */
 	for (*fp = 0.0; isdigit(c); c = my_getch())
 		*fp = 10 * *fp + (c - '0');
 	
+	/* calculate part after the decimal point */
 	if (c == '.') {
 		for (c = my_getch(); isdigit(c); c = my_getch(), exp *= 10)
 			*fp = *fp + (float)(c - '0') / exp;
