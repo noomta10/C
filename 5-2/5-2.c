@@ -1,3 +1,6 @@
+/* The function should receive the following floating-point value from the input, 
+and put it into the *fp pointer. */
+
 #include <stdio.h>
 #include <ctype.h>
 #define BUFSIZE 100
@@ -17,6 +20,7 @@ void my_ungetch(int c) /* push character back on input */
 	else
 		buf[bufp++] = c;
 }
+
 
 /* get next float from input into *fp */
 float get_float(float* fp)
@@ -42,7 +46,7 @@ float get_float(float* fp)
 	/* calculate part before the decimal point */
 	for (*fp = 0.0; isdigit(c); c = my_getch())
 		*fp = 10 * *fp + (c - '0');
-	
+
 	/* calculate part after the decimal point */
 	if (c == '.') {
 		for (c = my_getch(); isdigit(c); c = my_getch(), exp *= 10)
@@ -50,7 +54,7 @@ float get_float(float* fp)
 	}
 
 	*fp *= sign;
-	
+
 	if (c != EOF)
 		my_ungetch(c);
 	return c;
@@ -61,3 +65,4 @@ main() {
 	get_float(&ret_val);
 	printf("%g\n", ret_val);
 }
+
