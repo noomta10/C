@@ -1,10 +1,8 @@
 /* Count_bits is a function that sums up and returns the number of bits that are on, on the even places,
-in an unsigned long variable. The function gets the number and use bitwise operators 
+in an unsigned long variable. The function gets the number and use bitwise operators
 in order to find out how many bits on the even places are on.
 Main function asks for an input from the user, prints it, sends it to count_bits function,
 and finally, prints the return value. */
-
-#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include "count_bits.h"
@@ -35,3 +33,4 @@ int count_bits(unsigned long number) {
 
 	return bits_count;
 }
+
