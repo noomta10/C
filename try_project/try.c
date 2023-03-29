@@ -1,13 +1,17 @@
+/* chapter 5, fourth example.
+Example - print array */
 #include <stdio.h>
 
-main(void) {
-	int y;
-	int x = 2;
+void func(int* p) {
+	printf("%d\n", *p);
+	return;
+}
 
-	int* pointer_to_x = &x;
-
-	y = *pointer_to_x + 1;
-
-	printf("%d\n", y);
-	printf("%d\n", *pointer_to_x);
+main() {
+	int a[10];
+	int* pa;
+	a[0] = 8;
+	pa = &a[0];
+	func(a);
+	func(pa);
 }
