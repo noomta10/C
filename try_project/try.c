@@ -1,13 +1,15 @@
 #include <stdio.h>
 
-main(void) {
-	int y;
-	int x = 2;
+int strlen(char *s) {
+	char* p = s;
+	while (*p != '\0')
+		p++;
+	return p - s;
 
-	int* pointer_to_x = &x;
-
-	y = *pointer_to_x + 1;
-
-	printf("%d\n", y);
-	printf("%d\n", *pointer_to_x);
 }
+
+main(void) {
+	char my_string[] = "12";
+	printf("%d", strlen(my_string));
+}
+
