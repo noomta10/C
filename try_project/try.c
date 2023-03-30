@@ -1,15 +1,14 @@
-/* chapter 5, fourth example.
-Example - print array */
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <string.h>
 
-main(void) {
-	int y;
-	int x = 2;
+int main() {
+	char source[10] = "123";
+	char destination[10] = "abcde";
 
-	int* pointer_to_x = &x;
+	printf("destination is originally = '%s'\n", destination);
+	strncpy(destination, source, 5);
+	printf("After strncpy, destination becomes '%s'\n", destination);
 
-	y = *pointer_to_x + 1;
-
-	printf("%d\n", y);
-	printf("%d\n", *pointer_to_x);
+	return(0);
 }

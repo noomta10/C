@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{05824fb2-2ec7-437e-9c51-7b980ee11f14}</ProjectGuid>
+    <ProjectGuid>{2eb5cea1-d0f5-4403-9ec2-1ee819f9ce1b}</ProjectGuid>
     <RootNamespace>My505</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -127,7 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="5.5.c" />
+    <ClCompile Include="5-5.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
