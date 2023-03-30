@@ -9,17 +9,17 @@ int strncmp(char* string1, char* string2, int number_of_characters);
 int main() {
 	char dest[20] = "abcde";
 	char src[20] = "12345";
-	//printf("Destination: %s\n", dest);
-	//strncpy(dest, src, 2);
-	//printf("New destination: %s\n", dest);
+	printf("Destination: %s\n", dest);
+	strncpy(dest, src, 2);
+	printf("New destination: %s\n\n", dest);
 
-	//printf("Destination: %s\n", dest);
-	//strncat(dest, src, 6);
-	//printf("New destination: %s\n", dest);
+	printf("Destination: %s\n", dest);
+	strncat(dest, src, 6);
+	printf("New destination: %s\n\n", dest);
 
-	char string1[] = "123abc456";
+	char string1[] = "123abc456";	
 	char string2[] = "abcdefghi";
-	printf("Strncmp return value: %d ", strncmp(string1 + 3, string2, 3));
+	printf("Strncmp return value: %d\n", strncmp(string1 + 3, string2,3));
 
 	return 0;
 }
