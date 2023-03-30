@@ -1,15 +1,15 @@
+/* chapter 5, fourth example.
+Example - print array */
 #include <stdio.h>
 
-int strlen(char *s) {
-	char* p = s;
-	while (*p != '\0')
-		p++;
-	return p - s;
-
-}
-
 main(void) {
-	char my_string[] = "12";
-	printf("%d", strlen(my_string));
-}
+	int y;
+	int x = 2;
 
+	int* pointer_to_x = &x;
+
+	y = *pointer_to_x + 1;
+
+	printf("%d\n", y);
+	printf("%d\n", *pointer_to_x);
+}
