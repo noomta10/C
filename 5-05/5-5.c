@@ -7,12 +7,26 @@ int strncmp(char* string1, char* string2, int number_of_characters);
 
 
 int main() {
+	char dest1[20] = "abcde";
+	char src1[20] = "12345";
+	printf("Destination: %s\n", dest1);
+	strncpy(dest1, src1, 2);
+	printf("New destination: %s\n\n", dest1);
+
+	char dest2[20] = "abcde";
+	char src2[20] = "1";
+	printf("Destination: %s\n", dest2);
+	strncpy(dest2, src2, 2);
+	printf("New destination: %s\n\n", dest2);
+
+	char dest3[20] = "abcde";
+	char src3[20] = "12";
+	printf("Destination: %s\n", dest3);
+	strncpy(dest3, src3, 2);
+	printf("New destination: %s\n\n", dest3);
+
 	char dest[20] = "abcde";
 	char src[20] = "12345";
-	printf("Destination: %s\n", dest);
-	strncpy(dest, src, 2);
-	printf("New destination: %s\n\n", dest);
-
 	printf("Destination: %s\n", dest);
 	strncat(dest, src, 6);
 	printf("New destination: %s\n\n", dest);
@@ -23,6 +37,7 @@ int main() {
 
 	return 0;
 }
+
 
 /* Copy n chars from src to dest */
 void strncpy(char* dest, char* src, int number_of_characters) {
