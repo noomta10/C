@@ -7,8 +7,7 @@ static int stk_ptr = 0;
 static stack[STK_SIZE]; /* stack and stack pointer */
 
 void push(int val) {
-	if (stk_ptr >= STK_SIZE)
-	{
+	if (stk_ptr >= STK_SIZE) {
 		printf("push: stack overflow\n");
 		exit(1);
 	}
@@ -18,8 +17,7 @@ void push(int val) {
 
 int pop(void)
 {
-	if (stk_ptr <= 0)
-	{
+	if (stk_ptr <= 0) {
 		printf("pop: stack underflow\n");
 		exit(2);
 	}
@@ -29,9 +27,11 @@ int pop(void)
 main(int argc, char* argv[]) {
 	int i;
 	int tmp;
+
 	if (argc == 1) /* no arguments */
 		return (0);
-	for (i = 1; i < argc; i++)
+
+	for (i = 1; i < argc; i++) {
 		if (isdigit(*argv[i]))
 			push(atoi(argv[i]));
 		else
@@ -56,5 +56,7 @@ main(int argc, char* argv[]) {
 				break;
 
 			}
-	printf("%d\n", pop());
+	}
+
+	printf("Result is: %d\n", pop());
 }
