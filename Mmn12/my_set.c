@@ -18,7 +18,7 @@ int* get_set(void) {
 	int number; // users number
 	int index = 1; // index of number in the array
 	int size = 1; // number of elements in the array
-	int* array_pointer = (int*) calloc(size, ENLARGE_SIZE); // allocate memory for the array
+	int* array_pointer = (int*) malloc(size); // allocate memory for the array
 
 	if (array_pointer == NULL) {
 		printf("Error: memory allocation failed\n");
@@ -28,7 +28,7 @@ int* get_set(void) {
 	printf("Enter numbers:\n ");
 
 	while (scanf("%d", &number) == 1) {
-		size += 1;
+		size++;
 		array_pointer = realloc(array_pointer, size * ENLARGE_SIZE);
 
 		if (array_pointer == NULL) {
