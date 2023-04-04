@@ -4,19 +4,21 @@
 #define ENLARGE_SIZE sizeof(int)
 
 int* get_set(void);
-void print_set(int* set_pointer);
+void print_set(int* set_pointer, int number_of_elements);
 
 int main(void) {
 	int* set_pointer = get_set();
-	print_set(set_pointer);
+	print_set(set_pointer, set_pointer[0]);
+	free(set_pointer);
+	return 0;
 }
 
 // create a set
 int* get_set(void) {
 	int number; // users number
-	int index = 0; // index of number in the array
-	int size = 0; // initial size of array
-	int* array_pointer = malloc(size * ENLARGE_SIZE); // allocate memory for the array
+	int index = 1; // index of number in the array
+	int size = 1; // number of elements in the array
+	int* array_pointer = (int*) calloc(size, ENLARGE_SIZE); // allocate memory for the array
 
 	if (array_pointer == NULL) {
 		printf("Error: memory allocation failed\n");
@@ -26,8 +28,8 @@ int* get_set(void) {
 	printf("Enter numbers:\n ");
 
 	while (scanf("%d", &number) == 1) {
-		size += ENLARGE_SIZE;
-		array_pointer = realloc(array_pointer, size);
+		size += 1;
+		array_pointer = realloc(array_pointer, size * ENLARGE_SIZE);
 
 		if (array_pointer == NULL) {
 			printf("Error: memory reallocation failed\n");
@@ -38,16 +40,14 @@ int* get_set(void) {
 		index++;
 	}
 
-	*(array_pointer + index) = '\0';
+	array_pointer[0] = index - 1;
 	return array_pointer;
 }
 
 
-void print_set(int *set_pointer) {
-	while (*set_pointer != '\0') {
-		printf("%d ", *set_pointer);
-		set_pointer++;
+void print_set(int *set_pointer, int number_of_elements) {
+	int index = 1;;
+	for (index; index <= number_of_elements; index++) {
+		printf("%d ", *(set_pointer + index));
 	}
-
-	free(set_pointer);
 }
