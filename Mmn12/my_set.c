@@ -1,23 +1,8 @@
-#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS 
 
 #include <stdio.h> 
 #include <stdlib.h>
-#define ENLARGE_SIZE sizeof(int)
-#define NUMBER_EXISTS 1
-#define NUMBER_DOESNT_EXIST 0
-#define NUMBER_OF_ELEMENTS_INDEX 0
-#define NO_ERRORS 0
-#define MEMORY_ERROR 1
-#define INT_FOUND 1
-#define INITIAL_ARRAY_SIZE 1
-#define FIRST_INDEX 1
-
-int* get_set(void);
-void print_set(int* set_pointer, int number_of_elements);
-void add_number_to_array(int** pointer_to_pointer, int number, int* size, int* index_pointer);
-int number_in_array(int number, int* array_pointer, int number_of_elements);
-void print_input(int* full_array_pointer, int number_of_elements);
-
+#include "my_set.h"
 
 int main(void) {
 	int* set_pointer = get_set();
