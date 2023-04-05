@@ -14,7 +14,7 @@
 
 int* get_set(void);
 void print_set(int* set_pointer, int number_of_elements);
-void add_number_to_array(int** pointer_to_pointer, int number, int size, int index);
+void add_number_to_array(int** pointer_to_pointer, int number, int* size, int* index_pointer);
 int number_in_array(int number, int* array_pointer, int number_of_elements);
 void print_input(int* full_array_pointer, int number_of_elements);
 
@@ -45,14 +45,10 @@ int* get_set(void) {
 
 	printf("Enter numbers:\n");
 	while (scanf("%d", &number) == INT_FOUND) {
-		full_array_size++;
-		add_number_to_array(&full_array_pointer, number, full_array_size, full_array_index);
-		full_array_index++;
+		add_number_to_array(&full_array_pointer, number, &full_array_size, &full_array_index);
 
 		if (!number_in_array(number, set_pointer, set_size)) {
-			set_size++;
-			add_number_to_array(&set_pointer, number, set_size, set_index);
-			set_index++;
+			add_number_to_array(&set_pointer, number, &set_size, &set_index);
 		}
 	}
 
@@ -78,15 +74,17 @@ void print_set(int* set_pointer, int number_of_elements) {
 
 
 // Add number to the array
-void add_number_to_array(int** pointer_to_pointer, int number, int size, int index) {
-	*pointer_to_pointer = realloc(*pointer_to_pointer, size * ENLARGE_SIZE);
+void add_number_to_array(int** pointer_to_pointer, int number, int* size_pointer, int* index_pointer) {
+	(*size_pointer)++;
+	*pointer_to_pointer = realloc(*pointer_to_pointer, *size_pointer * ENLARGE_SIZE);
 
 	if (*pointer_to_pointer == NULL) {
 		printf("Error: memory reallocation failed\n");
 		exit(MEMORY_ERROR);
 	}
 
-	*(*pointer_to_pointer + index++) = number;
+	*(*pointer_to_pointer + *index_pointer) = number;
+	(*index_pointer)++;
 }
 
 
