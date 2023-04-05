@@ -74,12 +74,12 @@ void add_number_to_array(int** pointer_to_pointer, int number, int* size_pointer
 
 
 // Check if number is present in the array
-int number_in_array(int number, int* array_pointer, int number_of_elements)
+int number_in_array(int number, int* set_pointer, int number_of_elements)
 {
 	int index = FIRST_INDEX;
 
 	for (index; index < number_of_elements; index++) {
-		if (array_pointer[index] == number)
+		if (set_pointer[index] == number)
 			return NUMBER_EXISTS;
 	}
 
