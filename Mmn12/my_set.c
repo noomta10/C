@@ -13,7 +13,6 @@ int main(void) {
 	int* set_pointer = get_set();
 	print_set(set_pointer, set_pointer[NUMBER_OF_ELEMENTS_INDEX]);
 	free(set_pointer);
-
 	return NO_ERRORS;
 }
 
@@ -23,7 +22,7 @@ int main(void) {
 2. Full array- holds the full array, where all the numbers the user entered appear.
 The purpose of this array is for the input to be displayed nicely
 The function uses add_number_to_array function to add all of the numbers the user entered to the full array.
-The function uses number_in_array function to check if number is present in the array,
+The function uses number_in_array function to check if number is present in the set,
 if it is not, the function uses add_number_to_array function and adds the number to the set.
 Then, the function puts in the first element of each array the number pf elements in the array,
 which is the next free index (index variable) of the array minus 1.
@@ -44,6 +43,7 @@ int* get_set(void) {
 	}
 
 	printf("Enter numbers:\n");
+
 	while (scanf("%d", &number) == INT_FOUND) {
 		add_number_to_array(&full_array_pointer, number, &full_array_size, &full_array_index);
 
@@ -56,7 +56,6 @@ int* get_set(void) {
 	full_array_pointer[NUMBER_OF_ELEMENTS_INDEX] = full_array_number_of_elements;
 	print_input(full_array_pointer, full_array_number_of_elements);
 	free(full_array_pointer);
-
 	set_pointer[NUMBER_OF_ELEMENTS_INDEX] = --set_index;
 	return set_pointer;
 }
@@ -96,8 +95,7 @@ void add_number_to_array(int** pointer_to_pointer, int number, int* size_pointer
 /* Number_in_array function gets the number the user enterd, the set pointer and number of elements in the set.
 It loops through the array and checks if the number already exists in the array.
 If the number exist, it returns 1, else, it returns 0.*/
-int number_in_array(int number, int* set_pointer, int number_of_elements)
-{
+int number_in_array(int number, int* set_pointer, int number_of_elements) {
 	int index = FIRST_INDEX;
 
 	for (index; index < number_of_elements; index++) {
