@@ -32,10 +32,10 @@ int* get_set(void) {
 	int number; /* Users number */
 	int set_index = FIRST_INDEX; /* Index of number in set */
 	int set_size = INITIAL_ARRAY_SIZE; /* Initial size of set */
-	int* set_pointer = (int*)malloc(set_size); /* Allocate memory for the set pointer */
+	int* set_pointer = (int*)malloc(set_size*ENLARGE_SIZE); /* Allocate memory for the set pointer */
 	int full_array_index = FIRST_INDEX; /* Index of number in full array */
 	int full_array_size = INITIAL_ARRAY_SIZE; /* Initial size of full array  */
-	int* full_array_pointer = (int*)malloc(full_array_size); /* Allocate memory for the full array pointer */
+	int* full_array_pointer = (int*)malloc(full_array_size* ENLARGE_SIZE); /* Allocate memory for the full array pointer */
 
 	if (set_pointer == NULL || full_array_pointer == NULL) {
 		printf("Error: memory allocation failed\n");
