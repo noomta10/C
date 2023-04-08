@@ -1,18 +1,17 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
-#include <stdlib.h>
+﻿#include <stdio.h>
 
-int add(int a, int b) {
-    return a + b;
-}
-
-int mul(int a, int b) {
-    return a * b;
-}
+struct person {
+	char name[50];
+	int age;
+};
 
 int main() {
-    int (*fun)(int, int); // A pointer to a function
-    fun = mul;
-    printf("%d\n", fun(5, 7));
-    return 0;
+	struct person my_person = { "Noam Tamir", 20 };
+	struct person* my_person_pointer = &my_person;
+
+	printf("Name: %s\n", my_person_pointer->name);
+	printf("Name: %s\n", (*my_person_pointer).name);
+
+
+	return 0;
 }
