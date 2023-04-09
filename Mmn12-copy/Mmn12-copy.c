@@ -6,9 +6,8 @@
 #define ENLARGE_SIZE(size) ++size
 #define INT_FOUND 1
 #define MEMORY_ERROR 1
-#define FIRST_INDEX 0
-#define NUMBER_EXISTS 1 
-#define NUMBER_DOESNT_EXIST 0
+#define TRUE 1 
+#define FALSE 0
 								
 struct dynamic_array {
 	int size;
@@ -19,15 +18,14 @@ struct dynamic_array get_set();
 void add_number_to_array(struct dynamic_array* my_array, int number);
 int number_in_array(struct dynamic_array my_array, int number);
 void print_set(struct dynamic_array set);
+void print_full_array(struct dynamic_array full_array);
 
 int main(void) {
 	struct dynamic_array set;
 	set = get_set();
-	printf("%d", set.size);
 	print_set(set);
 
 }
-
 
 struct dynamic_array get_set() {
 	struct dynamic_array set = {0, NULL};
@@ -43,6 +41,9 @@ struct dynamic_array get_set() {
 			add_number_to_array(&set, number);
 		}
 	}
+
+	print_full_array(full_array);
+
 	return set;
 }
 
@@ -51,8 +52,18 @@ void print_set(struct dynamic_array set) {
 	int index;
 	printf("Set is:\n");
 
-	for (index = FIRST_INDEX; index < set.size; index++)
+	for (index = 0; index < set.size; index++)
 		printf("%d ", *(set.array_pointer + index));
+
+	printf("\n");
+}
+
+void print_full_array(struct dynamic_array full_array) {
+	int index;
+	printf("Full array is:\n");
+
+	for (index = 0; index < full_array.size; index++)
+		printf("%d ", *(full_array.array_pointer + index));
 
 	printf("\n");
 }
@@ -75,20 +86,19 @@ void add_number_to_array(struct dynamic_array* my_array, int number) {
 			exit(MEMORY_ERROR);
 		}
 	}
-	
-	*my_array->array_pointer = number;
-	my_array->array_pointer++;
+	*(my_array->array_pointer + (my_array->size - 1)) = number;
 		
 }
+
 
 
 int number_in_array(struct dynamic_array my_array, int number) {
 	int index;
 
-	for (index = FIRST_INDEX; index < my_array.size; index++) {
+	for (index = 0; index < my_array.size; index++) {
 		if (*(my_array.array_pointer + index) == number)
-			return NUMBER_EXISTS;
+			return TRUE;
 	}
 
-	return NUMBER_DOESNT_EXIST;
+	return FALSE;
 }
