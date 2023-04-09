@@ -5,7 +5,7 @@
 #define NO_ERRORS 0 /* Return value for main function- program was completed successfully */
 #define MEMORY_ERROR 1 /* Return value for memory reallocate or dealllocate error */
 #define INT_FOUND 1 /* When scanf returns 1 an int was found */
-#define INITIAL_ARRAY_SIZE 1 // Initial array size */
+#define INITIAL_ARRAY_SIZE 1 /* Initial array size */
 #define FIRST_INDEX 1 /* First index for number */
 
 
