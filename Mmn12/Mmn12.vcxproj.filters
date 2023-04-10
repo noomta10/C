@@ -15,12 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="my_set.c">
+    <ClCompile Include="Mmn12-pointers.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="my_set.h">
+    <ClInclude Include="Mmn12-pointers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

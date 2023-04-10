@@ -2,7 +2,7 @@
 
 #include <stdio.h> 
 #include <stdlib.h>
-#include "Mmn12-copy.h"
+#include "Mmn12-structs.h"
 								
 /* Main function calls get_set function to create a set.
 Then, it calls print_set function in order to print the set. 

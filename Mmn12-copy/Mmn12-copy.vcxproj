@@ -24,6 +24,7 @@
     <ProjectGuid>{f08462ef-c957-4fe1-b33a-3fa1e589c95e}</ProjectGuid>
     <RootNamespace>Mmn12copy</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Mmn12-structs</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -127,10 +128,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Mmn12-copy.c" />
+    <ClCompile Include="Mmn12-structs.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Mmn12-copy.h" />
+    <ClInclude Include="Mmn12-structs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
