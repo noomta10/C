@@ -2,7 +2,7 @@
 
 #include <stdio.h> 
 #include <stdlib.h>
-#include "my_set.h"
+#include "Mmn12-pointers.h"
 
 
 /* Main function calls get_set function to create a set.
