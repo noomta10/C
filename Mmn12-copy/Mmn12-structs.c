@@ -89,7 +89,7 @@ int number_in_array(dynamic_array my_array, int number) {
 loops through the array and prints each number of the set until it reaches the size of the dynamic_array. */
 void print_set(dynamic_array set) {
 	int index;
-	printf("Set is:\n");
+	printf("\nSet is:\n");
 
 	for (index = 0; index < set.size; index++)
 		printf("%d ", *(set.array_pointer + index));
@@ -101,7 +101,7 @@ void print_set(dynamic_array set) {
 loops through the array and prints each number of the full array until it reaches the size of the dynamic_array. */
 void print_full_array(dynamic_array full_array) {
 	int index;
-	printf("Full array received is:\n");
+	printf("\nFull array received is:\n");
 
 	for (index = 0; index < full_array.size; index++)
 		printf("%d ", *(full_array.array_pointer + index));
