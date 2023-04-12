@@ -11,21 +11,17 @@ c. Let number-of-lines = 0;
 d. Read next line.
 e. If list isn't full (number-of-lines read is less then n) then allocate a new
 line. Copy to it the line which has been read and put this line in the list.
- Otherwise
- switch the oldest line (the one which is pointed to by head) with the
+ Otherwise, switch the oldest line (the one which is pointed to by head) with the
 new line, and advance head to the next line.
 f. When there are no more lines to be read do the printing.
-if number-of-lines read is less than n, print the
- first number-of-lines in the list
- otherwise
- print the lines from head to n and then the lines from 0 to head - 1.
-*/
+if number-of-lines read is less than n, print the first number-of-lines in the list
+ Otherwise, print the lines from head to n and then the lines from 0 to head - 1. */
 #define _CRT_SECURE_NO_WARNINGS 
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <string.h> 
 #define MAX_LINE_LEN 100 
-#define DEFAULT_N 3 
+#define DEFAULT_N 5 
 
 /* getline: get line into s, return length */
 int getline(char s[], int lim) {
@@ -76,9 +72,10 @@ main(int argc, char* argv[]) {
 	}
 
 	/* Printing from head (which always points to the oldest line) to the end of the list */
-	if (number_of_lines >= tail)
+	if (number_of_lines >= tail) {
 		for (tmp = head; tmp - keep < tail; tmp++)
 			printf("%s ", *tmp);
+	}
 
 	/* Printing the rest. After we printed head[9] (default case) We start printing from the beginning till one entry before head */
 		for (tmp = keep; tmp != head; tmp++)

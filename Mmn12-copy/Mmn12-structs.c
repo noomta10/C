@@ -9,7 +9,7 @@ Then, it calls print_set function in order to print the set.
 Finally, it uses free function to deallocate the memory of the set pointer.
 Returns 0 if the program was completed successfully */
 int main() {
-	dynamic_array set;
+	Dynamic_array set;
 	set = get_set();
 	print_set(set);
 	free(set.array_pointer);
@@ -26,9 +26,9 @@ if it is not, the function uses add_number_to_array function and adds the number
 Finally, it calls print_full_array to print the full array to display the input as it was received,
 and uses free function to deallocate the memory of the full array pointer.
 Returns a dynamic_array. */
-dynamic_array get_set() {
-	dynamic_array set = {INITIAL_ARRAY_SIZE, NULL};
-	dynamic_array full_array = {INITIAL_ARRAY_SIZE, NULL};
+Dynamic_array get_set() {
+	Dynamic_array set = {INITIAL_ARRAY_SIZE, NULL};
+	Dynamic_array full_array = {INITIAL_ARRAY_SIZE, NULL};
 	int number;
 
 	printf("Enter numbers:\n");
@@ -50,7 +50,7 @@ dynamic_array get_set() {
 If the size of the dynamic_array is 0, it uses malloc to allocate memory to the array.
 Else, it uses realloc to reallocate more memory to the array.
 Finally, it adds the number to the array. */
-void add_number_to_array(dynamic_array* my_array, int number) {
+void add_number_to_array(Dynamic_array* my_array, int number) {
 	if (my_array->size == INITIAL_ARRAY_SIZE) {
 		my_array->array_pointer = (int*)malloc(ENLARGE_SIZE(my_array->size) * INT_SIZE);
 		
@@ -74,7 +74,7 @@ void add_number_to_array(dynamic_array* my_array, int number) {
 /* Number_in_array function gets a dynamic_array and the number the user enterd.
 It loops through the array and checks if the number already exists in the array.
 It returns an int. If the number exist, 1, else, it returns 0.*/
-int number_in_array(dynamic_array my_array, int number) {
+int number_in_array(Dynamic_array my_array, int number) {
 	int index;
 
 	for (index = 0; index < my_array.size; index++) {
@@ -87,7 +87,7 @@ int number_in_array(dynamic_array my_array, int number) {
 
 /* Print_set function gets a dynamic_array,
 loops through the array and prints each number of the set until it reaches the size of the dynamic_array. */
-void print_set(dynamic_array set) {
+void print_set(Dynamic_array set) {
 	int index;
 	printf("\nSet is:\n");
 
@@ -99,7 +99,7 @@ void print_set(dynamic_array set) {
 
 /* Print_full_arrau function gets a dynamic_array,
 loops through the array and prints each number of the full array until it reaches the size of the dynamic_array. */
-void print_full_array(dynamic_array full_array) {
+void print_full_array(Dynamic_array full_array) {
 	int index;
 	printf("\nFull array received is:\n");
 
