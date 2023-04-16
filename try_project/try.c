@@ -1,14 +1,13 @@
 ﻿#include <stdio.h> 
 
-struct struct2 {
-	int member1 : 1;
-	int member2 : 1;
+struct user_st {
+	int age;
+	char* name;
 };
+typedef struct user_st user;
 
 int main() {
-	struct struct2 struct2;
-	printf("Size of struct2: %zu\n", sizeof(struct2));
-
+	user noam = { 20, "noam" };
 
 	return 0;
 }
