@@ -44,7 +44,10 @@ void check_line(char* line) {
 		command[command_index] = line[first_command_character++];
 	command[command_index] = '\0';
 
+	line += line_index;
+
 	printf("%s\n", command);
+	printf("%s\n", line);
 
 }
 
@@ -67,7 +70,7 @@ int main() {
 		printf("Line received is: %s\n", line);
 		
 		check_line(line);
-
+		printf("LINE IN MAIN: %s", line);
 		printf("Enter a command:\n");
 		scanf(" %[^\n]", line);
 	}
