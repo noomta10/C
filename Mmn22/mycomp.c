@@ -2,21 +2,30 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "complex.h"
 
-char* check_command(char line[]) {
-	int i;
-	char* valid_commands[] = {"read_comp", "print_comp", "add_comp", "sub_comp", "mult_comp_real", "mult_comp_img", "mult_comp_comp", "abs_comp"};
-	int number_of_commands = sizeof(valid_commands) / sizeof(char*);
-    char* command = strtok(line, " ");
+#define ENLARGE_SIZE(size) ++size 
+#define CHAR_SIZE sizeof(char)
 
-	for (i = 0; i < number_of_commands; i++) {
-		if (strcmp(command, valid_commands[i]) == 0) {
-			return command;
-		}
+
+void check_line(char* line) {
+	int i = 0;
+	int command_size = 0;
+	char* command = (char*)malloc(ENLARGE_SIZE(command_size) * CHAR_SIZE);
+	
+	/* Skip blanks and tabs */
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+
+	/* Read command */
+	while (line[i] != ' '){
+		command[command_size-1] = line[i];
+		command = (char*)realloc(command, ENLARGE_SIZE(command_size) * CHAR_SIZE);
+		i++;
 	}
-
-	return "Undefined command name";
+	command[command_size-1] = '\0';
+	printf("%s\n", command);
 }
 
 
@@ -29,13 +38,7 @@ int main() {
 	complex F = { 0, 0 };
 
 	char line[100];
-	char command[10];
-	char variable_name;
-	char first_variable_name;
-	char second_variable_name;
-	char line_copy[100];
-	double real;
-	double imaginary;
+
 
 	printf("Enter a command:\n");
 	scanf(" %[^\n]", line);
@@ -43,28 +46,7 @@ int main() {
 	while (strcmp(line, "stop") != 0) {
 		printf("Line received is: %s\n", line);
 		
-		strcpy(line_copy, line);
-
-		if (strcmp(check_command(line_copy), "read_comp") == 0) {
-			if ((sscanf(line, "%s  %c, %lf, %lf", command, &variable_name, &real, &imaginary)) == 4)
-				printf("Syntax OK.\n");
-			else
-				printf("Wrong syntax\n");
-
-			if (variable_name == 'A') {
-				read_comp(&A, real, imaginary);
-			}
-		}
-		else if (strcmp(check_command(line_copy), "print_comp") == 0) {
-			if ((sscanf(line, "%s %c", command, &variable_name)) == 2) {
-				printf("Syntax OK.\n");
-				if (variable_name == 'A') {
-					print_comp(&A, real, imaginary);
-				}
-			}
-		}
-		else
-			printf("Undefined command name\n");
+		check_line(line);
 
 		printf("Enter a command:\n");
 		scanf(" %[^\n]", line);
