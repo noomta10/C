@@ -10,7 +10,7 @@ void read_comp(complex *variable, double real, double imaginary) {
 void print_comp(complex variable) {
 	char sign;
 	sign = variable.imaginary > 0 ? '+' : '-';
-	printf("%.2lf %c %.2lfi\n", variable.real, sign, variable.imaginary);
+	printf("%.2lf %c %.2lfi\n", variable.real, sign, fabs(variable.imaginary));
 }
 
 complex add_comp(complex first_variable, complex second_variable) {

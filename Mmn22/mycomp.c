@@ -27,6 +27,7 @@ int main() {
 	complex D = { 0, 0 };
 	complex E = { 0, 0 };
 	complex F = { 0, 0 };
+
 	char line[100];
 	char command[10];
 	char variable_name;
