@@ -5,27 +5,47 @@
 #include <stdlib.h>
 #include "complex.h"
 
-#define ENLARGE_SIZE(size) ++size 
 #define CHAR_SIZE sizeof(char)
 
 
 void check_line(char* line) {
-	int i = 0;
+	int line_index = 0;
+	int command_index = 0;
 	int command_size = 0;
-	char* command = (char*)malloc(ENLARGE_SIZE(command_size) * CHAR_SIZE);
+	int first_command_character;
+	int last_command_character;
+
+	char* command = (char*)malloc(++command_size * CHAR_SIZE);
+	if (command == NULL) {
+		printf("Error: memory allocation failed\n");
+		exit(-1);
+	}
 	
 	/* Skip blanks and tabs */
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-
+	while (line[line_index] == ' ' || line[line_index] == '\t')
+		line_index++;
+	first_command_character = line_index;
+	
 	/* Read command */
-	while (line[i] != ' '){
-		command[command_size-1] = line[i];
-		command = (char*)realloc(command, ENLARGE_SIZE(command_size) * CHAR_SIZE);
-		i++;
+	while (line[line_index] != ' ')
+		line_index++;
+	last_command_character = line_index;
+
+	/* Allocate memory for command */
+	command_size = last_command_character - first_command_character + 1;
+	command = (char*) realloc(command, command_size);
+	if (command == NULL) {
+		printf("Error: memory allocation failed\n");
+		exit(-1);
 	}
-	command[command_size-1] = '\0';
+
+	/* Put command in its variable */
+	for (command_index = 0; command_index < command_size -1; command_index++)
+		command[command_index] = line[first_command_character++];
+	command[command_index] = '\0';
+
 	printf("%s\n", command);
+
 }
 
 
