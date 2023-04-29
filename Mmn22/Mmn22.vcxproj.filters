@@ -21,6 +21,9 @@
     <ClCompile Include="complex.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="check_syntax.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="complex.h">

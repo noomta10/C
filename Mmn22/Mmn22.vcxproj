@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="check_syntax.c" />
     <ClCompile Include="complex.c" />
     <ClCompile Include="mycomp.c" />
   </ItemGroup>
