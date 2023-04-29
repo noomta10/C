@@ -1,9 +1,6 @@
-#define _CRT_SECURE_NO_WARNINGS 
-
-
 #include "complex.h"
 
-void variable_valid(char variable) {
+int variable_valid(char variable) {
 	int index;
 	int valid_variable = 0;
 	char valid_variables[6] = { 'A', 'B', 'C', 'D', 'E', 'F' };
@@ -16,42 +13,10 @@ void variable_valid(char variable) {
 	return valid_variable;
 }
 
-void check_read_comp_syntax(char* line, complex complex_array[]) {
-	int line_index = 0;
-	char variable;
-	double first_number = 0;
-	double second_number = 0;
-
-	/* Skip blanks and tabs */
-	while (line[line_index] == ' ' || line[line_index] == '\t')
-		line_index++;
-
-	/* Check variable validity */
-	variable = line[line_index];
-	if (!variable_valid)
+void check_read_comp_syntax(command_line* user_command_line, complex* complex_array[]) {
+	char* variable = get_string(user_command_line, ',');
+	printf("%s\n", variable);
+	if (!variable_valid(variable))
 		printf("Undefined complex variable");
-	line_index++;
-
-	if (line[line_index] != ' ' && line[line_index] != '\t' && line[line_index] != ',') {
-		printf("Undefined complex variable");
-	}
-	
-	/* Skip blanks and tabs */
-	while (line[line_index] == ' ' || line[line_index] == '\t')
-		line_index++;
-
-	if (line[line_index] != ',') {
-		printf("Missing comma");
-	}
-	line_index++;
-
-	/* Skip blanks and tabs */
-	while (line[line_index] == ' ' || line[line_index] == '\t')
-		line_index++;
-
-	line += line_index;
-	scanf("%lf %lf", first_number, second_number);
-
-	read_comp(complex_array[0], first_number, second_number);
 
 }

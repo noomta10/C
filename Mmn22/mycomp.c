@@ -1,9 +1,33 @@
-#define _CRT_SECURE_NO_WARNINGS 
-
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "complex.h"
+
+
+int main() {
+	complex A = { 0, 0 };
+	complex B = { 0, 0 };
+	complex C = { 0, 0 };
+	complex D = { 0, 0 };
+	complex E = { 0, 0 };
+	complex F = { 0, 0 };
+
+	complex* complex_array[6] = {&A, &B, &C, &D, &E, &F};
+	int initial_line_size = 0;
+	char* line = (char*)malloc(++initial_line_size * CHAR_SIZE);
+	command_line user_command_line = {NULL, 0};
+	char* command;
+
+	printf("Enter a command:\n");
+	user_command_line.full_line = get_line(line, initial_line_size);
+
+	while (strcmp(user_command_line.full_line, "stop") != 0) {
+		printf("Line received is: %s\n", user_command_line.full_line);
+		command = get_string(&user_command_line, ' ');
+		check_command(command, &user_command_line, complex_array);
+		printf("Enter a command:\n");
+		user_command_line.full_line = get_line(user_command_line.full_line, initial_line_size);
+		user_command_line.parse_index = 0;
+	}
+}
+
 
 char* get_line(char* line, int line_size) {
 	int c = getchar();
@@ -22,77 +46,40 @@ char* get_line(char* line, int line_size) {
 	return line;
 }
 
-char* get_command(char** line_pointer) {
-	int line_index = 0;
-	int command_index = 0;
-	int command_size = 0;
-	int first_command_character;
-	int last_command_character;
 
-	char* command = (char*)malloc(++command_size * CHAR_SIZE);
-	if (command == NULL) {
-		printf("Error: memory allocation failed\n");
-		exit(-1);
-	}
+char* get_string(command_line* command_line, char seperator) {
+	int start_string_index;
+	int end_string_index;
+	int final_string_size;
 
 	/* Skip blanks and tabs */
-	while ((*line_pointer)[line_index] == ' ' || (*line_pointer)[line_index] == '\t')
-		line_index++;
-	first_command_character = line_index;
+	while (command_line->full_line[command_line->parse_index] == ' ' || command_line->full_line[command_line->parse_index] == '\t')
+		(command_line->parse_index)++;
+	start_string_index = command_line->parse_index;
 
-	/* Read command */
-	while ((*line_pointer)[line_index] != ' ')
-		line_index++;
-	last_command_character = line_index;
+	/* Get characters until seperator */
+	while (command_line->full_line[command_line->parse_index] != seperator && command_line->full_line[command_line->parse_index] != '\0')
+		(command_line->parse_index)++;
+	end_string_index = command_line->parse_index;
 
-	/* Allocate memory for command */
-	command_size = last_command_character - first_command_character + 1;
-	command = (char*)realloc(command, command_size);
-	if (command == NULL) {
+	/* Create and allocate space for final string */
+	final_string_size = end_string_index - start_string_index + 1;
+	char* final_string = (char*)malloc(final_string_size);
+	if (final_string == NULL) {
 		printf("Error: memory allocation failed\n");
 		exit(-1);
 	}
 
-	/* Put command in its variable */
-	for (command_index = 0; command_index < command_size - 1; command_index++)
-		command[command_index] = (*line_pointer)[first_command_character++];
-	
-	command[command_index] = '\0';
-	*line_pointer += line_index;
-
-	return command;
+	final_string = strncpy(final_string, command_line->full_line + start_string_index, final_string_size - 1);
+	final_string[final_string_size - 1] = '\0';
+	printf("FINAL STRING: %s\nINDEX: %d\n", final_string, command_line->parse_index);
+	return final_string;
 }
 
 
-void check_command(char* command, char* line, complex complex_array[]) {
-	if (strcmp(command, "read_comp") == 0)
-		check_read_comp_syntax(line, complex_array);
-	//else if (strcmp(command, "print_comp") == 0)
-	//	check_print_comp_syntax(line, complex_array);
-}
-
-
-int main() {
-	complex A = { 0, 0 };
-	complex B = { 0, 0 };
-	complex C = { 0, 0 };
-	complex D = { 0, 0 };
-	complex E = { 0, 0 };
-	complex F = { 0, 0 };
-	complex* complex_array[6] = {&A, &B, &C, &D, &E, &F};
-	int initial_line_size = 0;
-	char* line = (char*)malloc(++initial_line_size * CHAR_SIZE);
-	char* command;
-
-	printf("Enter a command:\n");
-	line = get_line(line, initial_line_size);
-
-	while (strcmp(line, "stop") != 0) {
-		printf("Line received is: %s\n", line);
-		command = get_command(&line);
-		check_command(command, line, complex_array);
-		printf("Enter a command:\n");
-		line = get_line(line, initial_line_size);
+void check_command(char* command, command_line* user_command_line, complex complex_array[]) {
+	if (strcmp(command, "read_comp") == 0) {
+		check_read_comp_syntax(user_command_line, &complex_array);
 	}
 }
 

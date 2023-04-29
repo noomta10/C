@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <math.h>
 #include "complex.h"
 
 void read_comp(complex *variable, double real, double imaginary) {
