@@ -62,6 +62,9 @@ char* get_string(command_line* command_line, char seperator) {
 		(command_line->parse_index)++;
 	end_string_index = command_line->parse_index;
 
+	/* Go one place after the seperator */
+	(command_line->parse_index)++;
+
 	/* Create and allocate space for final string */
 	final_string_size = end_string_index - start_string_index + 1;
 	char* final_string = (char*)malloc(final_string_size);
@@ -77,9 +80,10 @@ char* get_string(command_line* command_line, char seperator) {
 }
 
 
-void check_command(char* command, command_line* user_command_line, complex complex_array[]) {
+void check_command(char* command, command_line* user_command_line, complex* complex_array[]) {
 	if (strcmp(command, "read_comp") == 0) {
-		check_read_comp_syntax(user_command_line, &complex_array);
+		check_read_comp_syntax(user_command_line, complex_array);
 	}
+	printf("%lf\n", complex_array[0]->real);
 }
 
