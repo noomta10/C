@@ -62,7 +62,7 @@ char* get_string(command_line* command_line, char seperator) {
 		(command_line->parse_index)++;
 	end_string_index = command_line->parse_index;
 
-	/* Go one place after the seperator */
+	/* Move one index after the seperator */
 	(command_line->parse_index)++;
 
 	/* Create and allocate space for final string */
@@ -84,6 +84,8 @@ void check_command(char* command, command_line* user_command_line, complex* comp
 	if (strcmp(command, "read_comp") == 0) {
 		check_read_comp_syntax(user_command_line, complex_array);
 	}
-	printf("After change: %lf\n", complex_array[0]->real);
+	else if (strcmp(command, "print_comp") == 0) {
+		check_print_comp_syntax(user_command_line, complex_array);
+	}
 }
 

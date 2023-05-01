@@ -18,7 +18,6 @@ void check_read_comp_syntax(command_line* user_command_line, complex* complex_ar
 	char variable_character = variable_string[0];
 	double real_input;
 	double imaginary_input;
-	printf("%s\n", variable_string);
 
 	if (strlen(variable_string) < 1)
 		printf("Missing parameter\n");
@@ -31,9 +30,20 @@ void check_read_comp_syntax(command_line* user_command_line, complex* complex_ar
 
 	printf("%lf\n", real_input);
 	printf("%lf\n", imaginary_input);
-	printf("Before change: %lf", complex_array[variable_character]->imaginary);
+	read_comp(complex_array['A' - variable_character], real_input, imaginary_input);
+}
 
-	read_comp(complex_array[variable_character], real_input, imaginary_input);
 
+void check_print_comp_syntax(command_line* user_command_line, complex* complex_array[]) {
+	char* variable_string = get_string(user_command_line, '\n');
+	char variable_character = variable_string[0];
 	
+	if (strlen(variable_string) < 1)
+		printf("Missing parameter\n");
+
+	if (!variable_valid(variable_character))
+		printf("Undefined complex variable\n");
+
+	print_comp(complex_array['A' - variable_character]);
+
 }

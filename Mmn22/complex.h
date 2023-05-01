@@ -17,10 +17,10 @@ typedef struct {
 	int parse_index;
 } command_line;
 
-typedef enum {A, B, C, D, E, F} variables_indexes;
-
 char* get_line(char* line, int line_size);
 char* get_string(command_line* command_line, char seperator);
-void check_command(char* command, command_line* user_command_line, complex complex_array[]);
+void check_command(char* command, command_line* user_command_line, complex* complex_array[]);
+
 void check_read_comp_syntax(command_line* user_command_line, complex* complex_array[]);
+void check_print_comp_syntax(command_line* user_command_line, complex* complex_array[]);
 int variable_valid(char variable);
