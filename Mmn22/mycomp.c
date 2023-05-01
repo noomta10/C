@@ -84,6 +84,6 @@ void check_command(char* command, command_line* user_command_line, complex* comp
 	if (strcmp(command, "read_comp") == 0) {
 		check_read_comp_syntax(user_command_line, complex_array);
 	}
-	printf("%lf\n", complex_array[0]->real);
+	printf("After change: %lf\n", complex_array[0]->real);
 }
 

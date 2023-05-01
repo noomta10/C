@@ -31,7 +31,7 @@ void check_read_comp_syntax(command_line* user_command_line, complex* complex_ar
 
 	printf("%lf\n", real_input);
 	printf("%lf\n", imaginary_input);
-	printf("%lf", complex_array[variable_character]->imaginary);
+	printf("Before change: %lf", complex_array[variable_character]->imaginary);
 
 	read_comp(complex_array[variable_character], real_input, imaginary_input);
 
