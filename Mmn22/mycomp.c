@@ -9,11 +9,11 @@ int main() {
 	complex E = { 0, 0 };
 	complex F = { 0, 0 };
 
-	complex* complex_array[6] = {&A, &B, &C, &D, &E, &F};
+	command_line user_command_line = { NULL, 0 };
+	char* command;
 	int initial_line_size = 1;
 	char* line = (char*)malloc(initial_line_size * CHAR_SIZE);
-	command_line user_command_line = {NULL, 0};
-	char* command;
+	complex* complex_array[6] = {&A, &B, &C, &D, &E, &F};
 
 	printf("Enter a command:\n");
 	user_command_line.full_line = get_line(line);
@@ -21,7 +21,7 @@ int main() {
 	while (strcmp(user_command_line.full_line, "stop") != 0) {
 		printf("Line received is: %s\n", user_command_line.full_line);
 		command = get_string(&user_command_line, ' ');
-		check_command(command, &user_command_line, complex_array);
+		handle_command(command, &user_command_line, complex_array);
 		printf("Enter a command:\n");
 		user_command_line.full_line = get_line(user_command_line.full_line);
 		user_command_line.parse_index = 0;
@@ -29,7 +29,7 @@ int main() {
 }
 
 
-void check_command(char* command, command_line* user_command_line, complex* complex_array[]) {
+void handle_command(char* command, command_line* user_command_line, complex* complex_array[]) {
 	if (strcmp(command, "read_comp") == 0) {
 		check_and_execute_read_comp(user_command_line, complex_array);
 	}
@@ -55,7 +55,6 @@ void check_command(char* command, command_line* user_command_line, complex* comp
 		check_and_execute_abs_comp(user_command_line, complex_array);
 	}
 }
-
 
 
 void check_and_execute_read_comp(command_line* user_command_line, complex* complex_array[]) {
@@ -131,10 +130,11 @@ void check_and_execute_mult_comp_comp(command_line* user_command_line, complex* 
 	print_comp(mult_result);
 }
 
+
 void check_and_execute_abs_comp(command_line* user_command_line, complex* complex_array[]) {
 	char* variable_string = get_string(user_command_line, ',');
 	char variable = check_variable(variable_string);
-	double abs_result = abs_comp(*complex_array[variable - 'A']);
 
+	double abs_result = abs_comp(*complex_array[variable - 'A']);
 	printf("%.2lf\n", abs_result);
 }
