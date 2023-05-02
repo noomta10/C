@@ -10,26 +10,27 @@ int main() {
 	complex F = { 0, 0 };
 
 	complex* complex_array[6] = {&A, &B, &C, &D, &E, &F};
-	int initial_line_size = 0;
-	char* line = (char*)malloc(++initial_line_size * CHAR_SIZE);
+	int initial_line_size = 1;
+	char* line = (char*)malloc(initial_line_size * CHAR_SIZE);
 	command_line user_command_line = {NULL, 0};
 	char* command;
 
 	printf("Enter a command:\n");
-	user_command_line.full_line = get_line(line, initial_line_size);
+	user_command_line.full_line = get_line(line);
 
 	while (strcmp(user_command_line.full_line, "stop") != 0) {
 		printf("Line received is: %s\n", user_command_line.full_line);
 		command = get_string(&user_command_line, ' ');
 		check_command(command, &user_command_line, complex_array);
 		printf("Enter a command:\n");
-		user_command_line.full_line = get_line(user_command_line.full_line, initial_line_size);
+		user_command_line.full_line = get_line(user_command_line.full_line);
 		user_command_line.parse_index = 0;
 	}
 }
 
 
-char* get_line(char* line, int line_size) {
+char* get_line(char* line) {
+	int line_size = 1;
 	int c = getchar();
 
 	while (c != '\n') {
@@ -90,6 +91,20 @@ void check_command(char* command, command_line* user_command_line, complex* comp
 	else if (strcmp(command, "add_comp") == 0) {
 		check_and_execute_add_comp(user_command_line, complex_array);
 	}
-	
+	else if (strcmp(command, "sub_comp") == 0) {
+		check_and_execute_sub_comp(user_command_line, complex_array);
+	}
+	else if (strcmp(command, "mult_comp_real") == 0) {
+		check_and_execute_mult_comp_real(user_command_line, complex_array);
+	}
+	else if (strcmp(command, "mult_comp_img") == 0) {
+		check_and_execute_mult_comp_img(user_command_line, complex_array);
+	}
+	else if (strcmp(command, "mult_comp_comp") == 0) {
+		check_and_execute_mult_comp_comp(user_command_line, complex_array);
+	}
+	else if (strcmp(command, "abs_comp") == 0) {
+		check_and_execute_abs_comp(user_command_line, complex_array);
+	}
 }
 

@@ -19,7 +19,7 @@ typedef struct {
 
 
 // Main
-char* get_line(char* line, int line_size);
+char* get_line(char* line);
 char* get_string(command_line* command_line, char seperator);
 void check_command(char* command, command_line* user_command_line, complex* complex_array[]);
 
