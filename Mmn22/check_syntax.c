@@ -1,26 +1,35 @@
 #include "complex.h"
 
-char check_variable(char variable_string[]) {
-	char variable_character;
+int check_variable(char variable) {
 	int index;
 	int valid_variable = 0;
 	char valid_variables[6] = { 'A', 'B', 'C', 'D', 'E', 'F' };
 
-	if (strlen(variable_string) < 1)
-		printf("Missing parameter\n");
-
-	variable_character = variable_string[0];
 ;
 	for (index = 0; index < 6; index++) {
-		if (variable_character == valid_variables[index])
+		if (variable == valid_variables[index])
 			valid_variable = 1;
 	}
 
 	if (!valid_variable) {
-		printf("Undefined complex variable\n");
+		return 0;
 	}
 
-	return variable_character;
+	return 1;
+}
+
+is_number(char number_string[]) {
+	int i;
+	int dots_count = 0;
+
+	for (i = 0; i < strlen(number_string); i++) {
+		if ((number_string[i]) == '.')
+			dots_count++;
+		if (!isdigit(number_string[i]) && !(dots_count == 0 && number_string[i] == '.'))
+			return 0;
+	}
+
+	return 1;
 }
 
 

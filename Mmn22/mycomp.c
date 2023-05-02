@@ -22,16 +22,18 @@ int main() {
 		printf("Line received is: %s\n", user_command_line.full_line);
 		command = get_string(&user_command_line, ' ');
 		handle_command(command, &user_command_line, complex_array);
+		user_command_line.parse_index = 0;
 		printf("Enter a command:\n");
 		user_command_line.full_line = get_line(user_command_line.full_line);
-		user_command_line.parse_index = 0;
 	}
 }
 
 
-void handle_command(char* command, command_line* user_command_line, complex* complex_array[]) {
+int handle_command(char* command, command_line* user_command_line, complex* complex_array[]) {
 	if (strcmp(command, "read_comp") == 0) {
-		check_and_execute_read_comp(user_command_line, complex_array);
+		if (!check_and_execute_read_comp(user_command_line, complex_array)) {
+			return 0;
+		}
 	}
 	else if (strcmp(command, "print_comp") == 0) {
 		check_and_execute_print_comp(user_command_line, complex_array);
@@ -57,24 +59,61 @@ void handle_command(char* command, command_line* user_command_line, complex* com
 }
 
 
-void check_and_execute_read_comp(command_line* user_command_line, complex* complex_array[]) {
-	double real_input;
-	double imaginary_input;
+int check_and_execute_read_comp(command_line* user_command_line, complex* complex_array[]) {
+	char* real_input;
+	char* imaginary_input;
 	char* variable_string = get_string(user_command_line, ',');
-	char variable = check_variable(variable_string);
+	char variable_character = variable_string[0];	
+	int full_line_size = strlen(user_command_line->full_line);
+	int last_index = full_line_size - 1;
 
-	real_input = atof(get_string(user_command_line, ','));
-	imaginary_input = atof(get_string(user_command_line, '\n'));
+	// If variable is invalid, return 0
+	if (strlen(variable_string) > 1 || !check_variable(variable_character)) {
+		printf("Undefined complex variable\n");
+		return 0;
+	}
 
-	read_comp(complex_array[variable - 'A'], real_input, imaginary_input);
+	real_input = get_string(user_command_line, ',');
+	imaginary_input = get_string(user_command_line, '\n');
+
+	if (strchr(imaginary_input, ' ') || (user_command_line->full_line[last_index]) == ',') {
+		printf("Extraneous text after end of command\n");
+		return 0;
+	}
+	
+	if (!is_number(real_input) || !is_number(imaginary_input)) {
+		printf("Invalid parameter \- not a number\n");
+		return 0;
+	}
+
+	read_comp(complex_array[variable_character - 'A'], (double)atof(real_input), (double)atof(imaginary_input));
+	return 1;
 }
 
 
 void check_and_execute_print_comp(command_line* user_command_line, complex* complex_array[]) {
-	char* variable_string = get_string(user_command_line, '\n');
-	char variable = check_variable(variable_string);
+	char* variable_string = get_string(user_command_line, ',');
+	char variable_character = variable_string[0];
+	int full_line_size = strlen(user_command_line->full_line);
+	int last_index = full_line_size - 1;
 
-	print_comp(*complex_array[variable - 'A']);
+	// If variable is invalid, return 0
+	if (!check_variable(variable_character)) {
+		printf("Undefined complex variable\n");
+		return 0;
+	}
+
+	if (strchr(variable_string, ' ') || (user_command_line->full_line[last_index]) == ',') {
+		printf("Extraneous text after end of command\n");
+		return 0;
+	}
+
+	if (strlen(variable_string) > 1) {
+		printf("Undefined complex variable\n");
+		return 0;
+	}
+
+	print_comp(*complex_array[variable_character - 'A']);
 }
 
 
