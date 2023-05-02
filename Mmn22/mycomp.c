@@ -29,58 +29,6 @@ int main() {
 }
 
 
-char* get_line(char* line) {
-	int line_size = 1;
-	int c = getchar();
-
-	while (c != '\n') {
-		line[line_size - 1] = c;
-		line = realloc(line, ++line_size * CHAR_SIZE);
-		if (line == NULL) {
-			printf("Error: memory allocation failed\n");
-			exit(-1);
-		}
-		c = getchar();
-	}
-	line[line_size - 1] = '\0';
-
-	return line;
-}
-
-
-char* get_string(command_line* command_line, char seperator) {
-	int start_string_index;
-	int end_string_index;
-	int final_string_size;
-
-	/* Skip blanks and tabs */
-	while (command_line->full_line[command_line->parse_index] == ' ' || command_line->full_line[command_line->parse_index] == '\t')
-		(command_line->parse_index)++;
-	start_string_index = command_line->parse_index;
-
-	/* Get characters until seperator */
-	while (command_line->full_line[command_line->parse_index] != seperator && command_line->full_line[command_line->parse_index] != '\0')
-		(command_line->parse_index)++;
-	end_string_index = command_line->parse_index;
-
-	/* Move one index after the seperator */
-	(command_line->parse_index)++;
-
-	/* Create and allocate space for final string */
-	final_string_size = end_string_index - start_string_index + 1;
-	char* final_string = (char*)malloc(final_string_size);
-	if (final_string == NULL) {
-		printf("Error: memory allocation failed\n");
-		exit(-1);
-	}
-
-	final_string = strncpy(final_string, command_line->full_line + start_string_index, final_string_size - 1);
-	final_string[final_string_size - 1] = '\0';
-	printf("FINAL STRING: %s\nINDEX: %d\n", final_string, command_line->parse_index);
-	return final_string;
-}
-
-
 void check_command(char* command, command_line* user_command_line, complex* complex_array[]) {
 	if (strcmp(command, "read_comp") == 0) {
 		check_and_execute_read_comp(user_command_line, complex_array);
@@ -108,3 +56,85 @@ void check_command(char* command, command_line* user_command_line, complex* comp
 	}
 }
 
+
+
+void check_and_execute_read_comp(command_line* user_command_line, complex* complex_array[]) {
+	double real_input;
+	double imaginary_input;
+	char* variable_string = get_string(user_command_line, ',');
+	char variable = check_variable(variable_string);
+
+	real_input = atof(get_string(user_command_line, ','));
+	imaginary_input = atof(get_string(user_command_line, '\n'));
+
+	read_comp(complex_array[variable - 'A'], real_input, imaginary_input);
+}
+
+
+void check_and_execute_print_comp(command_line* user_command_line, complex* complex_array[]) {
+	char* variable_string = get_string(user_command_line, '\n');
+	char variable = check_variable(variable_string);
+
+	print_comp(*complex_array[variable - 'A']);
+}
+
+
+void check_and_execute_add_comp(command_line* user_command_line, complex* complex_array[]) {
+	char* variable_string1 = get_string(user_command_line, ',');
+	char variable1 = check_variable(variable_string1);
+	char* variable_string2 = get_string(user_command_line, '\n');
+	char variable2 = check_variable(variable_string2);
+
+	complex sum_result = add_comp(*complex_array[variable1 - 'A'], *complex_array[variable2 - 'A']);
+	print_comp(sum_result);
+}
+
+
+void check_and_execute_sub_comp(command_line* user_command_line, complex* complex_array[]) {
+	char* variable_string1 = get_string(user_command_line, ',');
+	char variable1 = check_variable(variable_string1);
+	char* variable_string2 = get_string(user_command_line, '\n');
+	char variable2 = check_variable(variable_string2);
+
+	complex sub_result = sub_comp(*complex_array[variable1 - 'A'], *complex_array[variable2 - 'A']);
+	print_comp(sub_result);
+}
+
+
+void check_and_execute_mult_comp_real(command_line* user_command_line, complex* complex_array[]) {
+	char* variable_string = get_string(user_command_line, ',');
+	char variable = check_variable(variable_string);
+	double real_input = atof(get_string(user_command_line, '\n'));
+
+	complex mult_result = mult_comp_real(*complex_array[variable - 'A'], real_input);
+	print_comp(mult_result);
+}
+
+
+void check_and_execute_mult_comp_img(command_line* user_command_line, complex* complex_array[]) {
+	char* variable_string = get_string(user_command_line, ',');
+	char variable = check_variable(variable_string);
+	double img_input = atof(get_string(user_command_line, '\n'));
+
+	complex mult_result = mult_comp_img(*complex_array[variable - 'A'], img_input);
+	print_comp(mult_result);
+}
+
+
+void check_and_execute_mult_comp_comp(command_line* user_command_line, complex* complex_array[]) {
+	char* variable_string1 = get_string(user_command_line, ',');
+	char variable1 = check_variable(variable_string1);
+	char* variable_string2 = get_string(user_command_line, '\n');
+	char variable2 = check_variable(variable_string2);
+
+	complex mult_result = mult_comp_comp(*complex_array[variable1 - 'A'], *complex_array[variable2 - 'A']);
+	print_comp(mult_result);
+}
+
+void check_and_execute_abs_comp(command_line* user_command_line, complex* complex_array[]) {
+	char* variable_string = get_string(user_command_line, ',');
+	char variable = check_variable(variable_string);
+	double abs_result = abs_comp(*complex_array[variable - 'A']);
+
+	printf("%.2lf\n", abs_result);
+}

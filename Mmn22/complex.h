@@ -18,17 +18,22 @@ typedef struct {
 } command_line;
 
 
-// Main
+// Check syntax
 char* get_line(char* line);
 char* get_string(command_line* command_line, char seperator);
 void check_command(char* command, command_line* user_command_line, complex* complex_array[]);
 
 
-// Check_syntax
+// Main
 char check_variable(char variable_string[]);
 void check_and_execute_read_comp(command_line* user_command_line, complex* complex_array[]);
 void check_and_execute_print_comp(command_line* user_command_line, complex* complex_array[]);
 void check_and_execute_add_comp(command_line* user_command_line, complex* complex_array[]);
+void check_and_execute_sub_comp(command_line* user_command_line, complex* complex_array[]);
+void check_and_execute_mult_comp_real(command_line * user_command_line, complex * complex_array[]);
+void check_and_execute_mult_comp_img(command_line* user_command_line, complex* complex_array[]);
+void check_and_execute_mult_comp_comp(command_line* user_command_line, complex* complex_array[]);
+void check_and_execute_abs_comp(command_line* user_command_line, complex* complex_array[]);
 
 
 // Complex
