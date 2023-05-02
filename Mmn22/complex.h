@@ -26,9 +26,9 @@ void check_command(char* command, command_line* user_command_line, complex* comp
 
 // Check_syntax
 char check_variable(char variable_string[]);
-void check_read_comp_syntax(command_line* user_command_line, complex* complex_array[]);
-void check_print_comp_syntax(command_line* user_command_line, complex* complex_array[]);
-void check_add_comp_syntax(command_line* user_command_line, complex* complex_array[]);
+void check_and_execute_read_comp(command_line* user_command_line, complex* complex_array[]);
+void check_and_execute_print_comp(command_line* user_command_line, complex* complex_array[]);
+void check_and_execute_add_comp(command_line* user_command_line, complex* complex_array[]);
 
 
 // Complex

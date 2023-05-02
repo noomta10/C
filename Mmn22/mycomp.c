@@ -82,10 +82,14 @@ char* get_string(command_line* command_line, char seperator) {
 
 void check_command(char* command, command_line* user_command_line, complex* complex_array[]) {
 	if (strcmp(command, "read_comp") == 0) {
-		check_read_comp_syntax(user_command_line, complex_array);
+		check_and_execute_read_comp(user_command_line, complex_array);
 	}
 	else if (strcmp(command, "print_comp") == 0) {
-		check_print_comp_syntax(user_command_line, complex_array);
+		check_and_execute_print_comp(user_command_line, complex_array);
 	}
+	else if (strcmp(command, "add_comp") == 0) {
+		check_and_execute_add_comp(user_command_line, complex_array);
+	}
+	
 }
 
