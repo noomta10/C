@@ -66,6 +66,18 @@ int handle_command(char* command, command_line* user_command_line, complex* comp
 		if (!check_and_execute_abs_comp(user_command_line, complex_array))
 			return 0;
 	}
+	else if (strcmp(command, "stop") == 0) {
+		char* ending_characters = get_string(user_command_line, '\n');
+		printf("DEBUG: %s\n", ending_characters);
+
+		for (int i = 0; i < strlen(ending_characters); i++) {
+			if (!isblank(ending_characters[i])) {
+				printf("Extraneous text after end of command\n");
+				return 0;
+			}
+		}
+		exit(0);
+	}
 	else {
 		if (!check_command_comma(command)) {
 			printf("Illegal comma\n");

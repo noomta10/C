@@ -89,6 +89,7 @@ int check_command_comma(char* command) {
 	int valid_command = 0;
 	int i;
 	char* valid_commands[] = { "read_comp", "print_comp", "add_comp", "sub_comp", "mult_comp_real", "mult_comp_img", "mult_comp_comp", "abs_comp", "stop" };
+	int number_of_commands = 9;
 	int command_length = strlen(command);
 	int command_last_index = command_length - 1;
 
@@ -98,10 +99,10 @@ int check_command_comma(char* command) {
 		exit(-1);
 	}
 
-	strcpy(command_without_last_character, command, command_length - 1);
+	strncpy(command_without_last_character, command, command_length - 1);
 	command_without_last_character[command_length - 1] = '\0';
 
-	for (i = 0; i <= command_last_index; i++) {
+	for (i = 0; i < number_of_commands; i++) {
 		if (strcmp(command_without_last_character, valid_commands[i]) == 0) {
 			valid_command = 1;
 			break;
@@ -109,7 +110,7 @@ int check_command_comma(char* command) {
 	}
 
 	if (command[command_last_index] == ',' && valid_command) {
-		//free(command_without_last_character);
+		free(command_without_last_character);
 		return 0;
 	}
 
