@@ -85,10 +85,11 @@ int handle_command(char* command, command_line* user_command_line, complex* comp
 		for (i = 0; i <= command_last_index; i++) {
 			if (strcmp(command_without_last_character, valid_commands[i]) == 0) {
 				valid_command = 1;
+				//free(command_without_last_character);
 				break;
 			}
 		}
-		//free(command_without_last_character);
+
 
 		if (command[command_last_index] == ',' && valid_command) {
 			printf("Illegal comma\n");
