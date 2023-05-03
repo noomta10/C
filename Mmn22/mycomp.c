@@ -78,7 +78,7 @@ int handle_command(char* command, command_line* user_command_line, complex* comp
 			return 0;
 	    }
 
-		printf("Invalid command\n\n");
+		printf("Undefined command name\n\n");
 		return 0;
 	}
 }
@@ -93,7 +93,7 @@ int check_and_execute_read_comp(command_line* user_command_line, complex* comple
 	int last_index = full_line_size - 1;
 
 	if (strlen(variable_string) > 1 || !variable_valid(variable)) {
-		printf("Undefined complex variable\n");
+		printf("Undefined complex variable\n\n");
 		return 0;
 	}
 
@@ -106,7 +106,7 @@ int check_and_execute_read_comp(command_line* user_command_line, complex* comple
 	}
 
 	if (strchr(imaginary_input, ' ') || (user_command_line->full_line[last_index]) == ',') {
-		printf("Extraneous text after end of command\n");
+		printf("Extraneous text after end of command\n\n");
 		return 0;
 	}
 
@@ -121,7 +121,7 @@ int check_and_execute_read_comp(command_line* user_command_line, complex* comple
 
 
 int check_and_execute_print_comp(command_line* user_command_line, complex* complex_array[]) {
-	char* variable_string = get_string(user_command_line, ',');
+	char* variable_string = get_string(user_command_line, '\n');
 	char variable = variable_string[0];
 	int full_line_size = strlen(user_command_line->full_line);
 	int last_index = full_line_size - 1;
