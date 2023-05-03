@@ -35,6 +35,7 @@ int check_and_execute_mult_comp_real(command_line * user_command_line, complex *
 int check_and_execute_mult_comp_img(command_line* user_command_line, complex* complex_array[]);
 int check_and_execute_mult_comp_comp(command_line* user_command_line, complex* complex_array[]);
 int check_and_execute_abs_comp(command_line* user_command_line, complex* complex_array[]);
+int check_stop(command_line* user_command_line);
 
 // Complex
 void read_comp(complex* variable, double real, double imaginary);
