@@ -1,6 +1,6 @@
 #include "complex.h"
 
-int check_variable(char variable) {
+int variable_valid(char variable) {
 	int index;
 	int valid_variable = 0;
 	char valid_variables[6] = { 'A', 'B', 'C', 'D', 'E', 'F' };
@@ -25,7 +25,7 @@ is_number(char number_string[]) {
 	for (i = 0; i < strlen(number_string); i++) {
 		if ((number_string[i]) == '.')
 			dots_count++;
-		if (!isdigit(number_string[i]) && !(dots_count == 0 && number_string[i] == '.'))
+		if (!isdigit(number_string[i]) && !(dots_count == 1 && number_string[i] == '.') && !(number_string[i] == ' '))
 			return 0;
 	}
 
@@ -83,3 +83,4 @@ char* get_string(command_line* command_line, char seperator) {
 	printf("FINAL STRING: %s\nINDEX: %d\n", final_string, command_line->parse_index);
 	return final_string;
 }
+
