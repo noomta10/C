@@ -12,7 +12,7 @@ sub_comp C, A
 sub_comp B, B 
 sub_comp D, A
 mult_comp_real A, 2.51 
-mult_comp_img A, -2.564 
+mult_comp_img A, -2.564
 mult_comp_comp A, B 
 mult_comp_comp E , C 
 abs_comp A 

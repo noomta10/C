@@ -69,8 +69,6 @@ int handle_command(char* command, command_line* user_command_line, complex* comp
 	else if (strcmp(command, "stop") == 0) {
 		if (!check_stop(user_command_line))
 			return 0;
-		else
-			exit(0);
 	}
 	else {
 		if (!check_command_comma(command)) {
@@ -87,8 +85,17 @@ int handle_command(char* command, command_line* user_command_line, complex* comp
 int check_and_execute_read_comp(command_line* user_command_line, complex* complex_array[]) {
 	char* real_input;
 	char* imaginary_input;
-	char* variable_string = get_string(user_command_line, ',');
-	char variable = variable_string[0];	
+
+
+	char* variable_string;
+	if ((variable_string = get_string(user_command_line, ',')) == 0) {
+		printf("Missing parameter\n\n");
+		return 0;
+	}
+
+	char variable = variable_string[0];
+
+
 	int full_line_size = strlen(user_command_line->full_line);
 	int last_index = full_line_size - 1;
 
@@ -97,11 +104,18 @@ int check_and_execute_read_comp(command_line* user_command_line, complex* comple
 		return 0;
 	}
 
-	real_input = get_string(user_command_line, ',');
-	imaginary_input = get_string(user_command_line, '\n');
+	if ((real_input = get_string(user_command_line, ',')) == 0) {
+		printf("Missing parameter\n\n");
+		return 0;
+	}
+
+	if ((imaginary_input = get_string(user_command_line, '\n')) == 0) {
+		printf("Missing parameter\n\n");
+		return 0;
+	}
 
 	if (!is_number(real_input)) {
-		printf("Invalid parameter \- not a number\n");
+		printf("Invalid parameter \- not a number\n\n");
 		return 0;
 	}
 
@@ -111,7 +125,7 @@ int check_and_execute_read_comp(command_line* user_command_line, complex* comple
 	}
 
 	if (!is_number(imaginary_input)) {
-		printf("Invalid parameter \- not a number\n");
+		printf("Invalid parameter \- not a number\n\n");
 		return 0;
 	}
 
@@ -121,9 +135,16 @@ int check_and_execute_read_comp(command_line* user_command_line, complex* comple
 
 
 int check_and_execute_print_comp(command_line* user_command_line, complex* complex_array[]) {
-	char* variable_string = get_string(user_command_line, '\n');
+	char* variable_string;
+	if ((variable_string = get_string(user_command_line, '\n')) == 0) {
+		printf("Missing parameter\n\n");
+		return 0;
+	}
+
 	char variable = variable_string[0];
-	int full_line_size = strlen(user_command_line->full_line);
+
+
+    int full_line_size = strlen(user_command_line->full_line);
 	int last_index = full_line_size - 1;
 
 	if (!variable_valid(variable)) {
@@ -146,10 +167,23 @@ int check_and_execute_print_comp(command_line* user_command_line, complex* compl
 
 
 int check_and_execute_add_comp(command_line* user_command_line, complex* complex_array[]) {
-	char* variable1_string = get_string(user_command_line, ',');
+	char* variable1_string;
+	char* variable2_string;
+
+	if ((variable1_string = get_string(user_command_line, ',')) == 0) {
+		printf("Missing parameter\n\n");
+		return 0;
+	}
+
+	if ((variable2_string = get_string(user_command_line, '\n')) == 0) {
+		printf("Missing parameter\n\n");
+		return 0;
+	}
+
 	char variable1 = variable1_string[0];
-	char* variable2_string = get_string(user_command_line, '\n');
 	char variable2 = variable2_string[0];
+	
+	
 	int full_line_size = strlen(user_command_line->full_line);
 	int last_index = full_line_size - 1;
 
@@ -181,10 +215,22 @@ int check_and_execute_add_comp(command_line* user_command_line, complex* complex
 
 
 int check_and_execute_sub_comp(command_line* user_command_line, complex* complex_array[]) {
-	char* variable1_string = get_string(user_command_line, ',');
+	char* variable1_string;
+	char* variable2_string;
+
+	if ((variable1_string = get_string(user_command_line, ',')) == 0) {
+		printf("Missing parameter\n\n");
+		return 0;
+	}
+
+	if ((variable2_string = get_string(user_command_line, '\n')) == 0) {
+		printf("Missing parameter\n\n");
+		return 0;
+	}
+
 	char variable1 = variable1_string[0];
-	char* variable2_string = get_string(user_command_line, '\n');
 	char variable2 = variable2_string[0];
+
 	int full_line_size = strlen(user_command_line->full_line);
 	int last_index = full_line_size - 1;
 
@@ -216,7 +262,12 @@ int check_and_execute_sub_comp(command_line* user_command_line, complex* complex
 
 
 int check_and_execute_mult_comp_real(command_line* user_command_line, complex* complex_array[]) {
-	char* variable_string = get_string(user_command_line, ',');
+	char* variable_string;
+	if ((variable_string = get_string(user_command_line, ',')) == 0) {
+		printf("Missing parameter\n\n");
+		return 0;
+	}
+
 	char variable = variable_string[0];
 	int full_line_size = strlen(user_command_line->full_line);
 	int last_index = full_line_size - 1;
@@ -228,7 +279,11 @@ int check_and_execute_mult_comp_real(command_line* user_command_line, complex* c
 	}
 
 	// Check number 
-	char* real_input = get_string(user_command_line, '\n');
+	char* real_input;
+	if ((real_input = get_string(user_command_line, '\n')) == 0) {
+		printf("Missing parameter\n\n");
+		return 0;
+	}
 
 	if (strchr(real_input, ' ') || (user_command_line->full_line[last_index]) == ',') {
 		printf("Extraneous text after end of command\n\n");
@@ -246,8 +301,14 @@ int check_and_execute_mult_comp_real(command_line* user_command_line, complex* c
 
 
 int check_and_execute_mult_comp_img(command_line* user_command_line, complex* complex_array[]) {
-	char* variable_string = get_string(user_command_line, ',');
+	char* variable_string;
+	if ((variable_string = get_string(user_command_line, ',')) == 0) {
+		printf("Missing parameter\n\n");
+		return 0;
+	}
+
 	char variable = variable_string[0];
+	
 	int full_line_size = strlen(user_command_line->full_line);
 	int last_index = full_line_size - 1;
 
@@ -258,7 +319,11 @@ int check_and_execute_mult_comp_img(command_line* user_command_line, complex* co
 	}
 
 	// Check number 
-	char* imginary_input = get_string(user_command_line, '\n');
+	char* imginary_input;
+	if ((imginary_input = get_string(user_command_line, '\n')) == 0) {
+		printf("Missing parameter\n\n");
+		return 0;
+	}
 
 	if (strchr(imginary_input, ' ') || (user_command_line->full_line[last_index]) == ',') {
 		printf("Extraneous text after end of command\n\n");
@@ -276,10 +341,22 @@ int check_and_execute_mult_comp_img(command_line* user_command_line, complex* co
 
 
 int check_and_execute_mult_comp_comp(command_line* user_command_line, complex* complex_array[]) {
-	char* variable1_string = get_string(user_command_line, ',');
+	char* variable1_string;
+	char* variable2_string;
+
+	if ((variable1_string = get_string(user_command_line, ',')) == 0) {
+		printf("Missing parameter\n\n");
+		return 0;
+	}
+
+	if ((variable2_string = get_string(user_command_line, '\n')) == 0) {
+		printf("Missing parameter\n\n");
+		return 0;
+	}
+
 	char variable1 = variable1_string[0];
-	char* variable2_string = get_string(user_command_line, '\n');
 	char variable2 = variable2_string[0];
+
 	int full_line_size = strlen(user_command_line->full_line);
 	int last_index = full_line_size - 1;
 
@@ -311,7 +388,12 @@ int check_and_execute_mult_comp_comp(command_line* user_command_line, complex* c
 
 
 int check_and_execute_abs_comp(command_line* user_command_line, complex* complex_array[]) {
-	char* variable_string = get_string(user_command_line, ',');
+	char* variable_string;
+	if ((variable_string = get_string(user_command_line, '\n')) == 0) {
+		printf("Missing parameter\n\n");
+		return 0;
+	}
+
 	char variable = variable_string[0];
 	int full_line_size = strlen(user_command_line->full_line);
 	int last_index = full_line_size - 1;
@@ -337,16 +419,6 @@ int check_and_execute_abs_comp(command_line* user_command_line, complex* complex
 
 
 int check_stop(command_line* user_command_line) {
-	int i;
-	char* ending_characters = get_string(user_command_line, '\n');
-	printf("DEBUG: %s\n", ending_characters);
-
-	for (i = 0; i < strlen(ending_characters); i++) {
-		if (!isblank(ending_characters[i])) {
-			printf("Extraneous text after end of command\n\n");
-			return 0;
-		}
-	}
-
-	return 1;
+	printf("Extraneous text after end of command\n\n");
+	return 0;
 }
