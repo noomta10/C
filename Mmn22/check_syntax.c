@@ -4,7 +4,7 @@ int variable_valid(char variable) {
 	return (variable >= 'A' && variable <= 'F');
 }
 
-is_number(char number_string[]) {
+int is_number(char number_string[]) {
 	int i = 0;
 	int last_index;
 	int points_count = 0;
@@ -117,6 +117,7 @@ int check_command_comma(char* command) {
 	}
 
 	strncpy(command_without_last_character, command, command_length - 1);
+
 	command_without_last_character[command_length - 1] = '\0';
 
 	for (i = 0; i < number_of_commands; i++) {
