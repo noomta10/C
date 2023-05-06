@@ -8,7 +8,14 @@ int main() {
 	complex D = { 0, 0 };
 	complex E = { 0, 0 };
 	complex F = { 0, 0 };
+
 	complex* complex_array[6];
+	complex_array[0] = &A;
+	complex_array[1] = &B;
+	complex_array[2] = &C;
+	complex_array[3] = &D;
+	complex_array[4] = &E;
+	complex_array[5] = &F;
 
 	command_line user_command_line = { NULL, 0 };
 	char* command;
@@ -18,14 +25,6 @@ int main() {
 		printf("Error: memory allocation failed\n\n");
 		exit(-1);
 	}
-
-	
-	complex_array[0] = &A;
-	complex_array[1] = &B;
-	complex_array[2] = &C;
-	complex_array[3] = &D;
-	complex_array[4] = &E;
-	complex_array[5] = &F;
 
 	printf("Enter a command:\n");
 	user_command_line.full_line = get_line(line);
@@ -38,6 +37,8 @@ int main() {
 		printf("Enter a command:\n");
 		user_command_line.full_line = get_line(user_command_line.full_line);
 	}
+
+	free(line);
 	return 1;
 }
 
@@ -76,8 +77,10 @@ int handle_command(char* command, command_line* user_command_line, complex* comp
 			return 0;
 	}
 	else if (strcmp(command, "stop") == 0) {
-		printf("Extraneous text after end of command\n\n");
-		return 0;
+		if (!check_stop(user_command_line))
+			return 0;
+		else
+			exit(0);
 	}
 	else {
 		if (strlen(command) == 0) {
@@ -477,3 +480,16 @@ int check_and_execute_abs_comp(command_line* user_command_line, complex* complex
 	return 1;
 }
 
+int check_stop(command_line* user_command_line) {
+	int i;
+	char* ending_characters = get_string(user_command_line, '\n');
+
+	for (i = 0; i < strlen(ending_characters); i++) {
+		if (!isblank(ending_characters[i])) {
+			printf("Extraneous text after end of command\n\n");
+			return 0;
+		}
+	}
+
+	return 1;
+}

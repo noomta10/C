@@ -23,7 +23,7 @@ int is_number(char number_string[]) {
 			points_count++;
 		if (points_count > 1)
 			return 0;
-		if (!isdigit(number_string[i]) && points_count > 1)
+		if ((!isdigit(number_string[i]) && points_count > 1) || (!isdigit(number_string[i]) && number_string[i] != '.'))
 			return 0;
 	}
 
@@ -47,7 +47,6 @@ char* get_line(char* line) {
 	}
 	line[line_size - 1] = '\0';
 
-
 	return line;
 }
 
@@ -63,10 +62,11 @@ char* get_string(command_line* command_line, char seperator) {
 		(command_line->parse_index)++;
 	start_string_index = command_line->parse_index;
 
+	/* Sign that a parameter is missing */
 	if ((command_line->full_line[start_string_index - 1]) == '\0')
 		return 0;
 
-	/* Get characters until seperator */
+	/* Get characters until seperator or until end of line if seperator was not found */
 	while (command_line->full_line[command_line->parse_index] != seperator && command_line->full_line[command_line->parse_index] != '\0')
 		(command_line->parse_index)++;
 	end_string_index = command_line->parse_index;
@@ -82,7 +82,6 @@ char* get_string(command_line* command_line, char seperator) {
 		exit(-1);
 	}
 
-
 	final_string = strncpy(final_string, command_line->full_line + start_string_index, final_string_size - 1);
 	final_string[final_string_size - 1] = '\0';
 
@@ -96,8 +95,7 @@ char* get_string(command_line* command_line, char seperator) {
 		}
 	}
 
-
-	printf("FINAL STRING: %s\nINDEX: %d\n", final_string, command_line->parse_index);
+	printf("DEBUG: Final string: %s, Index: %d\n", final_string, command_line->parse_index);
 	return final_string;
 }
 
