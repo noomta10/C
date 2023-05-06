@@ -6,7 +6,6 @@ int variable_valid(char variable) {
 
 int is_number(char number_string[]) {
 	int i = 0;
-	int last_index;
 	int points_count = 0;
 
 	/* Skip spaces and tabs */
@@ -18,7 +17,7 @@ int is_number(char number_string[]) {
 		i++;
 
 	/* Check number validity */
-	for (i; i < strlen(number_string); i++) {
+	for (; i < strlen(number_string); i++) {
 		if ((number_string[i]) == '.')
 			points_count++;
 		if (points_count > 1)
@@ -34,7 +33,6 @@ int is_number(char number_string[]) {
 char* get_line(char* line) {
 	int line_size = 1;
 	int c = getchar();
-	int i;
 
 	while (c != '\n') {
 		line[line_size - 1] = c;
@@ -43,6 +41,10 @@ char* get_line(char* line) {
 			printf("Error: memory allocation failed\n");
 			exit(-1);
 		}
+
+		if (c == EOF)
+			break;
+
 		c = getchar();
 	}
 	line[line_size - 1] = '\0';
@@ -56,6 +58,7 @@ char* get_string(command_line* command_line, char seperator) {
 	int end_string_index;
 	int final_string_size;
 	int i;
+	char* final_string;
 
 	/* Skip blanks and tabs */
 	while (command_line->full_line[command_line->parse_index] == ' ' || command_line->full_line[command_line->parse_index] == '\t')
@@ -63,7 +66,7 @@ char* get_string(command_line* command_line, char seperator) {
 	start_string_index = command_line->parse_index;
 
 	/* Sign that a parameter is missing */
-	if ((command_line->full_line[start_string_index - 1]) == '\0')
+	if ((command_line->full_line[start_string_index]) == '\0')
 		return 0;
 
 	/* Get characters until seperator or until end of line if seperator was not found */
@@ -72,17 +75,18 @@ char* get_string(command_line* command_line, char seperator) {
 	end_string_index = command_line->parse_index;
 
 	/* Move one index after the seperator */
-	(command_line->parse_index)++;
+	if (command_line->full_line[command_line->parse_index] == seperator)
+		(command_line->parse_index)++;
 
 	/* Create and allocate space for final string */
 	final_string_size = end_string_index - start_string_index + 1;
-	char* final_string = (char*)malloc(final_string_size);
+	final_string = (char*)malloc(final_string_size);
 	if (final_string == NULL) {
 		printf("Error: memory allocation failed\n");
 		exit(-1);
 	}
 
-	final_string = strncpy(final_string, command_line->full_line + start_string_index, final_string_size - 1);
+	strncpy(final_string, command_line->full_line + start_string_index, final_string_size - 1);
 	final_string[final_string_size - 1] = '\0';
 
 	/* Trim spaces and tabs from the end of the line */

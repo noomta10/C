@@ -9,3 +9,6 @@ complex.o:  complex.c complex.h
 
 check_syntax.o:  check_syntax.c complex.h
 	gcc -c -ansi -Wall -pedantic check_syntax.c -o check_syntax.o
+
+clean:
+	rm -f mycomp.o complex.o check_syntax.o mycomp
