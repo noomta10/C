@@ -137,7 +137,7 @@
   <ItemGroup>
     <Text Include="input_invalid.txt" />
     <Text Include="input_valid.txt" />
-    <Text Include="makefile.txt" />
+    <Text Include="makefile" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

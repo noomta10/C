@@ -28,7 +28,7 @@
   <ItemGroup>
     <Text Include="input_valid.txt" />
     <Text Include="input_invalid.txt" />
-    <Text Include="makefile.txt" />
+    <Text Include="makefile" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="complex.h">

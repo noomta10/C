@@ -14,7 +14,7 @@ int main() {
 	char* command;
 	char* line;
 	int initial_line_size = 1;
-	int isEOF;
+	int has_EOF;
 
 	complex_array[0] = &A;
 	complex_array[1] = &B;
@@ -33,10 +33,18 @@ int main() {
 	user_command_line.full_line = get_line(line);
 
 	while (strcmp(user_command_line.full_line, "stop") != 0) {
-		isEOF = 0;
-		if (line[strlen(line) - 1] == EOF) {
-			isEOF = 1;
-			line[strlen(line) - 1] = '\0';
+		/* If users' input is EOF */
+		if (user_command_line.full_line[0] == EOF) {
+			printf("Stopping the program illegally\n\n");
+			break;
+		}
+
+		has_EOF = 0;
+
+		/* If command ends with EOF, trim and excecute it */
+		if (user_command_line.full_line[strlen(user_command_line.full_line) - 1] == EOF) {
+			has_EOF = 1;
+			user_command_line.full_line[strlen(user_command_line.full_line) - 1] = '\0';
 		}
 
 		printf("Line received is: %s\n", user_command_line.full_line);
@@ -45,8 +53,9 @@ int main() {
 		user_command_line.parse_index = 0;
 		printf("Enter a command:\n");
 
-		if (isEOF) {
-			printf("dfsjkjdsgsdf");
+		/* If command ends with EOF, print an error and stop the program  */
+		if (has_EOF) {
+			printf("Stopping the program illegally\n\n");
 			break;
 		}
 
@@ -56,7 +65,7 @@ int main() {
 		}
 	}
 
-	free(line);
+	free(user_command_line.full_line);
 	return 1;
 }
 
@@ -185,20 +194,24 @@ void check_and_execute_print_comp(command_line* user_command_line, complex* comp
 
 	if (!variable_valid(variable)) {
 		printf("Undefined complex variable\n\n");
+		free(variable_string);
 		return;
 	}
 
 	if (strchr(variable_string, ' ') || (user_command_line->full_line[last_index]) == ',') {
 		printf("Extraneous text after end of command\n\n");
+		free(variable_string);
 		return;
 	}
 
 	if (strlen(variable_string) > 1) {
 		printf("Undefined complex variable\n\n");
+		free(variable_string);
 		return;
 	}
 
 	print_comp(*complex_array[variable - 'A']);
+	free(variable_string);
 }
 
 
@@ -218,6 +231,7 @@ void check_and_execute_add_comp(command_line* user_command_line, complex* comple
 
 	if ((variable2_string = get_string(user_command_line, '\n')) == 0) {
 		printf("Missing parameter\n\n");
+		free(variable1_string);
 		return;
 	}
 
@@ -229,27 +243,37 @@ void check_and_execute_add_comp(command_line* user_command_line, complex* comple
 	/* Check variable 1 */
 	if (!variable_valid(variable1) || strlen(variable1_string) > 1) {
 		printf("Undefined complex variable\n\n");
+		free(variable1_string);
+		free(variable2_string);
 		return;
 	}
 
 	/* Check variable 2 */
 	if (!variable_valid(variable2)) {
 		printf("Undefined complex variable\n\n");
+		free(variable1_string);
+		free(variable2_string);
 		return;
 	}
 
 	if (strchr(variable2_string, ' ') || (user_command_line->full_line[last_index]) == ',') {
 		printf("Extraneous text after end of command\n\n");
+		free(variable1_string);
+		free(variable2_string);
 		return;
 	}
 
 	if (strlen(variable2_string) > 1) {
 		printf("Undefined complex variable\n\n");
+		free(variable1_string);
+		free(variable2_string);
 		return;
 	}
 
 	sum_result = add_comp(*complex_array[variable1 - 'A'], *complex_array[variable2 - 'A']);
 	print_comp(sum_result);
+	free(variable1_string);
+	free(variable2_string);
 }
 
 
@@ -269,6 +293,7 @@ void check_and_execute_sub_comp(command_line* user_command_line, complex* comple
 
 	if ((variable2_string = get_string(user_command_line, '\n')) == 0) {
 		printf("Missing parameter\n\n");
+		free(variable1_string);
 		return;
 	}
 
@@ -281,27 +306,37 @@ void check_and_execute_sub_comp(command_line* user_command_line, complex* comple
 	/* Check variable 1 */
 	if (!variable_valid(variable1) || strlen(variable1_string) > 1) {
 		printf("Undefined complex variable\n\n");
+		free(variable1_string);
+		free(variable2_string);
 		return;
 	}
 
 	/* Check variable 2 */
 	if (!variable_valid(variable2)) {
 		printf("Undefined complex variable\n\n");
+		free(variable1_string);
+		free(variable2_string);
 		return;
 	}
 
 	if (strchr(variable2_string, ' ') || (user_command_line->full_line[last_index]) == ',') {
 		printf("Extraneous text after end of command\n\n");
+		free(variable1_string);
+		free(variable2_string);
 		return;
 	}
 
 	if (strlen(variable2_string) > 1) {
 		printf("Undefined complex variable\n\n");
+		free(variable1_string);
+		free(variable2_string);
 		return;
 	}
 
 	sub_result = sub_comp(*complex_array[variable1 - 'A'], *complex_array[variable2 - 'A']);
 	print_comp(sub_result);
+	free(variable1_string);
+	free(variable2_string);
 }
 
 
@@ -325,27 +360,35 @@ void check_and_execute_mult_comp_real(command_line* user_command_line, complex* 
 	/* Check variable */
 	if (!variable_valid(variable) || strlen(variable_string) > 1) {
 		printf("Undefined complex variable\n\n");
+		free(variable_string);
 		return;
 	}
 
 	/* Check number */
 	if ((real_input = get_string(user_command_line, '\n')) == 0) {
 		printf("Missing parameter\n\n");
+		free(variable_string);
 		return;
 	}
 
 	if (strchr(real_input, ' ') || (user_command_line->full_line[last_index]) == ',') {
 		printf("Extraneous text after end of command\n\n");
+		free(variable_string);
+		free(real_input);
 		return;
 	}
 
 	if (!is_number(real_input)) {
 		printf("Invalid parameter - not a number\n\n");
+		free(variable_string);
+		free(real_input);
 		return;
 	}
 
 	mult_result = mult_comp_real(*complex_array[variable - 'A'], atof(real_input));
 	print_comp(mult_result);
+	free(variable_string);
+	free(real_input);
 }
 
 
@@ -354,7 +397,7 @@ void check_and_execute_mult_comp_img(command_line* user_command_line, complex* c
 	int last_index;
 	char* variable_string;
 	char variable;
-	char* imginary_input;
+	char* imaginary_input;
 	complex mult_result;
 
 	if ((variable_string = get_string(user_command_line, ',')) == 0) {
@@ -370,27 +413,35 @@ void check_and_execute_mult_comp_img(command_line* user_command_line, complex* c
 	/* Check variable */
 	if (!variable_valid(variable) || strlen(variable_string) > 1) {
 		printf("Undefined complex variable\n\n");
+		free(variable_string);
 		return;
 	}
 
 	/* Check number */
-	if ((imginary_input = get_string(user_command_line, '\n')) == 0) {
+	if ((imaginary_input = get_string(user_command_line, '\n')) == 0) {
 		printf("Missing parameter\n\n");
+		free(variable_string);
 		return;
 	}
 
-	if (strchr(imginary_input, ' ') || (user_command_line->full_line[last_index]) == ',') {
+	if (strchr(imaginary_input, ' ') || (user_command_line->full_line[last_index]) == ',') {
 		printf("Extraneous text after end of command\n\n");
+		free(variable_string);
+		free(imaginary_input);
 		return;
 	}
 
-	if (!is_number(imginary_input)) {
+	if (!is_number(imaginary_input)) {
 		printf("Invalid parameter - not a number\n\n");
+		free(variable_string);
+		free(imaginary_input);
 		return;
 	}
 
-	mult_result = mult_comp_img(*complex_array[variable - 'A'], atof(imginary_input));
+	mult_result = mult_comp_img(*complex_array[variable - 'A'], atof(imaginary_input));
 	print_comp(mult_result);
+	free(variable_string);
+	free(imaginary_input);
 }
 
 
@@ -410,6 +461,7 @@ void check_and_execute_mult_comp_comp(command_line* user_command_line, complex* 
 
 	if ((variable2_string = get_string(user_command_line, '\n')) == 0) {
 		printf("Missing parameter\n\n");
+		free(variable1_string);
 		return;
 	}
 
@@ -422,27 +474,37 @@ void check_and_execute_mult_comp_comp(command_line* user_command_line, complex* 
 	/* Check variable 1 */
 	if (!variable_valid(variable1) || strlen(variable1_string) > 1) {
 		printf("Undefined complex variable\n\n");
+		free(variable1_string);
+		free(variable2_string);
 		return;
 	}
 
 	/* Check variable 2 */
 	if (!variable_valid(variable2)) {
 		printf("Undefined complex variable\n\n");
+		free(variable1_string);
+		free(variable2_string);
 		return;
 	}
 
 	if (strchr(variable2_string, ' ') || (user_command_line->full_line[last_index]) == ',') {
 		printf("Extraneous text after end of command\n\n");
+		free(variable1_string);
+		free(variable2_string);
 		return;
 	}
 
 	if (strlen(variable2_string) > 1) {
 		printf("Undefined complex variable\n\n");
+		free(variable1_string);
+		free(variable2_string);
 		return;
 	}
 
 	mult_result = mult_comp_comp(*complex_array[variable1 - 'A'], *complex_array[variable2 - 'A']);
 	print_comp(mult_result);
+	free(variable1_string);
+	free(variable2_string);
 }
 
 
@@ -464,30 +526,36 @@ void check_and_execute_abs_comp(command_line* user_command_line, complex* comple
 
 	if (!variable_valid(variable)) {
 		printf("Undefined complex variable\n\n");
+		free(variable_string);
 		return;
 	}
 
 	if (strchr(variable_string, ' ') || (user_command_line->full_line[last_index]) == ',') {
 		printf("Extraneous text after end of command\n\n");
+		free(variable_string);
 		return;
 	}
 
 	if (strlen(variable_string) > 1) {
 		printf("Undefined complex variable\n\n");
+		free(variable_string);
 		return;
 	}
 
 	abs_result = abs_comp(*complex_array[variable - 'A']);
 	printf("%.2f\n", abs_result);
+	free(variable_string);
 }
 
 int check_stop(command_line* user_command_line) {
-	int i;
 	char* ending_characters = get_string(user_command_line, '\n');
 
 	if (ending_characters){
 		printf("Extraneous text after end of command\n\n");
+		free(ending_characters);
 		return 0;
 	}
+
+	free(ending_characters);
 	return 1;
 }

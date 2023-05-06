@@ -42,13 +42,14 @@ char* get_line(char* line) {
 			exit(-1);
 		}
 
-		if (c == EOF)
+		if (c == EOF) {
 			break;
+		}
 
 		c = getchar();
+
 	}
 	line[line_size - 1] = '\0';
-
 	return line;
 }
 
