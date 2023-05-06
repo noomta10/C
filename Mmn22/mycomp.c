@@ -94,19 +94,23 @@ void handle_command(char* command, command_line* user_command_line, complex* com
 	else if (strcmp(command, "stop") == 0) {
 		if (!check_stop(user_command_line))
 			return;
-		else
+		else {
+			free(command);
+			free(user_command_line->full_line);
 			exit(0);
+		}
 	}
 	else {
 		if (!check_command_comma(command)) {
 			printf("Illegal comma\n\n");
 			return;
-	    }
+		}
 
 		printf("Undefined command name\n\n");
 		return;
 	}
 }
+
 
 
 void check_and_execute_read_comp(command_line* user_command_line, complex* complex_array[]) {
@@ -116,6 +120,20 @@ void check_and_execute_read_comp(command_line* user_command_line, complex* compl
 	char* imaginary_input;
 	char variable;
 	char* variable_string;
+
+
+	if (!check_missing_comma(user_command_line->full_line, 2)) {
+		printf("Missing comma\n\n");
+		return;
+	}
+
+	if (!check_consecutive_commas(user_command_line->full_line)) {
+		printf("Multiple consecutive commas\n\n");
+		return;
+	}
+
+
+
 
 	if ((variable_string = get_string(user_command_line, ',')) == 0) {
 		printf("Missing parameter\n\n");
@@ -170,6 +188,9 @@ void check_and_execute_read_comp(command_line* user_command_line, complex* compl
 		return;
 	}
 
+
+
+
 	read_comp(complex_array[variable - 'A'], (double)atof(real_input), (double)atof(imaginary_input));
 	free(variable_string);
 	free(real_input);
@@ -223,6 +244,11 @@ void check_and_execute_add_comp(command_line* user_command_line, complex* comple
 	int full_line_size;
 	int last_index;
 	complex sum_result;
+
+	if (!check_consecutive_commas(user_command_line->full_line)) {
+		printf("Multiple consecutive commas\n\n");
+		return;
+	}
 
 	if ((variable1_string = get_string(user_command_line, ',')) == 0) {
 		printf("Missing parameter\n\n");
@@ -286,6 +312,11 @@ void check_and_execute_sub_comp(command_line* user_command_line, complex* comple
 	char* variable2_string;
 	complex sub_result;
 
+	if (!check_consecutive_commas(user_command_line->full_line)) {
+		printf("Multiple consecutive commas\n\n");
+		return;
+	}
+
 	if ((variable1_string = get_string(user_command_line, ',')) == 0) {
 		printf("Missing parameter\n\n");
 		return;
@@ -348,6 +379,11 @@ void check_and_execute_mult_comp_real(command_line* user_command_line, complex* 
 	char* real_input;
 	complex mult_result;
 
+	if (!check_consecutive_commas(user_command_line->full_line)) {
+		printf("Multiple consecutive commas\n\n");
+		return;
+	}
+
 	if ((variable_string = get_string(user_command_line, ',')) == 0) {
 		printf("Missing parameter\n\n");
 		return;
@@ -399,6 +435,11 @@ void check_and_execute_mult_comp_img(command_line* user_command_line, complex* c
 	char variable;
 	char* imaginary_input;
 	complex mult_result;
+
+	if (!check_consecutive_commas(user_command_line->full_line)) {
+		printf("Multiple consecutive commas\n\n");
+		return;
+	}
 
 	if ((variable_string = get_string(user_command_line, ',')) == 0) {
 		printf("Missing parameter\n\n");
@@ -453,6 +494,11 @@ void check_and_execute_mult_comp_comp(command_line* user_command_line, complex* 
 	int full_line_size;
 	int last_index;
 	complex mult_result;
+
+	if (!check_consecutive_commas(user_command_line->full_line)) {
+		printf("Multiple consecutive commas\n\n");
+		return;
+	}
 
 	if ((variable1_string = get_string(user_command_line, ',')) == 0) {
 		printf("Missing parameter\n\n");
@@ -546,6 +592,7 @@ void check_and_execute_abs_comp(command_line* user_command_line, complex* comple
 	printf("%.2f\n", abs_result);
 	free(variable_string);
 }
+
 
 int check_stop(command_line* user_command_line) {
 	char* ending_characters = get_string(user_command_line, '\n');

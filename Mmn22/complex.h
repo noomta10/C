@@ -29,6 +29,8 @@ char* get_line(char* line);
 char* get_string(command_line* command_line, char seperator);
 void handle_command(char* command, command_line* user_command_line, complex* complex_array[]);
 int check_command_comma(char* command);
+int check_consecutive_commas(char* full_line);
+int check_missing_comma(char* full_line, int required_commas);
 
 /* Main */ 
 void check_and_execute_read_comp(command_line* user_command_line, complex* complex_array[]);

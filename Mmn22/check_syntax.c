@@ -93,7 +93,7 @@ char* get_string(command_line* command_line, char seperator) {
 	/* Trim spaces and tabs from the end of the line */
 	if (seperator != ' ') {
 		for (i = strlen(final_string) - 1; i >= 0; i--) {
-			if (final_string[i] == '\t' || final_string[i] == ' ')
+			if (final_string[i] == '\t' || final_string[i] == '\r' || final_string[i] == ' ')
 				final_string[i] = '\0';
 			else
 				break;
@@ -137,4 +137,38 @@ int check_command_comma(char* command) {
 
 	free(command_without_last_character);
 	return 1;
+}
+
+
+int check_consecutive_commas(char* full_line) {
+	int i = 0;
+	
+	while (full_line[i] != ',')
+		i++;
+
+	i++;
+
+	while ((full_line[i] == ' ') || (full_line[i] == '\t'))
+		i++;
+
+	if (full_line[i] != ','){
+		return 1;
+	}
+
+	return 0;
+
+}
+
+int check_missing_comma(char* full_line, int required_commas) {
+	int i;
+	int commas_count = 0;
+	
+	for (i = 0; i < strlen(full_line); i++) {
+		if (full_line[i] == ',')
+			commas_count++;
+	}
+
+	if (commas_count >= required_commas)
+		return 1;
+	return 0;
 }
