@@ -121,19 +121,10 @@ void check_and_execute_read_comp(command_line* user_command_line, complex* compl
 	char variable;
 	char* variable_string;
 
-
 	if (!check_missing_comma(user_command_line->full_line, 2)) {
 		printf("Missing comma\n\n");
 		return;
 	}
-
-	if (!check_consecutive_commas(user_command_line->full_line)) {
-		printf("Multiple consecutive commas\n\n");
-		return;
-	}
-
-
-
 
 	if ((variable_string = get_string(user_command_line, ',')) == 0) {
 		printf("Missing parameter\n\n");
@@ -164,6 +155,11 @@ void check_and_execute_read_comp(command_line* user_command_line, complex* compl
 		return;
 	}
 
+	if (!check_consecutive_commas(user_command_line->full_line)) {
+		printf("Multiple consecutive commas\n\n");
+		return;
+	}
+
 	if (!is_number(real_input)) {
 		printf("Invalid parameter - not a number\n\n");
 		free(variable_string);
@@ -187,6 +183,10 @@ void check_and_execute_read_comp(command_line* user_command_line, complex* compl
 		free(imaginary_input);
 		return;
 	}
+
+
+
+
 
 
 

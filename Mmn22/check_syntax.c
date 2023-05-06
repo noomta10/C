@@ -93,14 +93,14 @@ char* get_string(command_line* command_line, char seperator) {
 	/* Trim spaces and tabs from the end of the line */
 	if (seperator != ' ') {
 		for (i = strlen(final_string) - 1; i >= 0; i--) {
-			if (final_string[i] == '\t' || final_string[i] == '\r' || final_string[i] == ' ')
+			if (final_string[i] == '\t' || final_string[i] == ' ')
 				final_string[i] = '\0';
 			else
 				break;
 		}
 	}
 
-	printf("DEBUG: Final string: %s, Index: %d\n", final_string, command_line->parse_index);
+	printf("DEBUG: Final string: %s Index: %d\n", final_string, command_line->parse_index);
 	return final_string;
 }
 
