@@ -141,22 +141,21 @@ int check_command_comma(char* command) {
 
 
 int check_consecutive_commas(char* full_line) {
+	int commas_count = 0;
 	int i = 0;
-	
-	while (full_line[i] != ',')
-		i++;
 
-	i++;
-
-	while ((full_line[i] == ' ') || (full_line[i] == '\t'))
-		i++;
-
-	if (full_line[i] != ','){
-		return 1;
+	for (i = 0; i < strlen(full_line); i++) {
+		if (full_line[i] == ',') {
+			commas_count++;
+			if (commas_count > 1)
+				return 0;
+		}
+		else if (full_line[i] != ' ' && full_line[i] != '\t') {
+			commas_count = 0;
+		}
 	}
 
-	return 0;
-
+	return 1;
 }
 
 int check_missing_comma(char* full_line, int required_commas) {

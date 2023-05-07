@@ -75,6 +75,10 @@ void handle_command(char* command, command_line* user_command_line, complex* com
 		printf("Missing command name\n\n");
 		return;
 	}
+	if (!check_consecutive_commas(user_command_line->full_line)) {
+		printf("Multiple consecutive commas\n\n");
+		return;
+	}
 	if (strcmp(command, "read_comp") == 0)
 		check_and_execute_read_comp(user_command_line, complex_array);
 	else if (strcmp(command, "print_comp") == 0)
@@ -126,6 +130,7 @@ void check_and_execute_read_comp(command_line* user_command_line, complex* compl
 		return;
 	}
 
+
 	if ((variable_string = get_string(user_command_line, ',')) == 0) {
 		printf("Missing parameter\n\n");
 		return;
@@ -155,10 +160,7 @@ void check_and_execute_read_comp(command_line* user_command_line, complex* compl
 		return;
 	}
 
-	if (!check_consecutive_commas(user_command_line->full_line)) {
-		printf("Multiple consecutive commas\n\n");
-		return;
-	}
+
 
 	if (!is_number(real_input)) {
 		printf("Invalid parameter - not a number\n\n");
@@ -183,9 +185,6 @@ void check_and_execute_read_comp(command_line* user_command_line, complex* compl
 		free(imaginary_input);
 		return;
 	}
-
-
-
 
 
 
