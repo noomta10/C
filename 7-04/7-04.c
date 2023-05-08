@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS 
+
 #include <stdio.h>
 #include <stdarg.h>
 
@@ -8,12 +10,10 @@ void mini_scanf(char* fmt, ...) {
 	int* iptr;
 	float* fptr;
 	va_start(ap, fmt);
-	for (p = fmt; *p != '\0'; p++)
-	{
+	for (p = fmt; *p != '\0'; p++) {
 		if (*p != '%')
 			continue;
-		switch (*++p)
-		{
+		switch (*++p){
 		case 'd':
 			iptr = va_arg(ap, int*);
 			scanf("%d", iptr);
