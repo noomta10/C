@@ -1,6 +1,12 @@
 #include "complex.h"
 
 
+/* Main function defines 6 complex variables and puts their addresses in an array.
+Then, it gets a line from the user with the function get_line, as long as the line is not "stop". 
+In the loop it checks if the users' line is EOF, if it is, it prints an error message and break the loop.
+If command ends with EOF, it trims and excecutes it.
+Then, it sends the command, the pointer to the user_command_line, and the complex_array to handle_command function. 
+Finally, it frees the memory space and return NO_ERRORS */
 int main() {
 
 	complex A = { 0, 0 };
@@ -70,7 +76,12 @@ int main() {
 	return NO_ERRORS;
 }
 
-
+/* Handle_command function gets a pointer to the command, a struct to the user cimmand line (contains the full line pointer and an int number of parse index), 
+and an array of pointers to structs from type complex.
+First, it checks if the command name is NULL, if it is, it prints an error message and exit.
+Then, it calls check_consecutive_commas function, if there are multiple consecutive commas, it prints an error message and exit.
+After that it checks what the received command is, then refers to the appropriate function that handles that command.
+Finally, if the command did not match to any of the valid commands, it prints an appropriate error message and exit. */
 void handle_command(char* command, command_line* user_command_line, complex* complex_array[]) {
 	if (command == NULL) {
 		printf("Missing command name\n\n");
@@ -117,7 +128,11 @@ void handle_command(char* command, command_line* user_command_line, complex* com
 }
 
 
-
+/* Check_and_execute_read_comp function gets a pointer to a struct of the user command line (contains the full line received, and an int number of parse index),
+and an array of pointers to structs from complex type.
+It uses the get_string function to parse the full row string to get the desired parameter whenever it needs one.
+If it fails to get the desired parameter, it prints an appropriate error message, frees the allocated memory space, and exits the function.
+Otherwise, it calls the read_comp function with the necessary parameters. */
 void check_and_execute_read_comp(command_line* user_command_line, complex* complex_array[]) {
 	int full_line_size;
 	int last_index;
@@ -191,6 +206,11 @@ void check_and_execute_read_comp(command_line* user_command_line, complex* compl
 }
 
 
+/* Check_and_execute_print_comp function gets a pointer to a struct of the user command line (contains the full line received, and an int number of parse index),
+and an array of pointers to structs from complex type.
+It uses the get_string function to parse the full row string to get the variable name.
+If it fails to get it, it prints an appropriate error message, frees the allocated memory space, and exits the function.
+Otherwise, it calls the print_comp function with the defined variable. */
 void check_and_execute_print_comp(command_line* user_command_line, complex* complex_array[]) {
 	char* variable_string;
 	char variable;
@@ -229,6 +249,11 @@ void check_and_execute_print_comp(command_line* user_command_line, complex* comp
 }
 
 
+/* Check_and_execute_add_comp function gets a pointer to a struct of the user command line (contains the full line received, and an int number of parse index),
+and an array of pointers to structs from complex type.
+It uses the get_string function to parse the full row string to get the variables name.
+If it fails to get them, it prints an appropriate error message, frees the allocated memory space, and exits the function.
+Otherwise, it calls the add_comp function with the defined variables and prints the sum result.  */
 void check_and_execute_add_comp(command_line* user_command_line, complex* complex_array[]) {
 	char variable1;
 	char variable2;
@@ -290,7 +315,11 @@ void check_and_execute_add_comp(command_line* user_command_line, complex* comple
 	free(variable2_string);
 }
 
-
+/* Check_and_execute_sub_comp function gets a pointer to a struct of the user command line (contains the full line received, and an int number of parse index),
+and an array of pointers to structs from complex type.
+It uses the get_string function to parse the full row string to get the variables name.
+If it fails to get them, it prints an appropriate error message, frees the allocated memory space, and exits the function.
+Otherwise, it calls the sub_comp function with the defined variables and prints the subtraction result. */
 void check_and_execute_sub_comp(command_line* user_command_line, complex* complex_array[]) {
 	int full_line_size;
 	int last_index;
@@ -353,6 +382,11 @@ void check_and_execute_sub_comp(command_line* user_command_line, complex* comple
 }
 
 
+/* Check_and_execute_mult_comp_real function gets a pointer to a struct of the user command line (contains the full line received, and an int number of parse index),
+and an array of pointers to structs from complex type.
+It uses the get_string function to parse the full row string to get the variable name and the real number.
+If it fails to get them, it prints an appropriate error message, frees the allocated memory space, and exits the function.
+Otherwise, it calls the mult_comp_real function with the necessary parameters and prints the multiplication result. */
 void check_and_execute_mult_comp_real(command_line* user_command_line, complex* complex_array[]) {
 	int full_line_size;
 	int last_index;
@@ -405,6 +439,11 @@ void check_and_execute_mult_comp_real(command_line* user_command_line, complex* 
 }
 
 
+/* Check_and_execute_mult_comp_img function gets a pointer to a struct of the user command line (contains the full line received, and an int number of parse index),
+and an array of pointers to structs from complex type.
+It uses the get_string function to parse the full row string to get the variable name and the imaginary number.
+If it fails to get them, it prints an appropriate error message, frees the allocated memory space, and exits the function.
+Otherwise, it calls the mult_comp_img function with the necessary parameters and prints the multiplication result. */
 void check_and_execute_mult_comp_img(command_line* user_command_line, complex* complex_array[]) {
 	int full_line_size;
 	int last_index;
@@ -457,6 +496,11 @@ void check_and_execute_mult_comp_img(command_line* user_command_line, complex* c
 }
 
 
+/* Check_and_execute_mult_comp_comp function gets a pointer to a struct of the user command line (contains the full line received, and an int number of parse index),
+and an array of pointers to structs from complex type.
+It uses the get_string function to parse the full row string to get the variables name.
+If it fails to get them, it prints an appropriate error message, frees the allocated memory space, and exits the function.
+Otherwise, it calls the mult_comp_comp function with the variables and prints the multiplication result. */
 void check_and_execute_mult_comp_comp(command_line* user_command_line, complex* complex_array[]) {
 	char variable1;
 	char variable2;
@@ -519,6 +563,11 @@ void check_and_execute_mult_comp_comp(command_line* user_command_line, complex* 
 }
 
 
+/* Check_and_execute_abs_comp function gets a pointer to a struct of the user command line (contains the full line received, and an int number of parse index),
+and an array of pointers to structs from complex type.
+It uses the get_string function to parse the full row string to get the variable name.
+If it fails to get it, it prints an appropriate error message, frees the allocated memory space, and exits the function.
+Otherwise, it calls the abs_comp function with the variable and prints the absolute result. */
 void check_and_execute_abs_comp(command_line* user_command_line, complex* complex_array[]) {
 	double abs_result;
 	char* variable_string;
@@ -559,6 +608,11 @@ void check_and_execute_abs_comp(command_line* user_command_line, complex* comple
 }
 
 
+
+/* Check_stop function gets a command_line pointer to the user command line. 
+It checks if the characters after the command are spaces or tabs.
+If they are not, prints an appropriate error message, frees the allocated memory space, and returns FALSE. 
+Else, it frees the allocated memory space returns TRUE.  */
 int check_stop(command_line* user_command_line) {
 	char* ending_characters = get_string(user_command_line, '\n');
 
