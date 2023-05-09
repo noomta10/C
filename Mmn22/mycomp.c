@@ -76,6 +76,7 @@ int main() {
 	return NO_ERRORS;
 }
 
+
 /* Handle_command function gets a pointer to the command, a struct to the user cimmand line (contains the full line pointer and an int number of parse index), 
 and an array of pointers to structs from type complex.
 First, it checks if the command name is NULL, if it is, it prints an error message and exit.
@@ -253,7 +254,7 @@ void check_and_execute_print_comp(command_line* user_command_line, complex* comp
 and an array of pointers to structs from complex type.
 It uses the get_string function to parse the full row string to get the variables name.
 If it fails to get them, it prints an appropriate error message, frees the allocated memory space, and exits the function.
-Otherwise, it calls the add_comp function with the defined variables and prints the sum result.  */
+Otherwise, it calls the add_comp function with the defined variables and prints the sum result. */
 void check_and_execute_add_comp(command_line* user_command_line, complex* complex_array[]) {
 	char variable1;
 	char variable2;
@@ -314,6 +315,7 @@ void check_and_execute_add_comp(command_line* user_command_line, complex* comple
 	free(variable1_string);
 	free(variable2_string);
 }
+
 
 /* Check_and_execute_sub_comp function gets a pointer to a struct of the user command line (contains the full line received, and an int number of parse index),
 and an array of pointers to structs from complex type.
@@ -608,11 +610,10 @@ void check_and_execute_abs_comp(command_line* user_command_line, complex* comple
 }
 
 
-
 /* Check_stop function gets a command_line pointer to the user command line. 
 It checks if the characters after the command are spaces or tabs.
 If they are not, prints an appropriate error message, frees the allocated memory space, and returns FALSE. 
-Else, it frees the allocated memory space returns TRUE.  */
+Else, it frees the allocated memory space returns TRUE. */
 int check_stop(command_line* user_command_line) {
 	char* ending_characters = get_string(user_command_line, '\n');
 
