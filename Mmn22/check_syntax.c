@@ -112,7 +112,6 @@ char* get_string(command_line* command_line, char seperator) {
 		}
 	}
 
-	printf("DEBUG: Final string: %s Index: %d\n", final_string, command_line->parse_index);
 	return final_string;
 }
 

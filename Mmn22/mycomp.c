@@ -53,11 +53,11 @@ int main() {
 			user_command_line.full_line[strlen(user_command_line.full_line) - ONE_INDEX] = '\0';
 		}
 
-		printf("Line received is: %s\n", user_command_line.full_line);
+		printf("Line received is: %s\n\n", user_command_line.full_line);
 		command = get_string(&user_command_line, ' ');
 		handle_command(command, &user_command_line, complex_array);
 		user_command_line.parse_index = INITIAL_ZERO;
-		printf("Enter a command:\n");
+		printf("\nEnter a command:\n");
 
 		/* If command ends with EOF, print an error and stop the program  */
 		if (has_EOF) {
@@ -150,12 +150,6 @@ void check_and_execute_read_comp(command_line* user_command_line, complex* compl
 	full_line_size = strlen(user_command_line->full_line);
 	last_index = full_line_size - ONE_INDEX;
 
-	if (!check_missing_comma(user_command_line->full_line, TWO_COMMAS)) {
-		printf("Missing comma\n\n");
-		free(variable_string);
-		return;
-	}
-
 	if (strlen(variable_string) > ONE_CHARACTER || !variable_valid(variable)) {
 		printf("Undefined complex variable\n\n");
 		free(variable_string);
@@ -196,6 +190,12 @@ void check_and_execute_read_comp(command_line* user_command_line, complex* compl
 		free(variable_string);
 		free(real_input);
 		free(imaginary_input);
+		return;
+	}
+
+	if (!check_missing_comma(user_command_line->full_line, TWO_COMMAS)) {
+		printf("Missing comma\n\n");
+		free(variable_string);
 		return;
 	}
 
@@ -309,6 +309,13 @@ void check_and_execute_add_comp(command_line* user_command_line, complex* comple
 		return;
 	}
 
+	if (!check_missing_comma(user_command_line->full_line, ONE_COMMA)) {
+		printf("Missing comma\n\n");
+		free(variable1_string);
+		free(variable2_string);
+		return;
+	}
+
 	sum_result = add_comp(*complex_array[variable1 - 'A'], *complex_array[variable2 - 'A']);
 	print_comp(sum_result);
 	free(variable1_string);
@@ -376,6 +383,13 @@ void check_and_execute_sub_comp(command_line* user_command_line, complex* comple
 		return;
 	}
 
+	if (!check_missing_comma(user_command_line->full_line, ONE_COMMA)) {
+		printf("Missing comma\n\n");
+		free(variable1_string);
+		free(variable2_string);
+		return;
+	}
+
 	sub_result = sub_comp(*complex_array[variable1 - 'A'], *complex_array[variable2 - 'A']);
 	print_comp(sub_result);
 	free(variable1_string);
@@ -433,6 +447,13 @@ void check_and_execute_mult_comp_real(command_line* user_command_line, complex* 
 		return;
 	}
 
+	if (!check_missing_comma(user_command_line->full_line, ONE_COMMA)) {
+		printf("Missing comma\n\n");
+		free(variable_string);
+		free(real_input);
+		return;
+	}
+
 	mult_result = mult_comp_real(*complex_array[variable - 'A'], atof(real_input));
 	print_comp(mult_result);
 	free(variable_string);
@@ -485,6 +506,13 @@ void check_and_execute_mult_comp_img(command_line* user_command_line, complex* c
 
 	if (!is_number(imaginary_input)) {
 		printf("Invalid parameter - not a number\n\n");
+		free(variable_string);
+		free(imaginary_input);
+		return;
+	}
+
+	if (!check_missing_comma(user_command_line->full_line, ONE_COMMA)) {
+		printf("Missing comma\n\n");
 		free(variable_string);
 		free(imaginary_input);
 		return;
@@ -557,6 +585,13 @@ void check_and_execute_mult_comp_comp(command_line* user_command_line, complex* 
 		return;
 	}
 
+	if (!check_missing_comma(user_command_line->full_line, ONE_COMMA)) {
+		printf("Missing comma\n\n");
+		free(variable1_string);
+		free(variable2_string);
+		return;
+	}
+
 	mult_result = mult_comp_comp(*complex_array[variable1 - 'A'], *complex_array[variable2 - 'A']);
 	print_comp(mult_result);
 	free(variable1_string);
@@ -604,7 +639,7 @@ void check_and_execute_abs_comp(command_line* user_command_line, complex* comple
 	}
 
 	abs_result = abs_comp(*complex_array[variable - 'A']);
-	printf("%.2f\n", abs_result);
+	printf("%.2f\n\n", abs_result);
 	free(variable_string);
 }
 
