@@ -7,11 +7,23 @@
 #include <stdlib.h> /* Provides memory allocation and deallocation functions */
 #include <ctype.h> /* Provides functions for working with character data */
 
+#define ONE_CHARACTER 1 /* Length of a string of one character */
+#define TWO_COMMAS 2 /* The function syntax has 2 commas */
+#define GET_STRING_FAILED 0 /* When the function get_string fails, it returns NULL */
+#define ONE_COMMA 1 /* The function syntax has 1 comma */
+#define ONE_INDEX 1 /* For Trimming strings sizes */
+#define STRINGS_EQUALS 0 /* Sign that the strings are equal */
+#define MEMORY_ERROR -1 /* Return value for memory reallocate or dealllocate error */
+#define INITIAL_SIZE 1 /* Initial size of a pointer */
+#define INITIAL_ZERO 0 /* Zero for initializing variables */
+#define ONE_POINT 1 /* In order to check if the number is float and has a point */
+#define VARIABLES_COUNT 6 /* Number of variables */
 #define NO_ERRORS 0 /* Return value for main function- program was completed successfully */
 #define COMMANDS_COUNT 9 /* Number of valid available command */
 #define CHAR_SIZE sizeof(char) /* Size of a character */
 
 typedef enum boolean {FALSE, TRUE}; /* boolean enum defines FALSE = 0 and TRUE = 1 */
+typedef enum indexes {INDEX1, INDEX2, INDEX3, INDEX4, INDEX5, INDEX6}; /* Indexes of the complex array */
 
 /* Complex struct has 2 memebers:
 1. real- a double, represents the real part of a complex number.
@@ -28,7 +40,6 @@ typedef struct {
 	char* full_line;
 	int parse_index;
 } command_line;
-
 
 /* Check syntax */
 

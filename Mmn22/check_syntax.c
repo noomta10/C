@@ -11,8 +11,8 @@ int variable_valid(char variable) {
 /* Is_number function gets a string and checks if it is a valid number. The number can be float ot negative.  
 If the nuber is valid, returns TRUE, else FALSE */
 int is_number(char number_string[]) {
-	int i = 0;
-	int points_count = 0;
+	int i = INITIAL_ZERO;
+	int points_count = INITIAL_ZERO;
 
 	/* Skip spaces and tabs */
 	while (number_string[i] == '\t' || number_string[i] == ' ')
@@ -26,7 +26,7 @@ int is_number(char number_string[]) {
 	for (; i < strlen(number_string); i++) {
 		if ((number_string[i]) == '.')
 			points_count++;
-		if (points_count > 1)
+		if (points_count > ONE_POINT)
 			return FALSE;
 		if ((!isdigit(number_string[i]) && points_count > 1) || (!isdigit(number_string[i]) && number_string[i] != '.'))
 			return FALSE;
@@ -39,15 +39,15 @@ int is_number(char number_string[]) {
 /* Get_line function gets a pointer to a line, and gets a line from the user, and reallocate space to it char by char.
 In the end of the line, puts a null terminator. Returns a pointer to the complete line. */
 char* get_line(char* line) {
-	int line_size = 1;
+	int line_size = INITIAL_SIZE;
 	int c = getchar();
 
 	while (c != '\n') {
-		line[line_size - 1] = c;
+		line[line_size - ONE_INDEX] = c;
 		line = realloc(line, ++line_size * CHAR_SIZE);
 		if (line == NULL) {
 			printf("Error: memory allocation failed\n");
-			exit(-1);
+			exit(MEMORY_ERROR);
 		}
 
 		if (c == EOF) {
@@ -57,7 +57,7 @@ char* get_line(char* line) {
 		c = getchar();
 
 	}
-	line[line_size - 1] = '\0';
+	line[line_size - ONE_INDEX] = '\0';
 	return line;
 }
 
@@ -92,19 +92,19 @@ char* get_string(command_line* command_line, char seperator) {
 		(command_line->parse_index)++;
 
 	/* Create and allocate space for final string */
-	final_string_size = end_string_index - start_string_index + 1;
+	final_string_size = end_string_index - start_string_index + ONE_INDEX;
 	final_string = (char*)malloc(final_string_size);
 	if (final_string == NULL) {
 		printf("Error: memory allocation failed\n");
-		exit(-1);
+		exit(MEMORY_ERROR);
 	}
 
-	strncpy(final_string, command_line->full_line + start_string_index, final_string_size - 1);
-	final_string[final_string_size - 1] = '\0';
+	strncpy(final_string, command_line->full_line + start_string_index, final_string_size - ONE_INDEX);
+	final_string[final_string_size - ONE_INDEX] = '\0';
 
 	/* Trim spaces and tabs from the end of the line */
 	if (seperator != ' ') {
-		for (i = strlen(final_string) - 1; i >= 0; i--) {
+		for (i = strlen(final_string) - ONE_INDEX; i >= INITIAL_ZERO; i--) {
 			if (final_string[i] == '\t' || final_string[i] == ' ')
 				final_string[i] = '\0';
 			else
@@ -121,23 +121,23 @@ char* get_string(command_line* command_line, char seperator) {
 That way we are able to print an error message when a comma is linked to the end of the valid command name.
 Returns TRUE if a comma is linked to the end of the valid command name, or FALSE if not. */
 int check_command_comma(char* command) {
-	int valid_command = 0;
+	int valid_command = INITIAL_ZERO;
 	int i;
 	char* valid_commands[] = { "read_comp", "print_comp", "add_comp", "sub_comp", "mult_comp_real", "mult_comp_img", "mult_comp_comp", "abs_comp", "stop" };
 	int command_length = strlen(command);
-	int command_last_index = command_length - 1;
+	int command_last_index = command_length - ONE_INDEX;
 	char* command_without_last_character = malloc(command_length);
 	if (command_without_last_character == NULL) {
 		printf("Error: memory allocation failed\n");
-		exit(-1);
+		exit(MEMORY_ERROR);
 	}
 
-	strncpy(command_without_last_character, command, command_length - 1);
-	command_without_last_character[command_length - 1] = '\0';
+	strncpy(command_without_last_character, command, command_length - ONE_INDEX);
+	command_without_last_character[command_length - ONE_INDEX] = '\0';
 
 	for (i = 0; i < COMMANDS_COUNT; i++) {
-		if (strcmp(command_without_last_character, valid_commands[i]) == 0) {
-			valid_command = 1;
+		if (strcmp(command_without_last_character, valid_commands[i]) == STRINGS_EQUALS) {
+			valid_command = TRUE;
 			break;
 		}
 	}
@@ -156,17 +156,17 @@ int check_command_comma(char* command) {
 Each time a comma is detected, the function checks if another comma seperated only bt spaces or tabs is present.
 If there are consecutive commas in the line, the function returns TRUE, else FALSE */
 int check_consecutive_commas(char* full_line) {
-	int commas_count = 0;
-	int i = 0;
+	int commas_count = INITIAL_ZERO;
+	int i;
 
 	for (i = 0; i < strlen(full_line); i++) {
 		if (full_line[i] == ',') {
 			commas_count++;
-			if (commas_count > 1)
+			if (commas_count > ONE_COMMA)
 				return TRUE;
 		}
 		else if (full_line[i] != ' ' && full_line[i] != '\t') {
-			commas_count = 0;
+			commas_count = INITIAL_ZERO;
 		}
 	}
 
@@ -179,7 +179,7 @@ The function loops through the line and checks if the number of commas in the li
 If it is, returns TRUE, else returns FALSE */
 int check_missing_comma(char* full_line, int required_commas) {
 	int i;
-	int commas_count = 0;
+	int commas_count = INITIAL_ZERO;
 	
 	for (i = 0; i < strlen(full_line); i++) {
 		if (full_line[i] == ',')
