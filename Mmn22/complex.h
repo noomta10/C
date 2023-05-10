@@ -22,8 +22,8 @@
 #define COMMANDS_COUNT 9 /* Number of valid available command */
 #define CHAR_SIZE sizeof(char) /* Size of a character */
 
-typedef enum boolean {FALSE, TRUE}; /* boolean enum defines FALSE = 0 and TRUE = 1 */
-typedef enum indexes {INDEX1, INDEX2, INDEX3, INDEX4, INDEX5, INDEX6}; /* Indexes of the complex array */
+typedef enum {FALSE, TRUE} boolean; /* boolean enum defines FALSE = 0 and TRUE = 1 */
+typedef enum {INDEX1, INDEX2, INDEX3, INDEX4, INDEX5, INDEX6} indexes; /* Indexes of the complex array */
 
 /* Complex struct has 2 memebers:
 1. real- a double, represents the real part of a complex number.

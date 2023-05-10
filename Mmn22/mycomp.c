@@ -1,5 +1,6 @@
 #include "complex.h"
 
+/* Noam Tamir */
 
 /* Main function defines 6 complex variables and puts their addresses in an array.
 Then, it gets a line from the user with the function get_line, as long as the line is not "stop". 
@@ -53,7 +54,7 @@ int main() {
 			user_command_line.full_line[strlen(user_command_line.full_line) - ONE_INDEX] = '\0';
 		}
 
-		printf("Line received is: %s\n\n", user_command_line.full_line);
+		printf("Line received is: %s\n", user_command_line.full_line);
 		command = get_string(&user_command_line, ' ');
 		handle_command(command, &user_command_line, complex_array);
 		user_command_line.parse_index = INITIAL_ZERO;
