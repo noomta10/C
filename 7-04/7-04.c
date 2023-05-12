@@ -10,6 +10,7 @@ void mini_scanf(char* fmt, ...) {
 	int* iptr;
 	float* fptr;
 	va_start(ap, fmt);
+
 	for (p = fmt; *p != '\0'; p++) {
 		if (*p != '%')
 			continue;
