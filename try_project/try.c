@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h> 
 #define NUM 15 
@@ -47,3 +48,21 @@ int main() {
 	printf("\n");
 	return 0;
 }
+=======
+﻿#define _CRT_SECURE_NO_WARNINGS 
+
+#include <stdio.h>
+
+
+main()
+{
+    FILE* fp;
+fp = fopen("Hello there.bye", "r");
+/* There can't be a file with such a name */
+if (fp == NULL)
+{
+    perror("myprog");
+    exit(7);
+}
+}
+>>>>>>> f56d696bdd001869b4503ebbc4d87266f8e4e8cd
