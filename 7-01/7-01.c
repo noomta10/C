@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
 	}
 	else {
 		printf("Unknown parameter\n");
-		return (- 1);
+		return (-1);
 	}
 }
 

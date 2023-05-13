@@ -33,11 +33,18 @@ main(int argc, char* argv[]) {
 	file2 = my_open(argv[2], "r");
 	line = 1;
 	
-	while ((fgets(buf1, sizeof(buf1), file1) != NULL) && (fgets(buf2, sizeof(buf2), file2) != NULL)) {
+	char* line_file1 = fgets(buf1, sizeof(buf1), file1);
+	char* line_file2 = fgets(buf2, sizeof(buf2), file2);
+
+	while (1) {
+
 		if (strcmp(buf1, buf2) != 0) {
-			printf("files differ: line %d\n%s: %s%s: %s",line, argv[1], buf1, argv[2], buf2);
+			printf("files differ: line %d\n%s: %s\n%s: %s",line, argv[1], buf1, argv[2], buf2);
 			exit(3);
 		}
+
+		char* line_file1 = fgets(buf1, sizeof(buf1), file1);
+		char* line_file2 = fgets(buf2, sizeof(buf2), file2);
 
 		line++;
 	}
