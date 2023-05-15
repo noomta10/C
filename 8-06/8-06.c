@@ -30,7 +30,7 @@ void main() {
 	else {
 		for (i = 0; i < MSIZE; i++)
 			printf("%X ", p[i]);
-
+		printf("DEBUG");
 		free(p);
 	}
 }
