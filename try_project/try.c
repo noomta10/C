@@ -1,16 +1,16 @@
-ï»¿#define _CRT_SECURE_NO_WARNINGS 
+/* program cat – concatenate files using UNIX system access */
+/* Test if input is capable of seeking */
 
 #include <stdio.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <fcntl.h>
 
-
-main()
+int seek_test(int fd)
 {
-    FILE* fp;
-fp = fopen("Hello there.bye", "r");
-/* There can't be a file with such a name */
-if (fp == NULL)
-{
-    perror("myprog");
-    exit(7);
-}
+	if (lseek(fd, 0, 0) == -1)
+		printf("cannot seek\n");
+	else
+		printf("seek is OK\n");
+	return(0);
 }
