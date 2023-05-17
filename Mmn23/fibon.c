@@ -45,7 +45,7 @@ Node* create_fibonacci(int number_of_elements) {
     }
     
     current_node->next = first_node;
-    return current_node;
+    return first_node;
 }
 
 
@@ -53,7 +53,7 @@ Node* create_fibonacci(int number_of_elements) {
 
 int main() {
     int number_of_elements = 10;
-    Node* last_node = create_fibonacci(number_of_elements);
-    print_fibonacci(last_node, );
+    Node* first_node = create_fibonacci(number_of_elements);
+    print_fibonacci(first_node, number_of_elements);
     return 0;
 }
