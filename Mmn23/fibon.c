@@ -8,11 +8,30 @@ typedef struct Node {
 } Node;
 
 
+void write_fibonacci_file(Node* first_node) {
+    FILE* file_pointer = fopen("fibonacci.txt", "a");
+    Node* current_node = first_node;
+
+    if (file_pointer == NULL) {
+        printf("Error opening file\n");
+        exit(-2);
+    }
+
+    do {
+        fprintf(file_pointer, "%d ", current_node->number);
+        current_node = current_node->next;
+    } while (current_node != first_node);
+
+
+    fclose(file_pointer);
+}
+
+
 void print_fibonacci(Node* first_node, int number_of_elements) {
     struct Node* previous_node = NULL;
     struct Node* current_node = first_node;
     struct Node* next_node;
-    printf("Descending order of first %d elements in fibonacci sequence :\n");
+    printf("Descending order of first %d elements in fibonacci sequence :\n", number_of_elements);
 
     /* Reverse to descending order */
     do {
@@ -72,6 +91,7 @@ int main() {
     scanf("%d", &number_of_elements);
 
     Node* first_node = create_fibonacci(number_of_elements);
+    write_fibonacci_file(first_node);
     print_fibonacci(first_node, number_of_elements);
     return 0;
 }
