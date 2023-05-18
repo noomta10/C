@@ -18,7 +18,7 @@ void write_fibonacci_file(Node* first_node, int number_of_elements, char* file_n
         exit(-2);
     }
 
-    fprintf(file_pointer, "First %d elements in fibonacci sequence when n=%d", number_of_elements, number_of_elements);
+    fprintf(file_pointer, "First n elements in fibonacci sequence when n=%d\n", number_of_elements, number_of_elements);
     fclose(file_pointer);
     file_pointer = fopen(file_name, "a");
 
@@ -74,8 +74,10 @@ Node* create_fibonacci(int number_of_elements) {
     Node* second_node = create_node(1);
     first_node->next = second_node;
 
-    if (number_of_elements == 0)
+    if (number_of_elements == 0) {
+        first_node->next = first_node;
         return(first_node);
+    }
 
     Node* current_node = second_node;
     Node* previous_node = first_node;
