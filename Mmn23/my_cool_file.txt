@@ -1,0 +1,1 @@
+First 0 elements in fibonacci sequence when n=0
