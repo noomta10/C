@@ -4,10 +4,21 @@
 
 
 typedef struct Node {
-    int number;
+    unsigned long long number;
     struct Node* next;
 } Node;
 
+
+void free_memory(Node** first_node_pointer) {
+    Node* current_node = *first_node_pointer;
+    Node* next_node;
+    
+    do {
+        next_node = current_node->next;
+        free(current_node);
+        current_node = next_node;
+    } while(current_node != *first_node_pointer);
+}
 
 void write_fibonacci_file(Node* first_node, int number_of_elements, char* file_name) {
     FILE* file_pointer = fopen(file_name, "w");
@@ -34,7 +45,7 @@ void write_fibonacci_file(Node* first_node, int number_of_elements, char* file_n
 void print_fibonacci(Node* first_node, int number_of_elements) {
     struct Node* current_node = first_node;
     printf("Descending order of first %d elements in fibonacci sequence:\n", number_of_elements);
-
+    
     /* Print the sequence in descending order */
     do {
         printf("%d ", (current_node->next)->number);
@@ -139,6 +150,8 @@ int main(int argc, char* argv[]) {
     Node* first_node = create_fibonacci(number_of_elements);
     write_fibonacci_file(first_node, number_of_elements, file_name);
     print_fibonacci(first_node, number_of_elements);
+    
+    free_memory(&first_node);
     
     return 0;
 }
