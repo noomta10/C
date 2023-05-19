@@ -1,5 +1,4 @@
-#include "complex.h"
-
+#include "mycomp.h"
 
 /* Variable_valid function gets a char variable, and checks if its ASCII value is between A and F.
 If it is in the range, it is a valid variable and the function returns 1 for TRUE, else, returns 0 for FALSE */
@@ -44,7 +43,7 @@ char* get_line(char* line) {
 
 	while (c != '\n') {
 		line[line_size - ONE_INDEX] = c;
-		line = realloc(line, ++line_size * CHAR_SIZE);
+		line = (char*)realloc(line, ++line_size * CHAR_SIZE);
 		if (line == NULL) {
 			printf("Error: memory allocation failed\n");
 			exit(MEMORY_ERROR);
@@ -125,7 +124,7 @@ int check_command_comma(char* command) {
 	char* valid_commands[] = { "read_comp", "print_comp", "add_comp", "sub_comp", "mult_comp_real", "mult_comp_img", "mult_comp_comp", "abs_comp", "stop" };
 	int command_length = strlen(command);
 	int command_last_index = command_length - ONE_INDEX;
-	char* command_without_last_character = malloc(command_length);
+	char* command_without_last_character = (char*)malloc(command_length);
 	if (command_without_last_character == NULL) {
 		printf("Error: memory allocation failed\n");
 		exit(MEMORY_ERROR);

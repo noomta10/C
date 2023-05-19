@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="complex.h" />
+    <ClInclude Include="mycomp.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input_invalid.txt" />

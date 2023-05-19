@@ -34,5 +34,8 @@
     <ClInclude Include="complex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="mycomp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

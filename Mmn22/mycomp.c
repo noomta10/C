@@ -1,4 +1,4 @@
-#include "complex.h"
+#include "mycomp.h"
 
 /* Noam Tamir */
 
