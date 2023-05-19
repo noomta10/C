@@ -1,2 +1,2 @@
-First 0 elements in fibonacci sequence when n=0
-0 
+First n elements in fibonacci sequence when n=12
+144 89 55 34 21 13 8 5 3 2 1 1 0 

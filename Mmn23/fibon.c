@@ -23,7 +23,7 @@ void write_fibonacci_file(Node* first_node, int number_of_elements, char* file_n
     file_pointer = fopen(file_name, "a");
 
     do {
-        fprintf(file_pointer, "%d ", current_node->number);
+        fprintf(file_pointer, "%d ", (current_node->next)->number);
         current_node = current_node->next;
     } while (current_node != first_node);
 
@@ -32,27 +32,14 @@ void write_fibonacci_file(Node* first_node, int number_of_elements, char* file_n
 
 
 void print_fibonacci(Node* first_node, int number_of_elements) {
-    struct Node* previous_node = NULL;
     struct Node* current_node = first_node;
-    struct Node* next_node;
     printf("Descending order of first %d elements in fibonacci sequence:\n", number_of_elements);
 
-    /* Reverse to descending order */
+    /* Print the sequence in descending order */
     do {
-        next_node = current_node->next;
-        current_node->next = previous_node;
-        previous_node = current_node;
-        current_node = next_node;
+        printf("%d ", (current_node->next)->number);
+        current_node = current_node->next;
     } while (current_node != first_node);
-
-    /* Previous_node is the head of the list */
-    Node* last_node = previous_node;
-
-    /* Print the descending list */
-    while (last_node != NULL) {
-        printf("%d ", last_node->number);
-        last_node = last_node->next;
-    }
 } 
 
 
@@ -60,7 +47,7 @@ Node* create_node(int number) {
     Node* new_node = (Node*) malloc(sizeof(Node));
 
     if (new_node == NULL) {
-        printf("Memory allocation failed\n");
+        fprintf(stderr, "Error: memory allocation failed\n");
         exit(-1);
     }
 
@@ -71,18 +58,21 @@ Node* create_node(int number) {
 
 Node* create_fibonacci(int number_of_elements) {
     Node* first_node = create_node(0);
-    Node* second_node = create_node(1);
-    first_node->next = second_node;
+    Node* second_node;
+    Node* next_node;
 
     if (number_of_elements == 0) {
         first_node->next = first_node;
         return(first_node);
     }
 
+    second_node = create_node(1);
+    first_node->next = second_node;
+
     Node* current_node = second_node;
     Node* previous_node = first_node;
 
-    for (int elements = 2; elements < number_of_elements; elements++) {
+    for (int elements = 2; elements < number_of_elements + 1; elements++) {
         Node* new_node = create_node(current_node->number + previous_node->number);
         current_node->next = new_node;
         previous_node = current_node;
@@ -90,10 +80,27 @@ Node* create_fibonacci(int number_of_elements) {
     }
     
     current_node->next = first_node;
+
+
+    /* Last node */
+    previous_node = current_node;
+    /* First node */
+    current_node = first_node;
+
+    /* Reverse */
+    do {
+        next_node = current_node->next;
+        current_node->next = previous_node;
+        previous_node = current_node;
+        current_node = next_node;
+    } while (current_node != first_node);
+
     return first_node;
 }
 
-void check_arguments_number(argc) {
+
+char* check_arguments(int argc, char* argv[]) {
+    char* file_name;
     if (argc > 2) {
         fprintf(stderr, "Error: too many arguments\n");
         exit(-1);
@@ -102,6 +109,9 @@ void check_arguments_number(argc) {
         fprintf(stderr, "Error: too few arguments\n");
         exit(-1);
     }
+
+    file_name = argv[1];
+    return file_name;
 }
 
 
@@ -120,15 +130,15 @@ int check_elements_number(int number_of_elements) {
 
 
 int main(int argc, char* argv[]) {
+    /* Get and check command line arguments and users input */
     int number_of_elements = NULL;
-    
-    check_arguments_number(argc);
-    char* file_name = argv[1];
-
+    char* file_name = check_arguments(argc, argv);
     number_of_elements = check_elements_number(number_of_elements);
 
+    /* Create and print fibonnaci sequence */
     Node* first_node = create_fibonacci(number_of_elements);
     write_fibonacci_file(first_node, number_of_elements, file_name);
     print_fibonacci(first_node, number_of_elements);
+    
     return 0;
 }
