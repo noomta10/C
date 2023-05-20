@@ -32,7 +32,7 @@ void write_fibonacci_file(Node* first_node, int n, char* file_name) {
     file_pointer = fopen(file_name, "a");
 
     do {
-        fprintf(file_pointer, "%d ", (current_node->previous)->number);
+        fprintf(file_pointer, "%llu ", (current_node->previous)->number);
         current_node = current_node->previous;
     } while (current_node != first_node);
 
@@ -47,7 +47,7 @@ void print_fibonacci(Node* first_node, int n) {
     printf("First elements in fibonacci sequence when maximun index n = %d\n", n);
     
     do {
-        printf("%d ", (current_node->previous)->number);
+        printf("%llu ", (current_node->previous)->number);
         current_node = current_node->previous;
     } while (current_node != first_node);
 } 
@@ -80,6 +80,7 @@ Node* create_fibonacci(int n) {
     Node* first_node = create_node(FIRST_ELEMENT);
     Node* second_node;
     Node* next_node;
+    int sequence_index;
 
     if (n == MIN_VALUE) {
         first_node->previous = first_node;
@@ -91,7 +92,7 @@ Node* create_fibonacci(int n) {
     Node* current_node = second_node;
     Node* previous_node = first_node;
 
-    for (int sequence_index = INDEX_ONE; sequence_index < n ; sequence_index++) {
+    for (sequence_index = INDEX_ONE; sequence_index < n ; sequence_index++) {
         Node* new_node = create_node(current_node->number + previous_node->number);
         new_node->previous = current_node;
         previous_node = current_node;
@@ -99,7 +100,6 @@ Node* create_fibonacci(int n) {
     }
     
     first_node->previous = current_node;
-
     return first_node;
 }
 
@@ -111,10 +111,12 @@ if it is not, it print an error message and exit the program.
 If no errors were encounterd, returns the file name which is a pointer to characters */
 char* get_file_name(int argc, char* argv[]) {
     char* file_name;
+
     if (argc > VALID_ARGUMENTS_NUMBER) {
         fprintf(stderr, "Error: too many arguments\n");
         exit(ARGUMNENTS_ERROR);
     }
+
     if (argc < VALID_ARGUMENTS_NUMBER) {
         fprintf(stderr, "Error: too few arguments\n");
         exit(ARGUMNENTS_ERROR);
