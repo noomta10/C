@@ -12,6 +12,7 @@
 #define INDEX_ONE 1 /* When the sequence contains two elements it is index number 1 */
 #define VALID_ARGUMENTS_NUMBER 2 /* Valid number of command line arguments is 2- one is the program name and two is the file name */
 #define FILE_NAME_INDEX 1 /* Index of file name is 1 in argv[1] */
+
 /* Node struct is a self-referential struct.
 sontains 2 members:
 1. unsigned long long number- the data, the number the node holds.
@@ -45,7 +46,7 @@ Node* create_node(unsigned long long number);
 First, it creates the first node with number 0, checks if n is zero, and if so,
 it returns the first node which points to itself. Then, it creates the second node with the number 1.
 After that, it loops as long as the index of the sequence is smaller than the n,
-and creates a circular ascending order fibonnaci sequence. Then, it reverses the order of the sequence to a descending order.
+and creates a circular descending order fibonnaci sequence.
 Finally, it returns a pointer to the first node. */
 Node* create_fibonacci(int n);
 

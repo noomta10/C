@@ -14,9 +14,9 @@ void free_memory(Node** first_node_pointer) {
 }
 
 
-/* Write_fibonnaci_file function gets a Node pointer to the first node, the number of elements in the sequence, and a character pointer to the file name.
+/* Write_fibonnaci_file function gets a Node pointer to the first node, the maximum index in the sequence, and a character pointer to the file name.
 It creates a file, prints an error if one was encountered, and prints a title.
-Then it loops through the sequence and prints the sequence in a descending order. 
+Then it loops through the sequence and prints the sequence in a descending order.
 Finally, it closes the file. Does not return anything. */
 void write_fibonacci_file(Node* first_node, int n, char* file_name) {
     FILE* file_pointer = fopen(file_name, "w");
@@ -40,7 +40,7 @@ void write_fibonacci_file(Node* first_node, int n, char* file_name) {
 }
 
 
-/* Print_fibonnaci function gets a Node pointer to the first node and the number of elements in the sequence.
+/* Print_fibonnaci function gets a Node pointer to the first node and the the maximum index in the sequence.
 It prints the sequence in a descending order. Does not return anything. */
 void print_fibonacci(Node* first_node, int n) {
     struct Node* current_node = first_node;
@@ -69,12 +69,12 @@ Node* create_node(unsigned long long number) {
 }
 
 
-/* Create_fibonacci function gets the number of elements the user entered and creates the fibonnaci sequence.
-The function uses create_node function in order to create each node in the sequence.
-First, it creates the first node with number 0, checks if the number of elements is zero, and if so,
+/* Create_fibonacci function gets n- maximum index in the sequence the user entered and creates the fibonnaci sequence.
+* The function uses create_node function in order to create each node in the sequence.
+First, it creates the first node with number 0, checks if n is zero, and if so,
 it returns the first node which points to itself. Then, it creates the second node with the number 1.
-After that, it loops as long as the index of the sequence is smaller than the number of elements,
-and creates a circular ascending order fibonnaci sequence. Then, it reverses the order of the sequence to a descending order.
+After that, it loops as long as the index of the sequence is smaller than the n,
+and creates a circular descending order fibonnaci sequence.
 Finally, it returns a pointer to the first node. */
 Node* create_fibonacci(int n) {
     Node* first_node = create_node(FIRST_ELEMENT);
@@ -125,7 +125,7 @@ char* get_file_name(int argc, char* argv[]) {
 }
 
 
-/* Get_n_input function gets the number of elements the user entered- int n.
+/* Get_n_input function gets the initial n- int n.
 The function checks that the number is positive, if it is not, it prints an error message ands asks again for an input.
 Returns a valid number of n (maximum index in fibonacci sequence)- int n */
 int get_n_input(int n) {
@@ -143,7 +143,7 @@ int get_n_input(int n) {
 
 /* Main function gets and checks command line arguments and users input, 
 creates and prints fibonnaci sequence, and frees the memory that was allocated with malloc 
-Return NO_ERRORS when run completed successfuly. */
+Return NO_ERRORS when the run completed successfuly. */
 int main(int argc, char* argv[]) {
     /* Get and check command line arguments and users input */
     int n = NULL;
