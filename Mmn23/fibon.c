@@ -7,7 +7,7 @@ void free_memory(Node** first_node_pointer) {
     Node* next_node;
     
     do {
-        next_node = current_node->next;
+        next_node = current_node->previous;
         free(current_node);
         current_node = next_node;
     } while(current_node != *first_node_pointer);
@@ -24,16 +24,16 @@ void write_fibonacci_file(Node* first_node, int number_of_elements, char* file_n
 
     if (file_pointer == NULL) {
         printf("Error opening file\n");
-        exit(-2);
+        exit(MEMORY_ERROE);
     }
 
-    fprintf(file_pointer, "First n elements in fibonacci sequence when n=%d\n", number_of_elements, number_of_elements);
+    fprintf(file_pointer, "First elements in fibonacci sequence when maximun index n = %d\n", number_of_elements, number_of_elements);
     fclose(file_pointer);
     file_pointer = fopen(file_name, "a");
 
     do {
-        fprintf(file_pointer, "%d ", (current_node->next)->number);
-        current_node = current_node->next;
+        fprintf(file_pointer, "%d ", (current_node->previous)->number);
+        current_node = current_node->previous;
     } while (current_node != first_node);
 
     fclose(file_pointer);
@@ -44,12 +44,12 @@ void write_fibonacci_file(Node* first_node, int number_of_elements, char* file_n
 It prints the sequence in a descending order. Does not return anything. */
 void print_fibonacci(Node* first_node, int number_of_elements) {
     struct Node* current_node = first_node;
-    printf("Descending order of first %d elements in fibonacci sequence:\n", number_of_elements);
+    printf("First elements in fibonacci sequence when maximun index n = %d\n", number_of_elements);
     
     /* Print the sequence in descending order */
     do {
-        printf("%d ", (current_node->next)->number);
-        current_node = current_node->next;
+        printf("%d ", (current_node->previous)->number);
+        current_node = current_node->previous;
     } while (current_node != first_node);
 } 
 
@@ -71,51 +71,36 @@ Node* create_node(unsigned long long number) {
 
 
 /* Create_fibonacci function gets the number of elements the user entered and creates the fibonnaci sequence.
-* The function uses create_node function in order to create each node in the sequence.
+The function uses create_node function in order to create each node in the sequence.
 First, it creates the first node with number 0, checks if the number of elements is zero, and if so,
 it returns the first node which points to itself. Then, it creates the second node with the number 1.
 After that, it loops as long as the index of the sequence is smaller than the number of elements,
 and creates a circular ascending order fibonnaci sequence. Then, it reverses the order of the sequence to a descending order.
-Finally, it returns a pointer to the first node.
-*/
-Node* create_fibonacci(int number_of_elements) {
+Finally, it returns a pointer to the first node. */
+Node* create_fibonacci(int n) {
     Node* first_node = create_node(0);
     Node* second_node;
     Node* next_node;
 
-    if (number_of_elements == 0) {
-        first_node->next = first_node;
+    if (n == 0) {
+        first_node->previous = first_node;
         return(first_node);
     }
 
     second_node = create_node(1);
-    first_node->next = second_node;
+    second_node->previous = first_node;
 
     Node* current_node = second_node;
     Node* previous_node = first_node;
 
-    for (int index = 1; index < number_of_elements ; index++) {
+    for (int sequence_index = 1; sequence_index < n ; sequence_index++) {
         Node* new_node = create_node(current_node->number + previous_node->number);
-        current_node->next = new_node;
+        new_node->previous = current_node;
         previous_node = current_node;
         current_node = new_node;
     }
     
-    current_node->next = first_node;
-
-
-    /* Last node */
-    previous_node = current_node;
-    /* First node */
-    current_node = first_node;
-
-    /* Reverse */
-    do {
-        next_node = current_node->next;
-        current_node->next = previous_node;
-        previous_node = current_node;
-        current_node = next_node;
-    } while (current_node != first_node);
+    first_node->previous = current_node;
 
     return first_node;
 }
@@ -146,12 +131,12 @@ char* check_arguments(int argc, char* argv[]) {
 The function checks that the number is positive, if it is not, it prints an error message ands asks again for an input.
 Returns a valid number of elements- int number_of_elements */
 int check_elements_number(int number_of_elements) {
-    printf("Enter number of elements: ");
+    printf("Enter n (maximum index in the sequence): ");
     scanf("%d", &number_of_elements);
 
     while (number_of_elements < 0) {
         fprintf(stderr, "Error: number of elements need to be a positive number\n");
-        printf("Enter number of elements: ");
+        printf("Enter n (maximum index in the sequence): ");
         scanf("%d", &number_of_elements);
     }
 
@@ -160,7 +145,7 @@ int check_elements_number(int number_of_elements) {
 
 /* Main function gets and checks command line arguments and users input, 
 creates and prints fibonnaci sequence, and frees the memory that was allocated with malloc 
-Return 0 when run completed successfuly. */
+Return NO_ERRORS when run completed successfuly. */
 int main(int argc, char* argv[]) {
     /* Get and check command line arguments and users input */
     int number_of_elements = NULL;
@@ -175,5 +160,5 @@ int main(int argc, char* argv[]) {
     /* Free the memory that was allocated with malloc */
     free_memory(&first_node);
     
-    return 0;
+    return NO_ERRORS;
 }
