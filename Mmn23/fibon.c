@@ -24,7 +24,7 @@ void write_fibonacci_file(Node* first_node, int n, char* file_name) {
 
     if (file_pointer == NULL) {
         printf("Error opening file\n");
-        exit(MEMORY_ERROE);
+        exit(FILE_ERROR);
     }
 
     fprintf(file_pointer, "First elements in fibonacci sequence when maximun index n = %d\n", n);
@@ -61,7 +61,7 @@ Node* create_node(unsigned long long number) {
 
     if (new_node == NULL) {
         fprintf(stderr, "Error: memory allocation failed\n");
-        exit(-1);
+        exit(MEMORY_ERROR);
     }
 
     new_node->number = number;
@@ -77,22 +77,21 @@ After that, it loops as long as the index of the sequence is smaller than the nu
 and creates a circular ascending order fibonnaci sequence. Then, it reverses the order of the sequence to a descending order.
 Finally, it returns a pointer to the first node. */
 Node* create_fibonacci(int n) {
-    Node* first_node = create_node(0);
+    Node* first_node = create_node(FIRST_ELEMENT);
     Node* second_node;
     Node* next_node;
 
-    if (n == 0) {
+    if (n == MIN_VALUE) {
         first_node->previous = first_node;
         return(first_node);
     }
 
-    second_node = create_node(1);
+    second_node = create_node(SECOND_ELEMENT);
     second_node->previous = first_node;
-
     Node* current_node = second_node;
     Node* previous_node = first_node;
 
-    for (int sequence_index = 1; sequence_index < n ; sequence_index++) {
+    for (int sequence_index = INDEX_ONE; sequence_index < n ; sequence_index++) {
         Node* new_node = create_node(current_node->number + previous_node->number);
         new_node->previous = current_node;
         previous_node = current_node;
@@ -112,16 +111,16 @@ if it is not, it print an error message and exit the program.
 If no errors were encounterd, returns the file name which is a pointer to characters */
 char* get_file_name(int argc, char* argv[]) {
     char* file_name;
-    if (argc > 2) {
+    if (argc > VALID_ARGUMENTS_NUMBER) {
         fprintf(stderr, "Error: too many arguments\n");
-        exit(-1);
+        exit(ARGUMNENTS_ERROR);
     }
-    if (argc < 2) {
+    if (argc < VALID_ARGUMENTS_NUMBER) {
         fprintf(stderr, "Error: too few arguments\n");
-        exit(-1);
+        exit(ARGUMNENTS_ERROR);
     }
 
-    file_name = argv[1];
+    file_name = argv[FILE_NAME_INDEX];
     return file_name;
 }
 

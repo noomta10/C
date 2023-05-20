@@ -5,7 +5,7 @@
 #define OPTION3 '3'
 #define OPTION4 '4' 
 
-#define ZERO 0 /* To reset new variables */
+#define MIN_VALUE 0 /* To reset new variables */
 
 #define SMALL -1 /* Lexically return values of the functions my_strcmp, my_strncmp */
 #define BIG 1

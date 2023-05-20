@@ -3,8 +3,15 @@
 #include <stdio.h>  /* Provides input and output functions */
 #include <stdlib.h> /* Provides memory allocation and deallocation functions */
 #define NO_ERRORS 0 /* Return value for main function- program was completed successfully */
-#define MEMORY_ERROE -2 /* Return value for a memory error */
-
+#define FILE_ERROR -1 /* Return value for a file openning error */
+#define MEMORY_ERROR -2 /* Return value for a memory error */
+#define ARGUMNENTS_ERROR -3 /* Return value for a command line arguments error */
+#define FIRST_ELEMENT 0 /* First element in fibonnaci sequence */
+#define SECOND_ELEMENT 1 /* Second element in fibonnaci sequence */
+#define MIN_VALUE 0 /* When n equals 0, it is the minimun value it can get */
+#define INDEX_ONE 1 /* When the sequence contains two elements it is index number 1 */
+#define VALID_ARGUMENTS_NUMBER 2 /* Valid number of command line arguments is 2- one is the program name and two is the file name */
+#define FILE_NAME_INDEX 1 /* Index of file name is 1 in argv[1] */
 /* Node struct is a self-referential struct.
 sontains 2 members:
 1. unsigned long long number- the data, the number the node holds.
