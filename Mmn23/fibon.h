@@ -12,13 +12,14 @@
 #define INDEX_ONE 1 /* When the sequence contains two elements it is index number 1 */
 #define VALID_ARGUMENTS_NUMBER 2 /* Valid number of command line arguments is 2- one is the program name and two is the file name */
 #define FILE_NAME_INDEX 1 /* Index of file name is 1 in argv[1] */
+#define INITIAL_VALUE 0 /* Initial variale value */
 
 /* Node struct is a self-referential struct.
 sontains 2 members:
 1. unsigned long long number- the data, the number the node holds.
 2. struct Node* previous- a pointer to the previous node in the circular list. */
 typedef struct Node {
-    unsigned long long number;
+    unsigned long number;
     struct Node* previous;
 } Node;
 
@@ -39,7 +40,7 @@ void print_fibonacci(Node* first_node, int n);
 /* Create_node function gets an unsigned long long number, which will be the node data.
 It creates a new node- allocates memory to it, and sets its number to the number it recieved.
 Returns the new node it created. */
-Node* create_node(unsigned long long number);
+Node* create_node(unsigned long number);
 
 /* Create_fibonacci function gets n- maximum index in the sequence the user entered and creates the fibonnaci sequence.
 * The function uses create_node function in order to create each node in the sequence.

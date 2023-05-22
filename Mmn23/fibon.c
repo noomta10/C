@@ -1,3 +1,5 @@
+/* Noam Tamir */
+
 #include "fibon.h"
 
 /* Free_memory function gets a pointer to a pointer to the first node (the address of the first node pointer).
@@ -32,7 +34,7 @@ void write_fibonacci_file(Node* first_node, int n, char* file_name) {
     file_pointer = fopen(file_name, "a");
 
     do {
-        fprintf(file_pointer, "%llu ", (current_node->previous)->number);
+        fprintf(file_pointer, "%lu ", (current_node->previous)->number);
         current_node = current_node->previous;
     } while (current_node != first_node);
 
@@ -47,16 +49,18 @@ void print_fibonacci(Node* first_node, int n) {
     printf("First elements in fibonacci sequence when maximun index n = %d\n", n);
     
     do {
-        printf("%llu ", (current_node->previous)->number);
+        printf("%lu ", (current_node->previous)->number);
         current_node = current_node->previous;
     } while (current_node != first_node);
+
+    printf("\n");
 } 
 
 
 /* Create_node function gets an unsigned long long number, which will be the node data.
 It creates a new node- allocates memory to it, and sets its number to the number it recieved.
 Returns the new node it created. */
-Node* create_node(unsigned long long number) {
+Node* create_node(unsigned long number) {
     Node* new_node = (Node*) malloc(sizeof(Node));
 
     if (new_node == NULL) {
@@ -79,7 +83,9 @@ Finally, it returns a pointer to the first node. */
 Node* create_fibonacci(int n) {
     Node* first_node = create_node(FIRST_ELEMENT);
     Node* second_node;
-    Node* next_node;
+    Node* current_node;
+    Node* previous_node;
+
     int sequence_index;
 
     if (n == MIN_VALUE) {
@@ -89,8 +95,8 @@ Node* create_fibonacci(int n) {
 
     second_node = create_node(SECOND_ELEMENT);
     second_node->previous = first_node;
-    Node* current_node = second_node;
-    Node* previous_node = first_node;
+    current_node = second_node;
+    previous_node = first_node;
 
     for (sequence_index = INDEX_ONE; sequence_index < n ; sequence_index++) {
         Node* new_node = create_node(current_node->number + previous_node->number);
@@ -128,6 +134,7 @@ char* get_file_name(int argc, char* argv[]) {
 
 
 /* Get_n_input function gets the initial n- int n.
+I assume that n is not greater than 47 because this is the max value long data type can contain (4294967295).
 The function checks that the number is positive, if it is not, it prints an error message ands asks again for an input.
 Returns a valid number of n (maximum index in fibonacci sequence)- int n */
 int get_n_input(int n) {
@@ -147,13 +154,14 @@ int get_n_input(int n) {
 creates and prints fibonnaci sequence, and frees the memory that was allocated with malloc 
 Return NO_ERRORS when the run completed successfuly. */
 int main(int argc, char* argv[]) {
+    Node* first_node;
+    int n = INITIAL_VALUE;
     /* Get and check command line arguments and users input */
-    int n = NULL;
     char* file_name = get_file_name(argc, argv);
     n = get_n_input(n);
 
     /* Create and print fibonnaci sequence */
-    Node* first_node = create_fibonacci(n);
+    first_node = create_fibonacci(n);
     write_fibonacci_file(first_node, n, file_name);
     print_fibonacci(first_node, n);
     
