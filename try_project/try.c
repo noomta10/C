@@ -6,4 +6,5 @@
 int main(int fd)
 {
 	printf("%l", ULONG_MAX);
+	printf("HELLO");
 }
