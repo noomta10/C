@@ -5,5 +5,5 @@
 
 int main(int fd)
 {
-	printf("%lu", ULONG_MAX);
+	printf("%l", ULONG_MAX);
 }
