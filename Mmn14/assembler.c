@@ -15,9 +15,9 @@ int main(int argc, char* argv[]) {
 		succeeded = process_file(argv[i]);
 		/* Line break if failed */
 	}
-
 	return 0;
 }
+
 
 
 static boolean process_file(char* file_name) {
