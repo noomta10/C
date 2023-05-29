@@ -1,4 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "utils.h"
 
 char* add_file_postfix(char* file_name, char* postfix) {

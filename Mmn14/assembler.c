@@ -1,5 +1,8 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
 #include "assembler.h" 
+#include "utils.h" 
 
 static void process_file(char* file_name);
 
@@ -14,7 +17,7 @@ int main(int argc, char* argv[]) {
 }
 
 
-static void process_file(char* file_name) {
+void process_file(char* file_name) {
 	FILE* file_pointer = NULL;
 
 	/* Concatenate '.as' postfix to file name */
