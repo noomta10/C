@@ -15,21 +15,26 @@ int main(int argc, char* argv[]) {
 		succeeded = process_file(argv[i]);
 		/* Line break if failed */
 	}
+
 	return 0;
 }
 
 
 static boolean process_file(char* file_name) {
-	FILE* file_pointer;
+	FILE* file_pointer = NULL;
 
-	/* Concatenate .as postfix to file name */
-	strcat(file_name, ".as");
+	/* Concatenate '.as' postfix to file name */
+	char* full_file_name = add_file_postfix(file_name, ".as");
 
-	printf("%s", file_name);
+	printf("%s\n", full_file_name);
 
-	file_pointer = fopen(file_name, "r");
+	file_pointer = fopen(full_file_name, "r");
 	if (file_pointer == NULL) {
-		printf("Error: The file %s.as couldn't be opened\n", file_name);
+		printf("Error: The file %s couldn't be opened\n", full_file_name);
+		free(full_file_name);
 		return FALSE;
 	}
+
+	free(full_file_name);
+	return TRUE;
 }
