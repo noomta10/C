@@ -29,23 +29,25 @@ char* get_next_element(char* line) {
 	int word_length;
 	int i = 0;
 	char element[MAX_LINE_LENGTH];
-	
+	char* word = NULL;
+
 	/* Skip spaces and tabs */
-	while (line + i == ' ' || line + i == '\t') {
+	while (line[i] == ' ' || line[i] == '\t') {
 		i++;
 	}
 
 	start_word_index = i;
 
-	while ((line + i) != ' ' && (line + i) != '\t') {
+	/* Increase the index as long as no tab or space was found */
+	while (line[i] != ' ' && line[i] != '\t') {
 		i++;
 	}
 
-	end_word_index = i;
+	end_word_index = i - 1;
 	word_length = end_word_index - start_word_index + 1;
-	char* word = malloc(word_length + 1);
-	strncpy(word, start_word_index, word_length);
-	word[word_length - 1] = '\0';
+	word = malloc(word_length + 1);
+	strncpy(word, line + start_word_index, word_length);
+	word[word_length] = '\0';
 
 	return word;
 }

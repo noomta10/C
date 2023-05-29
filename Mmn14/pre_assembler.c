@@ -8,7 +8,7 @@ void pre_assembler(FILE* source_file) {
 
 	/* Read file line by line until the end */
 	while (fgets(line, sizeof(line), source_file) != NULL) {
-		printf("%s", get_next_element(line));  // Do something with the line (printing in this case)
+		printf("%s\n", get_next_element(line));  // Do something with the line (printing in this case)
 	}
 
 	fclose(source_file);  // Close the file
