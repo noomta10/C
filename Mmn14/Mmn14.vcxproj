@@ -128,10 +128,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="assembler.c" />
+    <ClCompile Include="pre_assembler.c" />
     <ClCompile Include="utils.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assembler.h" />
+    <ClInclude Include="pre_assembler.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
