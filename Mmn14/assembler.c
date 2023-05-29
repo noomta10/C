@@ -1,4 +1,7 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "assembler.h" 
+
+static boolean process_file(char* file_name);
 
 int main(int argc, char* argv[]) {
 	int i;
@@ -16,11 +19,13 @@ int main(int argc, char* argv[]) {
 }
 
 
-static boolean proccess_file(char* file_name) {
+static boolean process_file(char* file_name) {
 	FILE* file_pointer;
 
 	/* Concatenate .as postfix to file name */
 	strcat(file_name, ".as");
+
+	printf("%s", file_name);
 
 	file_pointer = fopen(file_name, "r");
 	if (file_pointer == NULL) {
