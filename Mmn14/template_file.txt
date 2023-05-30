@@ -88,4 +88,10 @@ L1:bneEND:STR:LENGTH:K:MAIN:LOOP:mcrosubbneendmcro
 prnbnem1
 L1:bneEND:STR:LENGTH:K:MAIN:LOOP:mcrosubbneendmcro
 prnbnem1
-L1:bneEND:STR:LENGTH:K:MAIN:LOOP:mcroMAIN:LOOP:mcroMAIN:LOOP:mcro
+L1:bneEND:STR:LENGTH:K:MAIN:LOOP:mcroMAIN:LOOP:mcroMAIN:LOOP:mcromcroendmcro
+mcroendmcro
+mcroendmcro
+mcroendmcro
+mcroendmcro
+mcroendmcro
+mcroendmcro
