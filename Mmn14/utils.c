@@ -45,7 +45,7 @@ char* get_next_element(char* line) {
 
 	end_word_index = i - 1;
 	word_length = end_word_index - start_word_index + 1;
-	word = malloc(word_length + 1);
+	word = malloc_with_check(word_length + 1);
 	strncpy(word, line + start_word_index, word_length);
 	word[word_length] = '\0';
 

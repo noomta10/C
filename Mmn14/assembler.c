@@ -34,7 +34,7 @@ void process_file(char* file_name) {
 	}
 
 	/* Call pre-assembler */
-	pre_assembler(file_pointer);
+	pre_assembler(file_pointer, file_name);
 
 	/* Free memory */
 	free(full_file_name);

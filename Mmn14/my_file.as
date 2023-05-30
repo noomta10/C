@@ -1,6 +1,6 @@
 MAIN: mov @r3 ,LENGTH
 LOOP: jmp L1
-mcro m1 
+mcro	m1 
 sub @r1, @r4
 bne END
 endmcro
