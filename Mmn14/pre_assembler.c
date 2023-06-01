@@ -16,6 +16,7 @@ static void add_mcro_to_table(char* mcro_name, char* mcro_value, mcros_table_ent
 	if (*first_mcro_entry == NULL) {
 		new_mcro_entry->name = malloc_with_check(strlen(mcro_name) + 1);
 		new_mcro_entry->value = malloc_with_check(strlen(mcro_value) + 1);
+		new_mcro_entry->next = NULL;
 		strcpy(new_mcro_entry->name, mcro_name);
 		strcpy(new_mcro_entry->value, mcro_value);
 		*first_mcro_entry = new_mcro_entry;
@@ -38,6 +39,8 @@ static void add_mcro_to_table(char* mcro_name, char* mcro_value, mcros_table_ent
 
 		current_mcro_entry = current_mcro_entry->next;
 	}
+
+
 
 }
 
@@ -81,23 +84,31 @@ void pre_assembler(FILE* source_file, char file_name) {
 			continue;
 	    }
 
-		/* Start of a mcro definition, add its name to the table */
+		/* Start of a mcro definition */
 		if (strcmp(first_word, "mcro") == 0) {
 			mcro_exists = TRUE;
 			mcro_name = strtok(NULL, " \t\n");
 
-			/* Allocate memory for the string, and copy it */
+			/* Allocate memory for the mcro name, and copy it */
 			char* saved_mcro_name = malloc_with_check(strlen(mcro_name) + 1);
 			strcpy(saved_mcro_name, mcro_name); 
 
 			/* Mcros definition, adds its value to the table */
-			do {
+			while(1) {
 				fgets(line, sizeof(line), source_file);
+
+				/* Allocate memory for the line, and copy it */
+				char* saved_line = malloc_with_check(sizeof(line));
+				strcpy(saved_line, line);
 				first_word = strtok(line, " \t\n");
 
-				add_mcro_to_table(saved_mcro_name, line, &first_mcro_entry);
+				/* Stop if "endmcro" encountered */
+				if (strcmp(first_word, "endmcro") == 0) {
+					break;
+				}
 
-			} while (strcmp(first_word, "endmcro") != 0);
+				add_mcro_to_table(saved_mcro_name, saved_line, &first_mcro_entry);
+			}
 
 			continue;
 		}

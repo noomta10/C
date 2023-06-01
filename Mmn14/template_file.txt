@@ -1,18 +1,4 @@
 sub @r1, @r4
 bne END
-endmcro
-sub @r1, @r4
+blasub @r1, @r4
 bne END
-endmcro
-sub @r1, @r4
-bne END
-endmcro
-sub @r1, @r4
-bne END
-endmcro
-sub @r1, @r4
-bne END
-endmcro
-subbneendmcrosub @r1, @r4
-bne END
-endmcro
