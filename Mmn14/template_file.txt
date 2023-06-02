@@ -1,4 +1,0 @@
-sub @r1, @r4
-bne END
-bla
-P S I C h O M E T R I

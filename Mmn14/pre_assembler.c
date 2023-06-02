@@ -83,7 +83,21 @@ static boolean handle_existing_mcro(mcros_table_entry** first_mcro_entry, char* 
 }
 
 
-void pre_assembler(FILE* source_file, char file_name) {
+static void rename_file(char* file_name) {
+	char* new_file_name = add_file_postfix(file_name, ".am");
+
+	/* If file with '.am' postfix exists, remove it */
+	FILE* new_file = fopen(new_file_name, "r");
+	if (new_file != NULL) {
+		fclose(new_file);
+		remove(new_file_name);
+	}
+
+	(void)rename("template_file.txt", new_file_name);
+}
+
+
+void pre_assembler(FILE* source_file, char* file_name) {
 	char line[MAX_LINE_LENGTH];
 	mcros_table_entry* first_mcro_entry = NULL;
 	char* mcro_name = NULL;
@@ -152,7 +166,9 @@ void pre_assembler(FILE* source_file, char file_name) {
 	}
 
 	/* Close the files */
-	fclose(source_file);  
+	fclose(source_file);
 	fclose(template_file);
 
+	/* Rename template file to '.am' file */
+	rename_file(file_name);
 }
