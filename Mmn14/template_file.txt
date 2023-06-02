@@ -1,4 +1,8 @@
 sub @r1, @r4
 bne END
-blasub @r1, @r4
+bla
+
+sub @r1, @r4
 bne END
+another bla
+noam

@@ -4,4 +4,10 @@ bne END
 endmcro
 m1
 bla
+
 m1
+another bla
+mcro noam
+hola
+endmcro
+noam
