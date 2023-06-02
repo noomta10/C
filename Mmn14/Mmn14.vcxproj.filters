@@ -39,5 +39,6 @@
   <ItemGroup>
     <None Include="my_file.as" />
     <None Include="my_file2.as" />
+    <None Include="makefile" />
   </ItemGroup>
 </Project>

@@ -137,6 +137,7 @@
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="makefile" />
     <None Include="my_file.as" />
     <None Include="my_file2.as" />
   </ItemGroup>
