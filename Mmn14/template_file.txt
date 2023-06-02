@@ -1,8 +1,4 @@
 sub @r1, @r4
 bne END
 bla
-
-sub @r1, @r4
-bne END
-another bla
-noam
+P S I C h O M E T R I

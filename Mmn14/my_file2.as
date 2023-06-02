@@ -4,11 +4,7 @@ bne END
 endmcro
 m1
 bla
-
-m1
-another bla
-mcro noam
-hola hola hola
+mcro yarden
+P S I C h O M E T R I
 endmcro
-noam
-m1 
+yarden
