@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "debuging.h"
 #include "pre_assembler.h"
 #include "assembler.h"
 #include "utils.h"
@@ -127,6 +128,8 @@ void pre_assembler(FILE* source_file, char* file_name) {
 	char* saved_mcro_name = NULL;
 	char* first_word;
 
+	LOG_DEBUG("pre assember starting");
+
 	/* Create an empty file, close it, an reopen it in append mode */
 	FILE* template_file = fopen("template_file.txt", "w");
 	if (template_file == NULL) {
@@ -170,11 +173,12 @@ void pre_assembler(FILE* source_file, char* file_name) {
 
 			/* Mcros definition, adds its value to the table */
 			while (TRUE) {
+				LOG_DEBUG("pre assember loop on macros");
 				fgets(line, sizeof(line), source_file);
 				saved_line = malloc_with_check(sizeof(line));
 				strcpy(saved_line, line);
 				first_word = strtok(line, " \t\n");
-
+				LOG_DEBUG(first_word);
 				/* Stop if "endmcro" encountered */
 				if (strcmp(first_word, "endmcro") == 0) {
 					break;
@@ -200,4 +204,6 @@ void pre_assembler(FILE* source_file, char* file_name) {
 	free(saved_line);
 	free(saved_mcro_name);
 	free_table_memory(&first_mcro_entry);
+
+	LOG_DEBUG("pre assember done");
 }

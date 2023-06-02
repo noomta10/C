@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assembler.h" />
+    <ClInclude Include="debuging.h" />
     <ClInclude Include="pre_assembler.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
