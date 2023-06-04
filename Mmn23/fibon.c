@@ -134,17 +134,24 @@ char* get_file_name(int argc, char* argv[]) {
 
 
 /* Get_n_input function gets the initial n- int n.
-I assume that n is not greater than 47 because this is the max value long data type can contain (4294967295).
+Assuming that n is not greater than 47 because this is the max value long data type can contain (4294967295).
+If number was not entered it prints an error message and exit.
 The function checks that the number is positive, if it is not, it prints an error message ands asks again for an input.
 Returns a valid number of n (maximum index in fibonacci sequence)- int n */
 int get_n_input(int n) {
     printf("Enter n (maximum index in the sequence): ");
-    scanf("%d", &n);
+    if (scanf("%d", &n) != NUMBER_FOUND) {
+        fprintf(stderr, "Error: number was not entered\n");
+        exit(MISSING_NUMBER_ERROR);
+    }
 
-    while (n < 0) {
-        fprintf(stderr, "Error: number of elements need to be a positive number\n");
+    while (n < 0 || n > MAX_N) {
+        fprintf(stderr, "Error: number of elements must be a positive number and smaller than %d\n", MAX_N);
         printf("Enter n (maximum index in the sequence): ");
-        scanf("%d", &n);
+        if (scanf("%d", &n) != NUMBER_FOUND) {
+            fprintf(stderr, "Error: number was not entered\n");
+            exit(MISSING_NUMBER_ERROR);
+        }
     }
 
     return n;
