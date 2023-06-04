@@ -41,6 +41,7 @@ static void rename_file(char* file_name) {
 	}
 
 	(void)rename("template_file.txt", new_file_name);
+	free(new_file_name);
 }
 
 
@@ -128,9 +129,7 @@ void pre_assembler(FILE* source_file, char* file_name) {
 	char* saved_mcro_name = NULL;
 	char* first_word;
 
-	LOG_DEBUG("pre assember starting");
-
-	/* Create an empty file, close it, an reopen it in append mode */
+	/* Create an empty file, close it, and reopen it in append mode */
 	FILE* template_file = fopen("template_file.txt", "w");
 	if (template_file == NULL) {
 		printf("Error: The file 'template_file.txt' could not be opened\n");
@@ -152,7 +151,7 @@ void pre_assembler(FILE* source_file, char* file_name) {
 		strcpy(saved_line, line);
 		first_word = strtok(line, " \t\n");
 
-		/* If it is an empty line, print it to the template file continue to next line */
+		/* If it is an empty line, print it to the template file and continue to next line */
 		if (first_word == NULL) {
 			fprintf(template_file, "%s", "\n");
 			continue;
