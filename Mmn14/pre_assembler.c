@@ -1,116 +1,209 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "debuging.h"
 #include "pre_assembler.h"
 #include "assembler.h"
 #include "utils.h"
-#include <string.h>
 
 
-static void add_mcro_to_table(char* mcro_name, char* mcro_value, mcros_table_entry* first_mcro) {
-	mcros_table_entry* current_mcro_entry = first_mcro;
-	mcros_table_entry* new_mcro_entry = NULL;
-	int total_length; 
-	char* new_value;
+static void free_table_memory(mcros_table_entry** first_mcro_entry) {
+	mcros_table_entry* current_mcro_entry = *first_mcro_entry;
+	mcros_table_entry* next_mcro_entry;
 
-	/* If the mcros table is empty, add first mcro */
-	if (current_mcro_entry->name == NULL) {
-		current_mcro_entry->name = mcro_name;
-		current_mcro_entry->value = mcro_value;
-		return;
+	/* Free mcros table */
+	while (current_mcro_entry->next != NULL) {
+		next_mcro_entry = current_mcro_entry->next;
+		free(current_mcro_entry->name);
+		free(current_mcro_entry->value);
+		free(current_mcro_entry);
+		current_mcro_entry = next_mcro_entry;
 	}
 
-	/* Iterate through the table as long as mcros has a value */
-	while (current_mcro_entry->name != NULL) {
-
-		/* If mcros name was found in the table, append the line to its current value */
-		if (strcmp(current_mcro_entry->name, mcro_name) == 0) {
-			total_length = strlen(current_mcro_entry->value) + strlen(mcro_value);
-			new_value = malloc_with_check(total_length + 1);
-			strcpy(new_value, current_mcro_entry->value);
-			strcat(new_value, mcro_value);
-			new_value[total_length] = '\0';
-			free(new_value);
-			return;
-		}
-		
-		/* Advance the pointer to the next entry */
-		current_mcro_entry = current_mcro_entry->next;
-	}
-
-	/* If mcros name was not found in the table, add its name and value to the table */
-	new_mcro_entry->name = mcro_name;
-	new_mcro_entry->value = mcro_value;
-	current_mcro_entry->next = new_mcro_entry;
+	/* Free last mcro entry */
+	free(current_mcro_entry->name);
+	free(current_mcro_entry->value);
+	free(current_mcro_entry);
 
 }
 
 
-static boolean mcro_in_table(mcros_table_entry* first_mcros_table_entry, char* first_word, char* file_name, FILE* template_file) {
-	mcros_table_entry* mcros_table_entry = first_mcros_table_entry;
+static void rename_file(char* file_name) {
+	char* new_file_name = add_file_postfix(file_name, ".am");
+
+	/* If file with '.am' postfix exists, remove it */
+	FILE* new_file = fopen(new_file_name, "r");
+	if (new_file != NULL) {
+		fclose(new_file);
+		remove(new_file_name);
+	}
+
+	(void)rename("template_file.txt", new_file_name);
+}
+
+
+static boolean handle_existing_mcro(mcros_table_entry** first_mcro_entry, char* first_word, FILE* template_file) {
+	mcros_table_entry* current_mcro_entry = *first_mcro_entry;
 
 	/* If the mcros table is empty, return FALSE */
-	if (mcros_table_entry->name == NULL) {
+	if (first_mcro_entry == NULL) {
 		return FALSE;
 	}
-	
+
 	/* Loops through the table to check if the first word is a defined macro in the table */
-	while (mcros_table_entry->value != NULL) {
-		/* If the first word is a defined macro in the table, write its value to the template file, and return TRUE*/
-		if (strcmp(first_word, mcros_table_entry->name) == 0) {
-			fprintf(template_file, "%s", mcros_table_entry->value);
+	while (current_mcro_entry) {
+		/* If the first word is a defined macro in the table, write its value to the template file, and return TRUE */
+		if (strcmp(first_word, current_mcro_entry->name) == 0) {
+			fprintf(template_file, "%s", current_mcro_entry->value);
 			return TRUE;
 		}
 
-		mcros_table_entry = mcros_table_entry->next;
+		current_mcro_entry = current_mcro_entry->next;
 	}
 
 	return FALSE;
 }
 
 
-void pre_assembler(FILE* source_file, char file_name) {
+static void add_mcro_to_table(char* mcro_name, char* mcro_value, mcros_table_entry** first_mcro_entry) {
+	mcros_table_entry* new_mcro_entry = malloc_with_check(sizeof(mcros_table_entry));
+	mcros_table_entry* current_mcro_entry;
+	int total_length;
+
+	/* If table is empty, add first mcro */
+	if (*first_mcro_entry == NULL) {
+		new_mcro_entry->name = malloc_with_check(strlen(mcro_name) + 1);
+		new_mcro_entry->value = malloc_with_check(strlen(mcro_value) + 1);
+		new_mcro_entry->next = NULL;
+		strcpy(new_mcro_entry->name, mcro_name);
+		strcpy(new_mcro_entry->value, mcro_value);
+		*first_mcro_entry = new_mcro_entry;
+		return;
+	}
+
+	current_mcro_entry = *first_mcro_entry;
+
+	/* If mcro already exists in the table, append value to mcro */
+	while (current_mcro_entry->next != NULL) {
+		if (strcmp(current_mcro_entry->name, mcro_name) == 0) {
+			total_length = strlen(current_mcro_entry->value) + strlen(mcro_value);
+			current_mcro_entry->value = realloc_with_check(current_mcro_entry->value, (total_length + 1));
+			strcpy(current_mcro_entry->value, current_mcro_entry->value);
+			strcat(current_mcro_entry->value, mcro_value);
+			current_mcro_entry->value[total_length] = '\0';
+			return;
+		}
+
+		current_mcro_entry = current_mcro_entry->next;
+	}
+
+	/* Check last mcro */
+	if (strcmp(current_mcro_entry->name, mcro_name) == 0) {
+		total_length = strlen(current_mcro_entry->value) + strlen(mcro_value);
+		current_mcro_entry->value = realloc_with_check(current_mcro_entry->value, (total_length + 1));
+		strcpy(current_mcro_entry->value, current_mcro_entry->value);
+		strcat(current_mcro_entry->value, mcro_value);
+		current_mcro_entry->value[total_length] = '\0';
+		return;
+	}
+
+	/* If mcro does not exist, add it to the table */
+	new_mcro_entry->name = malloc_with_check(strlen(mcro_name) + 1);
+	new_mcro_entry->value = malloc_with_check(strlen(mcro_value) + 1);
+	new_mcro_entry->next = NULL;
+	strcpy(new_mcro_entry->name, mcro_name);
+	strcpy(new_mcro_entry->value, mcro_value);
+	current_mcro_entry->next = new_mcro_entry;
+	current_mcro_entry = new_mcro_entry;
+}
+
+
+void pre_assembler(FILE* source_file, char* file_name) {
 	char line[MAX_LINE_LENGTH];
-	mcros_table_entry first_mcros_table_entry = { NULL, NULL, NULL };
-	FILE* template_file = fopen("template_file.txt", "a");
-	boolean mcro_exists = FALSE;
+	mcros_table_entry* first_mcro_entry = NULL;
 	char* mcro_name = NULL;
+	char* saved_line = NULL;
+	char* saved_mcro_name = NULL;
+	char* first_word;
+
+	LOG_DEBUG("pre assember starting");
+
+	/* Create an empty file, close it, an reopen it in append mode */
+	FILE* template_file = fopen("template_file.txt", "w");
+	if (template_file == NULL) {
+		printf("Error: The file 'template_file.txt' could not be opened\n");
+		return;
+	}
+
+	fclose(template_file);
+	template_file = fopen("template_file.txt", "a");
+	if (template_file == NULL) {
+		printf("Error: The file 'template_file.txt' could not be opened\n");
+		return;
+	}
 
 	/* Read file line by line until the end */
 	while (fgets(line, sizeof(line), source_file) != NULL) {
-		char* first_word = strtok(line, " \t");
 
-		/* If first word is a defined mcro in the table, write its value to the template file and continue */
-		if (mcro_in_table(&first_mcros_table_entry, first_word, file_name, template_file)) {
+		/* Allocate memory for the line, and copy it */
+		saved_line = malloc_with_check(sizeof(line));
+		strcpy(saved_line, line);
+		first_word = strtok(line, " \t\n");
+
+		/* If it is an empty line, print it to the template file continue to next line */
+		if (first_word == NULL) {
+			fprintf(template_file, "%s", "\n");
 			continue;
 		}
 
-
-		/* If it is the start of a mcro definition, add its name to the table */
-		if (strcmp(first_word, "mcro") == 0) {
-			mcro_exists = TRUE;
-			mcro_name = strtok(NULL, " \t");
-			fprintf(template_file, "%s", line);
-			printf("%s\n", mcro_name);
-			
-			/* If it is the mcros definition, adds its value to the table */
-			do {
-				fgets(line, sizeof(line), source_file);
-				printf("1- %s\n", mcro_name);
-				add_mcro_to_table(mcro_name, line, &first_mcros_table_entry);
-				printf("2- %s\n", mcro_name);
-				first_word = strtok(line, " \t");
-			} while (strcmp(first_word, "endmcro\n") != 0);
-
+		/* If first word is a defined mcro in the table, write its value to the template file and continue to next line */
+		if (handle_existing_mcro(&first_mcro_entry, first_word, template_file)) {
+			continue;
 		}
 
+		/* If its the beginning of a mcro definition */
+		if (strcmp(first_word, "mcro") == 0) {
+			mcro_name = strtok(NULL, " \t\n");
 
+			/* Allocate memory for the mcro name, and copy it */
+			saved_mcro_name = malloc_with_check(strlen(mcro_name) + 1);
+			strcpy(saved_mcro_name, mcro_name);
 
-		/* If the line is not a mcro definition, write it to the template file */
-		fprintf(template_file, "%s", line);
+			/* Mcros definition, adds its value to the table */
+			while (TRUE) {
+				LOG_DEBUG("pre assember loop on macros");
+				fgets(line, sizeof(line), source_file);
+				saved_line = malloc_with_check(sizeof(line));
+				strcpy(saved_line, line);
+				first_word = strtok(line, " \t\n");
+				LOG_DEBUG(first_word);
+				/* Stop if "endmcro" encountered */
+				if (strcmp(first_word, "endmcro") == 0) {
+					break;
+				}
 
+				add_mcro_to_table(saved_mcro_name, saved_line, &first_mcro_entry);
+			}
+
+			continue;
+		}
+
+		/* If the line is not a mcro name or definition, write it to the template file */
+		fprintf(template_file, "%s", saved_line);
 	}
 
 	/* Close the file */
-	fclose(source_file);  
+	fclose(template_file);
+
+	/* Rename template file to '.am' file */
+	rename_file(file_name);
+
+	/* free allocated memory */
+	free(saved_line);
+	free(saved_mcro_name);
+	free_table_memory(&first_mcro_entry);
+
+	LOG_DEBUG("pre assember done");
 }

@@ -23,6 +23,16 @@ void* malloc_with_check(long length) {
 }
 
 
+void* realloc_with_check(char* ptr, long length) {
+	void* pointer = realloc(ptr, length);
+	if (pointer == NULL) {
+		printf("Error: memory reallocation failed\n");
+		exit(-1);
+	}
+	return pointer;
+}
+
+
 char* get_next_element(char* line) {
 	int start_word_index;
 	int end_word_index;

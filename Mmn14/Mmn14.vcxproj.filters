@@ -35,8 +35,13 @@
     <ClInclude Include="pre_assembler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="debuging.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="my_file.as" />
+    <None Include="my_file2.as" />
+    <None Include="makefile" />
   </ItemGroup>
 </Project>

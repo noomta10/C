@@ -2,59 +2,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Node{
-	struct Node* next;
-	int data;
-} Node;
-
-
-void add_node(Node** head, int number) {
-	Node* current_node;
-	Node* new_node = malloc(sizeof(Node*));
-	new_node->data = number;
-	new_node->next = NULL;
-	
-	/* First node in the list */
-	if (*head == NULL) {
-		*head = new_node;
-		return;
-	}
-	
-	current_node = *head;
-	 /* If new node has the smallest number */
-	if (current_node->data > number) {
-		new_node->next = current_node;
-		return;
-	}
-
-	/* Search the right place for new node */
-	while (current_node != NULL && current_node->data < number) {
-		current_node = current_node->next;
-	}
-	new_node->next = current_node;
-	
+char* add_file_postfix(char* file_name, char* postfix) {
+	char* full_file_name = (char*)malloc(strlen(file_name) + strlen(postfix) + 1);
+	strcpy(full_file_name, file_name);
+	strcat(full_file_name, postfix);
+	return full_file_name;
 }
-
-
-print_list(Node* head) {
-	Node* current_node = head;
-	while (current_node != NULL) {
-		printf("%d\n", current_node->data);
-		current_node = current_node->next;
-	}
-}
-
 
 int main() {
-	int number;
-	Node *head =NULL;
-	printf("Enter numbers:\n");
-
-	while (scanf("%d", &number) == 1) {
-		add_node(&head, number);
-	}
-
-	print_list(head);
+	FILE* my_file = fopen("my_file.txt", "w");
+	fclose(my_file);
+	if (rename("my_file.txt", "new_name.txt") != 0)
+		printf("Error renaming file\n");
 
 
 }
