@@ -55,7 +55,6 @@ static boolean mcro_in_table(mcros_table_entry* first_mcros_table_entry, char* f
 	}
 	
 	/* Loops through the table to check if the first word is a defined macro in the table */
-
 	while (mcros_table_entry->value != NULL) {
 		/* If the first word is a defined macro in the table, write its value to the template file, and return TRUE*/
 		if (strcmp(first_word, mcros_table_entry->name) == 0) {
@@ -72,7 +71,7 @@ static boolean mcro_in_table(mcros_table_entry* first_mcros_table_entry, char* f
 
 void pre_assembler(FILE* source_file, char file_name) {
 	char line[MAX_LINE_LENGTH];
-	mcros_table_entry first_mcro = { NULL, NULL, NULL };
+	mcros_table_entry first_mcros_table_entry = { NULL, NULL, NULL };
 	FILE* template_file = fopen("template_file.txt", "a");
 	boolean mcro_exists = FALSE;
 	char* mcro_name = NULL;
@@ -82,7 +81,7 @@ void pre_assembler(FILE* source_file, char file_name) {
 		char* first_word = strtok(line, " \t");
 
 		/* If first word is a defined mcro in the table, write its value to the template file and continue */
-		if (mcro_in_table(&first_mcro, first_word, file_name, template_file)) {
+		if (mcro_in_table(&first_mcros_table_entry, first_word, file_name, template_file)) {
 			continue;
 		}
 
@@ -98,7 +97,7 @@ void pre_assembler(FILE* source_file, char file_name) {
 			do {
 				fgets(line, sizeof(line), source_file);
 				printf("1- %s\n", mcro_name);
-				add_mcro_to_table(mcro_name, line, &first_mcro);
+				add_mcro_to_table(mcro_name, line, &first_mcros_table_entry);
 				printf("2- %s\n", mcro_name);
 				first_word = strtok(line, " \t");
 			} while (strcmp(first_word, "endmcro\n") != 0);
@@ -113,5 +112,5 @@ void pre_assembler(FILE* source_file, char file_name) {
 	}
 
 	/* Close the file */
-	fclose(source_file);  // Close the file
+	fclose(source_file);  
 }
