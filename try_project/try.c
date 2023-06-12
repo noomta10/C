@@ -2,20 +2,39 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+
+void print_decimal_to_binary(int num) {
+    if (num == 0) {
+        printf("0"); // Special case for zero
+        return;
+    }
+
+    int bits = sizeof(num) * 8; // Number of bits in an integer
+    printf("%d\n", bits);
+    // Iterate over each bit from left to right
+    for (int i = bits - 1; i >= 0; i--) {
+        int bit = (num >> i) & 1; // Extract the i-th bit
+        printf("%d", bit);
+    }
+}
+
+
 // Base64 character mapping table
 static const char base64_chars[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 // Function to encode a 6-bit number to base64
 char base64_encode_bits(uint8_t bits) {
+    printf("DEBUG bits: %d\n", bits);
     return base64_chars[bits];
 }
 
 int main() {
-    unsigned int number = 0b101010101010; // Example unsigned integer
+    print_decimal_to_binary(3);
+    unsigned int number = 0b111111101010; // Example unsigned integer
 
     // Extract the two 6-bit groups
-    uint8_t group1 = (number >> 6) & 0x3F;
-    uint8_t group2 = number & 0x3F;
+    uint8_t group1 = (number >> 6) & 0x3F; // 000000111111 & 111111 = 111111
+    uint8_t group2 = number & 0x3F; // 111111101010 & 111111 = 101010
 
     // Encode each group using base64
     char encoded_char1 = base64_encode_bits(group1);
